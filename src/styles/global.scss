@@ -1,0 +1,8 @@
+@import "reset";
+@import "variables";
+
+html,
+body {
+  height: 100%;
+  background-color: var(--background);
+}
