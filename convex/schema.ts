@@ -9,6 +9,5 @@ export default defineSchema({
     name: v.string(),
     about: v.string(),
     locales: v.number(),
-    avatar: v.string()
   }).index("by_token", ["token"]),
 });
