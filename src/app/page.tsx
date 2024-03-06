@@ -1,12 +1,17 @@
 "use client";
 
-import { useInter } from "@/hooks/useInter";
-import Auth from "@/components/Auth/Auth";
+import UploadWrapper from "@/components/Upload/UploadWrapper";
 
 export default function Home() {
   return (
     <>
-      <Auth />
+      <UploadWrapper
+        onLoad={(s) => console.log(s)}
+        loading={<div>идет загрузка</div>}
+        multiple
+      >
+        <div>123</div>
+      </UploadWrapper>
     </>
   );
 }
