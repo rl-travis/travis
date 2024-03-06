@@ -1,7 +1,13 @@
 :root {
   --background: #fff;
+  --travis: #3886e4;
+  --logo: #000;
+  --hover: #dadada;
 }
 
 [data-theme="dark"] {
   --background: #1a1a1c;
+  --travis: #3886e4;
+  --logo: #fff;
+  --hover: #000000;
 }
