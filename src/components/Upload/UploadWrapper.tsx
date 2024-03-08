@@ -20,8 +20,8 @@ export default function UploadWrapper({
   const [files, setFiles] = React.useState<File[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const generateUrl = useMutation(api.files.generateUploadUrl);
-  const create = useMutation(api.files.createFile);
+  const generateUrl = useMutation(api.file.generateUploadUrl);
+  const create = useMutation(api.file.createFile);
 
   const uploadFiles = async () => {
     setIsLoading(true);
