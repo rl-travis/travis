@@ -11,17 +11,18 @@ export default function Auth() {
   if (!isLoaded) {
     return <Loading />;
   }
+  //не сработает, если ты ни разу не заходил в систему Clerk :)
   const signInWithGoogle = () =>
     signIn.authenticateWithRedirect({
       strategy: "oauth_google",
-      redirectUrl: "/",
+      redirectUrl: "/sso-callback",
       redirectUrlComplete: "/",
     });
 
   const signInWithGithub = () =>
     signIn.authenticateWithRedirect({
       strategy: "oauth_github",
-      redirectUrl: "/",
+      redirectUrl: "/sso-callback",
       redirectUrlComplete: "/",
     });
   return (
