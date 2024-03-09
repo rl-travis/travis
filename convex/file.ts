@@ -19,7 +19,7 @@ export const createFile = mutation({
   handler: async (ctx, args) => {
     const url = await ctx.storage.getUrl(args.storageId);
     if (url === null) return null;
-    const id = await ctx.db.insert("files", {
+    const id = await ctx.db.insert("file", {
       storage: args.storageId,
       name: args.name,
       size: args.size,
