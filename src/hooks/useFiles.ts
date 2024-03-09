@@ -7,7 +7,7 @@ export default function useFiles() {
   const generateUrl = useMutation(api.file.generateUploadUrl);
   const create = useMutation(api.file.createFile);
   const upload = async (files: File[]) => {
-    const res: Doc<"files">[] = [];
+    const res: Doc<"file">[] = [];
     const uploadUrl = await generateUrl();
     for (const file of files) {
       const result: { storageId: Id<"_storage"> } = await ky

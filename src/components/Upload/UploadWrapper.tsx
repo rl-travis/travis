@@ -8,7 +8,7 @@ import useFiles from "@/hooks/useFiles";
 
 type PropsType = {
   children: React.ReactNode;
-  onUpload: (files: Doc<"files">[]) => void;
+  onUpload: (files: Doc<"file">[]) => void;
   multiple?: boolean;
   accept?: string;
   loading: React.ReactNode;
