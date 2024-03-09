@@ -16,7 +16,7 @@ export default function NewUser() {
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [locales, setLocales] = useState(1);
+  const [locales, setLocales] = useState(0);
 
   function onDone(info: InfoType) {
     setUsername(info.username);
