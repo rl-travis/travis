@@ -20,16 +20,5 @@ export default function Home() {
     getUserId();
   }, [userIdMutation]);
 
-  return (
-    <>
-      {userId ? <Main /> : <NewUser />}
-      {/*<UploadWrapper*/}
-      {/*  onUpload={(s) => console.log(s)}*/}
-      {/*  loading={<div>идет загрузка</div>}*/}
-      {/*  multiple*/}
-      {/*>*/}
-      {/*  <div>123</div>*/}
-      {/*</UploadWrapper>*/}
-    </>
-  );
+  return <>{userId ? <Main /> : <NewUser />}</>;
 }
