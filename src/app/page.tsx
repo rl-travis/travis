@@ -11,7 +11,7 @@ import { Id } from "../../convex/_generated/dataModel";
 export default function Home() {
   const userIdMutation = useMutation(api.user.store);
 
-  const [userId, setUserId] = useState<Id<"users"> | null>();
+  const [userId, setUserId] = useState<Id<"user"> | null>();
 
   useEffect(() => {
     const getUserId = async () => {

@@ -1,5 +1,29 @@
 import styles from "./ChangeProfile.module.scss";
+import { useContext } from "react";
+import { InternationalizationContext } from "@/providers/InternationalizationProvider";
 
-export default function ChangeProfile() {
-  return <div className={styles.wrapper}>52</div>;
+type PropsType = {
+  name: string;
+  about: string;
+  username: string;
+  avatar: string;
+  locales: number;
+  isCreate: boolean;
+  onDone: (obj: {}) => void;
+};
+
+export default function ChangeProfile({
+  name,
+  avatar,
+  username,
+  about,
+  isCreate,
+  locales,
+  onDone,
+}: PropsType) {
+  const { setId } = useContext(InternationalizationContext);
+
+  return (
+    <div className={styles.wrapper}>{isCreate ? <span></span> : <span></span>}</div>
+  );
 }
