@@ -24,7 +24,7 @@ export default function Home() {
     <>
       {userId ? <Main /> : <NewUser />}
       {/*<UploadWrapper*/}
-      {/*  onLoad={(s) => console.log(s)}*/}
+      {/*  onUpload={(s) => console.log(s)}*/}
       {/*  loading={<div>идет загрузка</div>}*/}
       {/*  multiple*/}
       {/*>*/}
