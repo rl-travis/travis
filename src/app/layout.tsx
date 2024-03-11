@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
-import ConvexClientProvider from "@/providers/ConvexClientProvider";
-import ThemeProviderTravis from "@/providers/ThemeProviderTravis";
 import "../styles/global.scss";
-import InternationalizationProvider from "@/providers/InternationalizationProvider";
-import AuthProvider from "@/providers/AuthProvider";
 import Providers from "@/providers/Providers";
 export const metadata: Metadata = {
   title: "travis",
