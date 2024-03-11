@@ -3,37 +3,19 @@ import ChangeProfile from "@/components/ChangeProfile/ChangeProfile";
 import { SignOutButton } from "@clerk/nextjs";
 import { useState } from "react";
 import { useInter } from "@/hooks/useInter";
+import { ChangeProfileType } from "@/types/ChangeProfileType";
 
-export type InfoType = {
-  username: string;
-  name: string;
-  avatar: string;
-  about: string;
-  locales: number;
-};
 export default function NewUser() {
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [about, setAbout] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [locales, setLocales] = useState(0);
-
-  function onDone(info: InfoType) {
-    setUsername(info.username);
-    setName(info.name);
-    setAbout(info.about);
-    setAvatar(info.avatar);
-    setLocales(info.locales);
-  }
+  function onDone(info: ChangeProfileType) {}
 
   return (
     <div className={styles.wrapper}>
       <ChangeProfile
-        username={username}
-        avatar={avatar}
-        name={name}
-        about={about}
-        locales={locales}
+        username={""}
+        avatar={""}
+        name={""}
+        about={""}
+        locales={0}
         isCreate={true}
         onDone={onDone}
       />

@@ -1,11 +1,15 @@
 import styles from "./ChangeProfile.module.scss";
 import { InfoType } from "@/components/NewUser/NewUser";
-import { i18nList, useInter } from "@/hooks/useInter";
+import { useInter } from "@/hooks/useInter";
 import UploadWrapper from "@/components/Upload/UploadWrapper";
-import { ImagePlus } from "lucide-react";
-import Image from "next/image";
-import bg from "/public/logo-bg.svg";
-import { ChangeEvent, useRef, useState } from "react";
+import { Check, ImagePlus, Plus } from "lucide-react";
+import avatarImage from "/public/logo-avatar.svg";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { changeRef, changeUsernameRef, resetRefs } from "@/utils/ref/ref";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+
+import { Loader2Icon } from "lucide-react";
 
 type PropsType = {
   name: string;
@@ -28,19 +32,62 @@ export default function ChangeProfile({
 }: PropsType) {
   const { i18n, switchLang } = useInter();
 
+  const checkUsernameMutation = useMutation(api.user.checkUsername);
+
   const [usernameValue, setUsernameValue] = useState(username);
   const [nameValue, setNameValue] = useState(name);
   const [aboutValue, setAboutValue] = useState(about);
   const [avatarValue, setAvatarValue] = useState(avatar);
   const [localesValue, setLocalesValue] = useState(locales);
 
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const [isChecking, setIsChecking] = useState<boolean>(false);
+  const [isBusy, setIsBusy] = useState<boolean>(false);
 
-  function changeUsername() {
-    if (usernameRef.current) {
-      usernameRef.current.value = usernameRef.current.value.slice(0, 69);
-    }
+  const aboutRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  function changeAbout(event: ChangeEvent<HTMLInputElement>) {
+    changeRef(aboutRef, 70);
+    setAboutValue(event.target.value.slice(0, 70));
   }
+
+  function changeName(event: ChangeEvent<HTMLInputElement>) {
+    changeRef(nameRef, 52);
+    setNameValue(event.target.value.slice(0, 52));
+  }
+
+  function changeUsername(event: ChangeEvent<HTMLInputElement>) {
+    changeUsernameRef(usernameRef);
+    setUsernameValue(event.target.value.slice(0, 52));
+  }
+
+  useEffect(() => {
+    document.body.addEventListener("click", () => {
+      resetRefs([aboutRef, nameRef, usernameRef]);
+    });
+    return () => {
+      document.body.removeEventListener("click", () => {
+        resetRefs([aboutRef, nameRef, usernameRef]);
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    const check = async () => {
+      setIsBusy(
+        await checkUsernameMutation({
+          username: usernameValue,
+        }),
+      );
+    };
+
+    if (usernameValue.length >= 5) {
+      setIsChecking(true);
+      check();
+      setIsChecking(false);
+    }
+  }, [usernameValue]);
 
   return (
     <div className={styles.wrapper}>
@@ -57,22 +104,29 @@ export default function ChangeProfile({
       >
         <div
           className={styles.background}
-          style={{ backgroundImage: `url(${bg.src})`, backgroundRepeat: "no-repeat" }}
+          style={{
+            backgroundImage: `url(${avatarImage.src})`,
+            backgroundRepeat: "no-repeat",
+          }}
         >
           <ImagePlus size={40} />
         </div>
       </UploadWrapper>
 
       <label htmlFor={"name"} className={styles.inputBlock}>
-        {nameValue && <span className={styles.subtitle}>{i18n.profile.name}*</span>}
+        <span className={styles.subtitle}>{nameValue && `${i18n.profile.name}*`}</span>
         <input
           type="text"
           placeholder={`${i18n.profile.name}*`}
           id={"name"}
           className={styles.input}
           autoComplete={"off"}
-          onChange={(event) => setNameValue(event.target.value)}
+          onChange={(event) => changeName(event)}
+          ref={nameRef}
         />
+        <span className={styles.subtitle + " " + styles.number}>
+          {nameValue && 52 - nameValue.length}
+        </span>
       </label>
       <label htmlFor={"about"} className={styles.inputBlock}>
         {aboutValue && <span className={styles.subtitle}>{i18n.profile.about}</span>}
@@ -82,7 +136,8 @@ export default function ChangeProfile({
           id={"about"}
           className={styles.input}
           autoComplete={"off"}
-          onChange={(event) => setAboutValue(event.target.value)}
+          onChange={(event) => changeAbout(event)}
+          ref={aboutRef}
         />
         {aboutValue && (
           <span className={styles.subtitle + " " + styles.number}>
@@ -91,18 +146,44 @@ export default function ChangeProfile({
         )}
       </label>
       <label htmlFor={"username"} className={styles.inputBlock}>
-        {usernameValue && (
-          <span className={styles.subtitle}>{i18n.profile.username}*</span>
-        )}
+        <span className={styles.subtitle}>
+          {usernameValue && `${i18n.profile.username}*`}
+        </span>
         <input
           type="text"
           placeholder={`${i18n.profile.username}*`}
-          id={"about"}
+          id={"username"}
           className={styles.input}
           autoComplete={"off"}
-          onChange={() => changeUsername()}
+          onChange={(event) => changeUsername(event)}
           ref={usernameRef}
         />
+        {usernameValue.length >= 5 && (
+          <>
+            {isChecking && (
+              <div className={styles.checking}>
+                <Loader2Icon size={12} className={styles.lucide} />
+                <span>{i18n.profile.check}</span>
+              </div>
+            )}
+            {isBusy && (
+              <div className={styles.busy}>
+                <Plus size={12} className={styles.lucidePlus} />
+                <span>{i18n.profile.busy}</span>
+              </div>
+            )}
+            {!isChecking && !isBusy && (
+              <div className={styles.free}>
+                <Check width={12} height={12} />
+                <span>{i18n.profile.free}</span>
+              </div>
+            )}
+          </>
+        )}
+
+        <span className={styles.subtitle + " " + styles.number}>
+          {usernameValue && 52 - usernameValue.length}
+        </span>
       </label>
       <div className={styles.rules}>
         <div>
@@ -126,8 +207,8 @@ export default function ChangeProfile({
             }}
             className={
               localesValue === 0
-                ? styles.button + " " + styles.activeButton
-                : styles.button
+                ? styles.langButton + " " + styles.langActiveButton
+                : styles.langButton
             }
           >
             English
@@ -139,14 +220,38 @@ export default function ChangeProfile({
             }}
             className={
               localesValue === 1
-                ? styles.button + " " + styles.activeButton
-                : styles.button
+                ? styles.langButton + " " + styles.langActiveButton
+                : styles.langButton
             }
           >
             Русский
           </button>
         </div>
       </div>
+      <button
+        className={
+          usernameValue.length > 5 && !isBusy && nameValue
+            ? styles.activeButton
+            : styles.button
+        }
+        onClick={() => {
+          if (usernameValue.length > 5 && !isBusy && nameValue) {
+            onDone({
+              avatar: avatarValue,
+              about: aboutValue,
+              name: nameValue,
+              locales: localesValue,
+              username: usernameValue,
+            });
+          }
+        }}
+      >
+        {isCreate ? (
+          <span className={styles.title}>{i18n.profile.createButton}</span>
+        ) : (
+          <span>{i18n.profile.changeButton}</span>
+        )}
+      </button>
     </div>
   );
 }
