@@ -1,5 +1,4 @@
 import styles from "./ChangeProfile.module.scss";
-import { InfoType } from "@/components/NewUser/NewUser";
 import { useInter } from "@/hooks/useInter";
 import UploadWrapper from "@/components/Upload/UploadWrapper";
 import { Check, ImagePlus, Plus } from "lucide-react";
@@ -10,6 +9,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { Loader2Icon } from "lucide-react";
+import { ChangeProfileType } from "@/types/ChangeProfileType";
 
 type PropsType = {
   name: string;
@@ -18,7 +18,7 @@ type PropsType = {
   avatar: string;
   locales: number;
   isCreate: boolean;
-  onDone: (info: InfoType) => void;
+  onDone: (info: ChangeProfileType) => void;
 };
 
 export default function ChangeProfile({

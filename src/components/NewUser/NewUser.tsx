@@ -1,8 +1,5 @@
 import styles from "./NewUser.module.scss";
 import ChangeProfile from "@/components/ChangeProfile/ChangeProfile";
-import { SignOutButton } from "@clerk/nextjs";
-import { useState } from "react";
-import { useInter } from "@/hooks/useInter";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
 
 export default function NewUser() {
