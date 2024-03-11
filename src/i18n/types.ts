@@ -4,6 +4,9 @@ export type i18nType = {
   profile: {
     createTitle: string;
     changeTitle: string;
+    check: string;
+    busy: string;
+    free: string;
     name: string;
     about: string;
     username: string;
