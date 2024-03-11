@@ -17,7 +17,7 @@ export default defineSchema({
     about: v.string(),
     locales: v.number(),
   })
-    .index("by_token", ["token"])
+    .index("token", ["token"])
     .index("username", ["username"]),
   user_avatar: defineTable({
     image: v.string(),

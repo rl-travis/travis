@@ -7,7 +7,7 @@ export const store = mutation({
     if (!identity) throw new Error("Пользователь не найден");
     const user = await ctx.db
       .query("user")
-      .withIndex("by_token", (q) => q.eq("token", identity.tokenIdentifier))
+      .withIndex("token", (q) => q.eq("token", identity.tokenIdentifier))
       .unique();
     if (user !== null) return user._id;
 
