@@ -8,7 +8,7 @@ import useFiles from "@/hooks/useFiles";
 
 type PropsType = {
   children: React.ReactNode;
-  onUpload: (files: Doc<"file">[]) => void;
+  onUpload: (files: File[]) => void;
   multiple?: boolean;
   accept?: string;
   loading: React.ReactNode;
@@ -24,18 +24,10 @@ export default function UploadWrapper({
   const [files, setFiles] = React.useState<File[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const { upload } = useFiles();
-
-  const uploadFiles = async () => {
-    setIsLoading(true);
-    const res = await upload(files);
-    onUpload(res);
-    setIsLoading(false);
-  };
-
   React.useEffect(() => {
     if (files.length > 0) {
-      uploadFiles();
+      setIsLoading(true);
+      onUpload(files);
     }
   }, [files]);
 
