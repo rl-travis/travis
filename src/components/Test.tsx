@@ -16,6 +16,7 @@ export default function Test() {
         <Portal
           title="Crop Avatar"
           done={() => setIsDone(true)}
+          isDone={true}
           close={() => {
             setFile(null);
           }}

@@ -11,11 +11,11 @@
   font-size: 20px;
 }
 
-.title{
+.title {
   font-size: 20px;
 }
 
-.imageBlock{
+.imageBlock {
   width: 100px;
   height: 100px;
   display: flex;
@@ -25,7 +25,7 @@
   position: relative;
 }
 
-.fill{
+.fill {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -33,43 +33,40 @@
   position: absolute;
 }
 
-.background{
+.background {
   width: 100px;
   height: 100px;
 }
 
-.lucideImage{
+.lucideImage {
   position: absolute;
 }
 
-.inputBlock{
+.inputBlock {
   position: relative;
   padding: 30px 20px;
   border-radius: 10px;
   border: 1px solid #929292;
   width: 100%;
   cursor: text;
-  &:focus-within{
+  &:focus-within {
     border: 1px solid var(--travis);
-    .input::placeholder{
-      color: var(--travis)
+    .input::placeholder {
+      color: var(--travis);
     }
-    .subtitle{
+    .subtitle {
       color: var(--travis);
     }
   }
 }
 
-.input{
+.input {
   width: 100%;
   background: none;
   font-size: 20px;
-
 }
 
-
-
-.subtitle{
+.subtitle {
   font-size: 14px;
   color: #929292;
   position: absolute;
@@ -78,38 +75,36 @@
   background: var(--background);
 }
 
-
-.number{
+.number {
   left: auto;
   right: 18px;
 }
 
-.lucide{
+.lucide {
   animation: 0.5s spin forwards;
 }
 
 @keyframes spin {
-  0%{
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
 
-.lucidePlus{
+.lucidePlus {
   transform: rotate(45deg);
 }
 
-.activeButton{
+.activeButton {
   padding: 9px 20px 10px;
   border-radius: 5px;
   font-size: 20px;
   background: var(--travis);
-
 }
 
-.button{
+.button {
   opacity: 0.5;
   cursor: auto;
   border-radius: 5px;
@@ -118,7 +113,12 @@
   background: var(--travis);
 }
 
-.usernameBlock{
+.usernameBlock {
   width: 100%;
   position: relative;
+}
+
+.newImage {
+
+  border-radius: 50%;
 }

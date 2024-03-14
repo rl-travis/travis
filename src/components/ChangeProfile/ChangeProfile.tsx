@@ -1,8 +1,5 @@
 import styles from "./ChangeProfile.module.scss";
 import { useInter } from "@/hooks/useInter";
-import UploadWrapper from "@/components/Upload/UploadWrapper";
-import { ImagePlus } from "lucide-react";
-import avatarImage from "/public/logo-avatar.svg";
 import { useEffect, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -13,6 +10,8 @@ import Textarea from "@/components/UI/Textarea/Textarea";
 import Checking from "@/components/Checking/Checking";
 import Rules from "@/components/Rules/Rules";
 import SwitchLanguage from "@/components/SwitchLanguage/SwitchLanguage";
+import ChangeProfileAvatar from "@/components/ChangeProfile/ChangeProfileAvatar";
+import { Id } from "../../../convex/_generated/dataModel";
 
 type PropsType = {
   name: string;
@@ -38,7 +37,7 @@ export default function ChangeProfile({
   const [usernameValue, setUsernameValue] = useState(username);
   const [nameValue, setNameValue] = useState(name);
   const [aboutValue, setAboutValue] = useState(about);
-  const [avatarValue, setAvatarValue] = useState(avatar);
+  const [avatarId, setAvatarId] = useState<Id<"file"> | null>(null);
 
   const [isChecking, setIsChecking] = useState<boolean>(false);
   const [isBusy, setIsBusy] = useState<boolean>(false);
@@ -69,24 +68,12 @@ export default function ChangeProfile({
         <span className={styles.title}>{i18n.profile.changeTitle}</span>
       )}
 
-      <UploadWrapper
-        loading={<div>Загрузка...</div>}
-        onUpload={(files) => setAvatarValue("")}
-        multiple={false}
-        accept={"image/*"}
-      >
-        <div className={styles.imageBlock}>
-          <div
-            className={styles.background}
-            style={{
-              backgroundImage: `url(${avatarImage.src})`,
-              backgroundRepeat: "no-repeat",
-            }}
-          ></div>
-          <div className={styles.fill}></div>
-          <ImagePlus size={40} className={styles.lucideImage} />
-        </div>
-      </UploadWrapper>
+      <ChangeProfileAvatar
+        avatar={avatar}
+        done={(f) => {
+          setAvatarId(f._id);
+        }}
+      />
 
       <Textarea
         value={nameValue}
@@ -125,7 +112,7 @@ export default function ChangeProfile({
         onClick={() => {
           if (usernameValue.length >= 5 && !isBusy && nameValue) {
             onDone({
-              avatar: avatarValue,
+              avatar_id: avatarId,
               about: aboutValue,
               name: nameValue,
               username: usernameValue,

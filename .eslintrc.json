@@ -4,6 +4,7 @@
   "rules": {
     "unused-imports/no-unused-imports": "error",
     "react-hooks/exhaustive-deps": "off",
-    "react/no-array-index-key": "error"
+    "react/no-array-index-key": "error",
+    "react/jsx-no-undef": "off"
   }
 }

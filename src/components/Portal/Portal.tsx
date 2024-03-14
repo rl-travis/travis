@@ -8,11 +8,13 @@ export default function Portal({
   close,
   children,
   done,
+  isDone,
 }: {
   title: string;
   close: () => void;
   children: React.ReactNode;
-  done: () => void;
+  done?: () => void;
+  isDone: boolean;
 }) {
   return (
     <>
@@ -28,26 +30,28 @@ export default function Portal({
           <div className={styles.block}>
             <div className={styles.title}>{title}</div>
             {children}
-            <div className={styles.btns}>
-              <button
-                className={styles.btn}
-                onClick={(e) => {
-                  e.preventDefault();
-                  close();
-                }}
-              >
-                <X />
-              </button>
-              <button
-                className={styles.btn__accent}
-                onClick={(e) => {
-                  e.preventDefault();
-                  done();
-                }}
-              >
-                <Check />
-              </button>
-            </div>
+            {isDone && (
+              <div className={styles.btns}>
+                <button
+                  className={styles.btn}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    close();
+                  }}
+                >
+                  <X />
+                </button>
+                <button
+                  className={styles.btn__accent}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    done!();
+                  }}
+                >
+                  <Check />
+                </button>
+              </div>
+            )}
           </div>
         </div>,
         document.body,
