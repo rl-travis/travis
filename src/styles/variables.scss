@@ -1,15 +1,19 @@
 :root {
   --background: #fff;
   --travis: #3886e4;
+  --dark-travis: #2779dc;
   --logo: #000;
   --hover: #dadada;
   --color: #000000;
+  --overlay: rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] {
   --background: #1a1a1c;
   --travis: #3886e4;
+  --dark-travis: #2779dc;
   --logo: #fff;
   --hover: #000000;
   --color: #ffffff;
+  --overlay: rgba(255, 255, 255, 0.3);
 }

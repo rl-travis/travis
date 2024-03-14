@@ -1,7 +1,7 @@
 "use client";
 
-import UploadWrapper from "@/components/Upload/UploadWrapper";
-import { useMutation, useQuery } from "convex/react";
+import Test from "@/components/Test";
+import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Main from "@/components/Main/Main";
 import { useEffect, useState } from "react";
@@ -20,5 +20,16 @@ export default function Home() {
     getUserId();
   }, [userIdMutation]);
 
-  return <>{userId ? <Main /> : <NewUser />}</>;
+  return (
+    <>
+      {userId ? (
+        <Main />
+      ) : (
+        <>
+          {/*<NewUser />*/}
+          <Test />
+        </>
+      )}
+    </>
+  );
 }
