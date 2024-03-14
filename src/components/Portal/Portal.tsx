@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./Portal.module.scss";
 import { createPortal } from "react-dom";
-import IconGoogle from "@/components/Icon/IconGoogle";
-import IconGithub from "@/components/Icon/IconGithub";
 import { Check, X } from "lucide-react";
 
 export default function Portal({

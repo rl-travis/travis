@@ -20,9 +20,10 @@ export default defineSchema({
     .index("token", ["token"])
     .index("username", ["username"]),
   user_avatar: defineTable({
-    image: v.string(),
+    image_url: v.string(),
     general: v.boolean(),
     public: v.boolean(),
+    image_id: v.id("file"),
     user_id: v.id("user"),
   }).index("by_user_id", ["user_id"]),
 });

@@ -1,4 +1,4 @@
-import React, { memo, useRef } from "react";
+import React, { useRef } from "react";
 import ReadBlobAsDataURL from "@/utils/ReadBlobAsDataURL";
 import cropper from "@/components/Crop/cropper";
 import "./Crop.scss";
