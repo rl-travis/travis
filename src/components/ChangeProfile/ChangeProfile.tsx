@@ -73,6 +73,7 @@ export default function ChangeProfile({
         loading={<div>Загрузка...</div>}
         onUpload={(files) => setAvatarValue("")}
         multiple={false}
+        accept={"image/*"}
       >
         <div className={styles.imageBlock}>
           <div
@@ -109,6 +110,7 @@ export default function ChangeProfile({
           maxSize={52}
           setState={setUsernameValue}
           subtitle={`${i18n.profile.username}*`}
+          regex={/^[a-z0-9_]*$/i}
         />
         <Checking isChecking={isChecking} isBusy={isBusy} value={usernameValue} />
       </div>
@@ -116,12 +118,12 @@ export default function ChangeProfile({
       <SwitchLanguage />
       <button
         className={
-          usernameValue.length > 5 && !isBusy && nameValue
+          usernameValue.length >= 5 && !isBusy && nameValue
             ? styles.activeButton
             : styles.button
         }
         onClick={() => {
-          if (usernameValue.length > 5 && !isBusy && nameValue) {
+          if (usernameValue.length >= 5 && !isBusy && nameValue) {
             onDone({
               avatar: avatarValue,
               about: aboutValue,
