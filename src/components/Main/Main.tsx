@@ -1,10 +1,10 @@
 import styles from "./Main.module.scss";
-import { SignOutButton } from "@clerk/nextjs";
+import { signOut } from "next-auth/react";
 
 export default function Main() {
   return (
-    <div className={styles.wrapper}>
-      <SignOutButton>Выйти</SignOutButton>
+    <div className={styles.wrapper} onClick={() => signOut()}>
+      Main
     </div>
   );
 }

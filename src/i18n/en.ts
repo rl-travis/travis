@@ -3,6 +3,25 @@ import { i18nType } from "@/i18n/types";
 export const en: i18nType = {
   id: 0,
   slug: "en",
+  name: "English",
+  changeProfile: {
+    create: "Create Profile",
+    change: "Change Profile",
+    btn: "Save",
+    name: "Name*",
+    about: "About",
+    username: "Username*",
+    rules: [
+      "You can use symbols ",
+      "a-z",
+      ", ",
+      "0-9",
+      " and ",
+      "underlines",
+      "Minimum length is 5 symbols",
+    ],
+    language: "Language",
+  },
   profile: {
     createTitle: "Create Profile",
     changeTitle: "Change Profile",

@@ -1,51 +1,45 @@
 "use client";
+import React from "react";
 import styles from "./NewUser.module.scss";
 import ChangeProfile from "@/components/ChangeProfile/ChangeProfile";
+import { useInter } from "@/hooks/useInter";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
-import React from "react";
 import Loading from "@/components/Loading/Loading";
 
-export default function NewUser() {
+export default function NewUser({ email }: { email: string }) {
+  const { i18n } = useInter();
   const [loading, setLoading] = React.useState(false);
   const createUser = useMutation(api.user.create);
-  const uploadAvatar = useMutation(api.user_avatar.add);
+  const addAvatar = useMutation(api.user_avatar.add);
   const router = useRouter();
-  async function onDone(info: ChangeProfileType) {
+  const onDone = async (p: ChangeProfileType) => {
     setLoading(true);
     const user_id = await createUser({
-      name: info.name,
-      locales: info.locales,
-      about: info.about,
-      username: info.username,
+      username: p.username,
+      email,
+      name: p.name,
+      about: p.about,
+      locales: i18n.id,
     });
 
-    if (info.avatar_id) {
-      await uploadAvatar({
-        image_id: info.avatar_id,
+    if (p.avatarDoc) {
+      await addAvatar({
+        image_id: p.avatarDoc._id,
         user_id,
       });
     }
+    router.refresh();
+  };
 
-    router.push("/");
+  if (loading) {
+    return <Loading />;
   }
-
   return (
     <div className={styles.wrapper}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <ChangeProfile
-          username=""
-          avatar=""
-          name=""
-          about=""
-          isCreate={true}
-          onDone={onDone}
-        />
-      )}
+      <ChangeProfile done={onDone} title={i18n.changeProfile.create} />
     </div>
   );
 }

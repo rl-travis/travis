@@ -11,13 +11,12 @@ export default defineSchema({
 
   user: defineTable({
     email: v.string(),
-    token: v.string(),
     username: v.string(),
     name: v.string(),
     about: v.string(),
     locales: v.number(),
   })
-    .index("token", ["token"])
+    .index("email", ["email"])
     .index("username", ["username"]),
   user_avatar: defineTable({
     image_url: v.string(),
@@ -25,5 +24,5 @@ export default defineSchema({
     public: v.boolean(),
     image_id: v.id("file"),
     user_id: v.id("user"),
-  }).index("by_user_id", ["user_id"]),
+  }).index("user_id", ["user_id"]),
 });
