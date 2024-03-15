@@ -4,6 +4,11 @@
  * https://github.com/morethanwords/tweb/blob/master/LICENSE
  */
 
+export type CropperType = {
+  crop: () => HTMLCanvasElement;
+  removeHandlers: () => void;
+};
+
 export default function cropper(originalImage: HTMLImageElement) {
   let cropImage: HTMLImageElement;
   let canvas: HTMLCanvasElement;

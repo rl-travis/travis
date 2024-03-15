@@ -1,9 +1,8 @@
-import { Id } from "../../convex/_generated/dataModel";
+import { Doc } from "../../convex/_generated/dataModel";
 
 export type ChangeProfileType = {
   username: string;
   name: string;
-  avatar_id: Id<"file"> | null;
+  avatarDoc: Doc<"file"> | null;
   about: string;
-  locales: number;
 };

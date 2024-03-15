@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./UploadWrapper.module.scss";
+import MiniLoading from "@/components/Loading/MiniLoading";
 
 type PropsType = {
   children: React.ReactNode;
   onUpload: (files: File[]) => void;
   multiple?: boolean;
   accept?: string;
-  loading: React.ReactNode;
 };
 
 export default function UploadWrapper({
@@ -14,7 +14,6 @@ export default function UploadWrapper({
   onUpload,
   multiple,
   accept,
-  loading,
 }: PropsType) {
   const [files, setFiles] = React.useState<File[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -23,13 +22,14 @@ export default function UploadWrapper({
     if (files.length > 0) {
       setIsLoading(true);
       onUpload(files);
+      setIsLoading(false);
     }
   }, [files]);
 
   return (
     <>
       {isLoading ? (
-        <>{loading}</>
+        <MiniLoading />
       ) : (
         <>
           <input

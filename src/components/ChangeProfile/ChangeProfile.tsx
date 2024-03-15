@@ -1,131 +1,77 @@
-import styles from "./ChangeProfile.module.scss";
+import React from "react";
+import styles from "./styles.module.scss";
+import TextArea from "@/components/TextArea/TextArea";
 import { useInter } from "@/hooks/useInter";
-import { useEffect, useState } from "react";
-import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-
+import Avatar from "@/components/ChangeProfile/Avatar";
+import Rules from "@/components/ChangeProfile/Rules";
+import Switch from "@/components/ChangeProfile/Switch";
+import Checking from "@/components/ChangeProfile/Checking";
+import { Doc } from "../../../convex/_generated/dataModel";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
-import { debounce } from "@/utils/debounce";
-import Textarea from "@/components/UI/Textarea/Textarea";
-import Checking from "@/components/Checking/Checking";
-import Rules from "@/components/Rules/Rules";
-import SwitchLanguage from "@/components/SwitchLanguage/SwitchLanguage";
-import ChangeProfileAvatar from "@/components/ChangeProfile/ChangeProfileAvatar";
-import { Id } from "../../../convex/_generated/dataModel";
-
-type PropsType = {
-  name: string;
-  about: string;
-  username: string;
-  avatar: string;
-  isCreate: boolean;
-  onDone: (info: ChangeProfileType) => void;
-};
 
 export default function ChangeProfile({
-  name,
-  avatar,
-  username,
-  about,
-  isCreate,
-  onDone,
-}: PropsType) {
+  username = "",
+  about = "",
+  name = "",
+  avatar = "https://i.ibb.co/XbKhr5X/avatar.jpg",
+  title,
+  done,
+}: {
+  done: (profile: ChangeProfileType) => void;
+  username?: string;
+  name?: string;
+  about?: string;
+  avatar?: string;
+  title: string;
+}) {
   const { i18n } = useInter();
+  const [nameValue, setNameValue] = React.useState(name);
+  const [aboutValue, setAboutValue] = React.useState(about);
+  const [usernameValue, setUsernameValue] = React.useState(username);
 
-  const checkUsernameMutation = useMutation(api.user.checkUsername);
-
-  const [usernameValue, setUsernameValue] = useState(username);
-  const [nameValue, setNameValue] = useState(name);
-  const [aboutValue, setAboutValue] = useState(about);
-  const [avatarId, setAvatarId] = useState<Id<"file"> | null>(null);
-
-  const [isChecking, setIsChecking] = useState<boolean>(false);
-  const [isBusy, setIsBusy] = useState<boolean>(false);
-
-  const debounceCheck = debounce(check, 200);
-
-  async function check() {
-    setIsBusy(
-      await checkUsernameMutation({
-        username: usernameValue,
-      }),
-    );
-  }
-
-  useEffect(() => {
-    if (usernameValue.length >= 5 && usernameValue !== username) {
-      setIsChecking(true);
-      debounceCheck();
-      setIsChecking(false);
-    }
-  }, [usernameValue]);
+  const [avatarDoc, setAvatarDoc] = React.useState<Doc<"file"> | null>(null);
 
   return (
     <div className={styles.wrapper}>
-      {isCreate ? (
-        <span className={styles.title}>{i18n.profile.createTitle}</span>
-      ) : (
-        <span className={styles.title}>{i18n.profile.changeTitle}</span>
-      )}
-
-      <ChangeProfileAvatar
-        avatar={avatar}
-        done={(f) => {
-          setAvatarId(f._id);
-        }}
-      />
-
-      <Textarea
+      <div className={styles.title}>{title}</div>
+      <Avatar avatar={avatar} setAvatarDoc={setAvatarDoc} />
+      <TextArea
+        maxLength={70}
+        title={i18n.changeProfile.name}
         value={nameValue}
-        placeholder={`${i18n.profile.name}*`}
-        maxSize={52}
-        setState={setNameValue}
-        subtitle={`${i18n.profile.name}*`}
+        setValue={setNameValue}
       />
-
-      <Textarea
+      <TextArea
+        maxLength={52}
+        title={i18n.changeProfile.about}
         value={aboutValue}
-        placeholder={i18n.profile.about}
-        maxSize={70}
-        setState={setAboutValue}
-        subtitle={i18n.profile.about}
+        setValue={setAboutValue}
       />
-      <div className={styles.usernameBlock}>
-        <Textarea
+      <div className={styles.username}>
+        <TextArea
+          maxLength={70}
+          title={i18n.changeProfile.username}
           value={usernameValue}
-          placeholder={`${i18n.profile.username}*`}
-          maxSize={52}
-          setState={setUsernameValue}
-          subtitle={`${i18n.profile.username}*`}
+          setValue={setUsernameValue}
           regex={/^[a-z0-9_]*$/i}
         />
-        <Checking isChecking={isChecking} isBusy={isBusy} value={usernameValue} />
+        <Checking username={username} usernameValue={usernameValue} i18n={i18n} />
+        <Rules i18n={i18n} />
       </div>
-      <Rules />
-      <SwitchLanguage />
+      <Switch />
       <button
-        className={
-          usernameValue.length >= 5 && !isBusy && nameValue
-            ? styles.activeButton
-            : styles.button
-        }
+        className={styles.btn}
+        disabled={usernameValue.length < 5 || nameValue.length === 0}
         onClick={() => {
-          if (usernameValue.length >= 5 && !isBusy && nameValue) {
-            onDone({
-              avatar_id: avatarId,
-              about: aboutValue,
-              name: nameValue,
-              username: usernameValue,
-              locales: i18n.id,
-            });
-          }
+          done({
+            username: usernameValue,
+            name: nameValue,
+            avatarDoc: avatarDoc,
+            about: aboutValue,
+          });
         }}
       >
-        {isCreate ? (
-          <span className={styles.title}>{i18n.profile.createButton}</span>
-        ) : (
-          <span className={styles.title}>{i18n.profile.changeButton}</span>
-        )}
+        {i18n.changeProfile.btn}
       </button>
     </div>
   );

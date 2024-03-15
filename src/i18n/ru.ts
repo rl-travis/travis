@@ -3,6 +3,25 @@ import { i18nType } from "@/i18n/types";
 export const ru: i18nType = {
   id: 1,
   slug: "ru",
+  name: "Русский",
+  changeProfile: {
+    create: "Создать Профиль",
+    change: "Изменить Профиль",
+    btn: "Сохранить",
+    name: "Имя*",
+    about: "О себе",
+    username: "Username*",
+    rules: [
+      "Вы можете использовать символы ",
+      "a-z",
+      ", ",
+      "0-9",
+      " и ",
+      "подчеркивания",
+      "Минимальная длина - 5 символов",
+    ],
+    language: "Язык",
+  },
   profile: {
     createTitle: "Создание профиля",
     changeTitle: "Изменение профиля",
