@@ -1,9 +1,16 @@
 "use client";
 import React from "react";
-import { useConvexAuth } from "convex/react";
 import Auth from "@/components/Auth/Auth";
+import { useSession } from "next-auth/react";
+import Loading from "@/components/Loading/Loading";
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading } = useConvexAuth();
-  return <>{isAuthenticated ? <>{children}</> : <Auth isLoading={isLoading} />}</>;
+  const { data } = useSession();
+  if (data === undefined) {
+    return <Loading />;
+  } else if (data === null) {
+    return <Auth />;
+  } else {
+    return <>{children}</>;
+  }
 }

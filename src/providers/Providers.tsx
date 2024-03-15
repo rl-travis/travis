@@ -11,11 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <ConvexClientProvider>
         <ThemeProviderTravis>
           <InternationalizationProvider>
-            {/*<AuthProvider>*/}
-
-            {children}
-
-            {/*</AuthProvider>*/}
+            <AuthProvider>{children}</AuthProvider>
           </InternationalizationProvider>
         </ThemeProviderTravis>
       </ConvexClientProvider>
