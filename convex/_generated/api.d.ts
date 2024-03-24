@@ -17,6 +17,7 @@ import type {
 import type * as file from "../file.js";
 import type * as user from "../user.js";
 import type * as user_avatar from "../user_avatar.js";
+import type * as user_chat from "../user_chat.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   file: typeof file;
   user: typeof user;
   user_avatar: typeof user_avatar;
+  user_chat: typeof user_chat;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
