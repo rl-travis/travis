@@ -8,7 +8,7 @@ export const getChats = query({
     //получаю чаты из user_chat
     const chats = await ctx.db
       .query("user_chat")
-      .filter((q) => q.eq(q.field("user_id"), args.user_id))
+      .withIndex("user_id", (q) => q.eq("user_id", args.user_id))
       .collect();
 
     //результат

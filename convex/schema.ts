@@ -15,7 +15,7 @@ export default defineSchema({
     name: v.string(),
     about: v.string(),
     locales: v.number(),
-    avatar_url: v.string(),
+    url: v.string(),
   })
     .index("email", ["email"])
     .index("username", ["username"]),

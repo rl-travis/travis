@@ -34,7 +34,7 @@ export const create = mutation({
       locales: args.locales,
       about: args.about,
       name: args.name,
-      avatar_url: DEFAULT_AVATAR_URL, //вынес в константу
+      url: DEFAULT_AVATAR_URL, //вынес в константу
     });
 
     const saved = await ctx.db.insert("saved", {

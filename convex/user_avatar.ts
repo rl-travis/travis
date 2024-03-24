@@ -7,7 +7,7 @@ export const add = mutation({
     const file = await ctx.db.get(args.image_id);
     if (!file) throw new ConvexError("Файл не найден");
     await ctx.db.patch(args.user_id, {
-      avatar_url: file.url,
+      url: file.url,
     });
     return await ctx.db.insert("user_avatar", {
       image_url: file.url,
