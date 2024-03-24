@@ -15,12 +15,12 @@ export default defineSchema({
     name: v.string(),
     about: v.string(),
     locales: v.number(),
-    url: v.string(),
+    avatar_url: v.string(),
   })
     .index("email", ["email"])
     .index("username", ["username"]),
   user_avatar: defineTable({
-    image_url: v.string(),
+    url: v.string(),
     user_id: v.id("user"),
   }).index("user_id", ["user_id"]),
   user_chat: defineTable({
