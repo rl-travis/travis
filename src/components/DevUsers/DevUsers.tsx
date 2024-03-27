@@ -3,15 +3,14 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { Doc, Id } from "../../../convex/_generated/dataModel";
-import { Chat } from "@/interfaces/Chat";
-import { Dialog } from "@/interfaces/Dialog";
+import { ChatType } from "@/types/interfaces/Chat";
 
 export default function DevUsers({
   user,
   chats,
 }: {
   user: Doc<"user">;
-  chats: Chat[];
+  chats: ChatType[];
 }) {
   const users = useQuery(api.user.devGetAll);
 
@@ -35,8 +34,7 @@ export default function DevUsers({
             {userItem._id !== user._id &&
               !chats.find((chat) => {
                 if (chat.type === "dialog") {
-                  let dialog = chat as Dialog;
-                  return dialog.chat.user._id === userItem._id;
+                  return chat.chat.user._id === userItem._id;
                 }
               }) && (
                 <button onClick={() => createDialog(userItem._id)}>

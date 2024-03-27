@@ -1,6 +1,13 @@
 import { query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { Doc } from "./_generated/dataModel";
+import {
+  ChannelInterface,
+  ChatType,
+  DialogInterface,
+  GroupInterface,
+  SavedInterface,
+} from "../src/types/interfaces/Chat";
 
 export const getChats = query({
   args: { user_id: v.id("user") },
@@ -12,7 +19,7 @@ export const getChats = query({
       .collect();
 
     //результат
-    const result = [];
+    const result: ChatType[] = [];
 
     //проходимся по чатам
     for (let chat of chats) {
@@ -23,13 +30,17 @@ export const getChats = query({
         if (!dialog) throw new ConvexError("Диалог не найден");
         const first_user = await ctx.db.get(dialog.first_user_id);
         const second_user = await ctx.db.get(dialog.second_user_id);
+        if (first_user === null || second_user === null) {
+          throw new ConvexError("пользователи не определены");
+        }
         let last_message = null; //тут можно изменить, если надо
         if (dialog.last_message_id) {
           last_message = await ctx.db.get(dialog.last_message_id);
         }
 
         //формируем объект для результирующего массива
-        const chatObject = {
+        // @ts-ignore
+        const chatObject: DialogInterface = {
           ...chat,
           chat: {
             ...dialog,
@@ -38,14 +49,47 @@ export const getChats = query({
           },
         };
         result.push(chatObject);
-      } else {
-        const chatItem = await ctx.db.get(chat.chat_id);
+      } else if (chat.type === "saved") {
+        const chatItem = (await ctx.db.get(chat.chat_id)) as Doc<"saved">;
         if (!chatItem) throw new ConvexError("Диалог не найден");
         let last_message = null;
         if (chatItem.last_message_id) {
           last_message = await ctx.db.get(chatItem.last_message_id);
         }
-        const chatObject = {
+        // @ts-ignore
+        const chatObject: SavedInterface = {
+          ...chat,
+          chat: {
+            ...chatItem,
+            last_message,
+          },
+        };
+        result.push(chatObject);
+      } else if (chat.type === "channel") {
+        const chatItem = (await ctx.db.get(chat.chat_id)) as Doc<"channel">;
+        if (!chatItem) throw new ConvexError("Диалог не найден");
+        let last_message = null;
+        if (chatItem.last_message_id) {
+          last_message = await ctx.db.get(chatItem.last_message_id);
+        }
+        // @ts-ignore
+        const chatObject: ChannelInterface = {
+          ...chat,
+          chat: {
+            ...chatItem,
+            last_message,
+          },
+        };
+        result.push(chatObject);
+      } else if (chat.type === "group") {
+        const chatItem = (await ctx.db.get(chat.chat_id)) as Doc<"group">;
+        if (!chatItem) throw new ConvexError("Диалог не найден");
+        let last_message = null;
+        if (chatItem.last_message_id) {
+          last_message = await ctx.db.get(chatItem.last_message_id);
+        }
+        // @ts-ignore
+        const chatObject: GroupInterface = {
           ...chat,
           chat: {
             ...chatItem,
