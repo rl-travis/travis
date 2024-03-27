@@ -1,4 +1,4 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { DEFAULT_AVATAR_URL } from "../src/constants/constants";
 
@@ -62,5 +62,12 @@ export const checkUsername = mutation({
       .withIndex("username", (q) => q.eq("username", args.username))
       .unique();
     return !!user;
+  },
+});
+
+export const devGetAll = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("user").collect();
   },
 });

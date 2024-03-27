@@ -12,12 +12,12 @@ import NewUser from "@/components/NewUser/NewUser";
 export default function Home() {
   const { data } = useSession();
   const getUser = useMutation(api.user.store);
-  const [userId, setUserId] = useState<Doc<"user"> | null>(null);
+  const [user, setUser] = useState<Doc<"user"> | null>(null);
   const [loading, setLoading] = useState(true);
 
   const asyncGetUser = async () => {
-    const user_id = await getUser({ email: data!.user!.email! });
-    setUserId(user_id);
+    const user = await getUser({ email: data!.user!.email! });
+    setUser(user);
     setLoading(false);
   };
 
@@ -28,8 +28,8 @@ export default function Home() {
   }, [data]);
   if (!data || loading) {
     return <Loading />;
-  } else if (userId) {
-    return <Main />;
+  } else if (user) {
+    return <Main user={user} />;
   } else {
     return <NewUser email={data.user!.email!} />;
   }
