@@ -5,7 +5,7 @@ import ChatList from "@/components/ChatList/ChatList";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import IconLogo from "@/components/Icon/IconLogo";
 import { Bolt } from "lucide-react";
-import Link from "next/link";
+import useResize from "@/hooks/useResize";
 
 export default function AdaptiveFull({
   chats,
@@ -14,9 +14,11 @@ export default function AdaptiveFull({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
+  const LeftRef = React.useRef<HTMLDivElement>(null);
+  const { initResize, resetSize } = useResize(LeftRef, 500, 200, 300);
   return (
     <div className={styles.wrapper}>
-      <div className={styles.left}>
+      <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
           <IconLogo />
           <button className={styles.btn}>
@@ -27,6 +29,11 @@ export default function AdaptiveFull({
           <ChatList chats={chats} user={user} />
         </div>
       </div>
+      <div
+        className={styles.resize}
+        onDoubleClick={resetSize}
+        onMouseDown={initResize}
+      />
     </div>
   );
 }

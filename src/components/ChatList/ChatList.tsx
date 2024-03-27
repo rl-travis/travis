@@ -15,15 +15,12 @@ export default function ChatList({
   if (chats === undefined) {
     return (
       <div className={styles.wrapper}>
-        {new Array(10)
-          .map((_, i) => i)
-          .map((e) => {
-            return <SkeletonChat key={e} />;
-          })}
+        {Array.from({ length: 10 }, (_, i) => (
+          <SkeletonChat key={i} />
+        ))}
       </div>
     );
   }
-  console.log(chats);
   return (
     <div className={styles.wrapper}>
       {chats.map((e) => {
