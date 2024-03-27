@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ChatList.module.scss";
 import { ChatType } from "@/types/interfaces/Chat";
 import Image from "next/image";
-import { Disc2, Pin } from "lucide-react";
+import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 import reformatDateChats from "@/utils/reformatDateChats";
 import { useInter } from "@/hooks/useInter";
 import { Doc } from "../../../convex/_generated/dataModel";
@@ -30,6 +30,15 @@ export default function ChatListItem({
 
       <div className={styles.right}>
         <div className={styles.top}>
+          {current.type === "saved" ? (
+            <Bookmark size={12} />
+          ) : current.type === "group" ? (
+            <UsersRound size={12} />
+          ) : current.type === "channel" ? (
+            <Rss size={12} />
+          ) : (
+            ""
+          )}
           <div className={styles.title}>
             {current.type === "dialog" ? current.chat.user.name : current.chat.name}
           </div>
