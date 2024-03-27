@@ -33,8 +33,7 @@ export const getChats = query({
           ...chat,
           chat: {
             ...dialog,
-            first_user,
-            second_user,
+            user: first_user?._id !== args.user_id ? first_user : second_user,
             last_message,
           },
         };

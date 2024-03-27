@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as dialog from "../dialog.js";
 import type * as file from "../file.js";
 import type * as user from "../user.js";
 import type * as user_avatar from "../user_avatar.js";
@@ -28,6 +29,7 @@ import type * as user_chat from "../user_chat.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  dialog: typeof dialog;
   file: typeof file;
   user: typeof user;
   user_avatar: typeof user_avatar;
