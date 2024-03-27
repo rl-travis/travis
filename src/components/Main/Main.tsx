@@ -13,7 +13,11 @@ export default function Main({ user }: { user: Doc<"user"> }) {
     <>
       {chats && <DevUsers user={user} chats={chats} />}
 
-      {navigator.maxTouchPoints > 0 ? <AdaptiveShort /> : <AdaptiveFull />}
+      {navigator.maxTouchPoints > 0 ? (
+        <AdaptiveShort />
+      ) : (
+        <AdaptiveFull chats={chats} user={user} />
+      )}
     </>
   );
 }

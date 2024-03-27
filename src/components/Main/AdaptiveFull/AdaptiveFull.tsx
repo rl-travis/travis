@@ -1,11 +1,19 @@
 import React from "react";
 import styles from "./AdaptiveFull.module.scss";
-import SkeletonChat from "@/components/Skeleton/SkeletonChat";
+import { ChatType } from "@/types/interfaces/Chat";
+import ChatList from "@/components/ChatList/ChatList";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
-export default function AdaptiveFull() {
+export default function AdaptiveFull({
+  chats,
+  user,
+}: {
+  chats: ChatType[] | undefined;
+  user: Doc<"user">;
+}) {
   return (
     <div className={styles.wrapper}>
-      <SkeletonChat />
+      <ChatList chats={chats} user={user} />
     </div>
   );
 }

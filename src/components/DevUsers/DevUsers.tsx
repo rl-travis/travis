@@ -4,6 +4,10 @@ import { api } from "../../../convex/_generated/api";
 
 import { Doc, Id } from "../../../convex/_generated/dataModel";
 import { ChatType } from "@/types/interfaces/Chat";
+import { useTheme } from "next-themes";
+import React from "react";
+import { ChevronsDown, ChevronsUp } from "lucide-react";
+import { useInter } from "@/hooks/useInter";
 
 export default function DevUsers({
   user,
@@ -13,7 +17,9 @@ export default function DevUsers({
   chats: ChatType[];
 }) {
   const users = useQuery(api.user.devGetAll);
-
+  const { i18n, nextLang } = useInter();
+  const { setTheme } = useTheme();
+  const [active, setActive] = React.useState(true);
   const dialogCreateMutation = useMutation(api.dialog.create);
 
   //interlocutor - собеседник, для общего развития
@@ -27,8 +33,14 @@ export default function DevUsers({
   }
 
   return (
-    <div className={styles.wrapper}>
-      dev
+    <div className={active ? styles.wrapper + " " + styles.active : styles.wrapper}>
+      <button onClick={() => setActive(!active)} className={styles.btn}>
+        dev {active ? <ChevronsDown size={16} /> : <ChevronsUp size={16} />}
+      </button>
+      <span>cur lang - {i18n.name}</span>
+      <button onClick={() => setTheme("light")}>change theme [light]</button>
+      <button onClick={() => setTheme("dark")}>change theme [dark]</button>
+      <button onClick={() => nextLang()}>next lang without save </button>
       {user &&
         users?.map((userItem) => (
           <div key={userItem._id}>
