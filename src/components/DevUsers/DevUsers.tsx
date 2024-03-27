@@ -26,7 +26,7 @@ export default function DevUsers({ user, chats }: { user: Doc<"user">; chats: an
         users?.map((userItem) => (
           <div key={userItem._id}>
             {userItem._id !== user._id &&
-              !chats.find((chat) => chat.user_id === userItem._id) && (
+              !chats.find((chat) => chat.chat.user.id === userItem._id) && (
                 <button onClick={() => createDialog(userItem._id)}>
                   {userItem.name}
                 </button>

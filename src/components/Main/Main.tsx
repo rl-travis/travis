@@ -1,5 +1,4 @@
 import styles from "./Main.module.scss";
-import { signOut } from "next-auth/react";
 import { Doc } from "../../../convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -11,7 +10,7 @@ export default function Main({ user }: { user: Doc<"user"> }) {
   });
 
   return (
-    <div className={styles.wrapper} onClick={() => signOut()}>
+    <div className={styles.wrapper}>
       {chats && <DevUsers user={user} chats={chats} />}
     </div>
   );
