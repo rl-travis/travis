@@ -37,6 +37,7 @@ export default function NewUser({ email }: { email: string }) {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className={styles.wrapper}>
       <ChangeProfile done={onDone} title={i18n.changeProfile.create} />

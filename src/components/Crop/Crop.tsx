@@ -23,11 +23,13 @@ export default function Crop({
 
   return (
     <div className="crop-avatar__wrapper">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src=""
         ref={originalImage}
         className="crop-avatar__original-image"
         draggable={false}
+        alt="crop avatar"
       />
     </div>
   );
