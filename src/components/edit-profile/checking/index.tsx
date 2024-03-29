@@ -1,12 +1,11 @@
 import React from "react";
-import { useMutation } from "convex/react";
 import { Check, X } from "lucide-react";
-import { api } from "../../../../convex/_generated/api";
 import styles from "./index.module.scss";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { FormInterface } from "@/components/edit-profile";
 import classNames from "classnames/bind";
 import { debounce, i18nType } from "@/6.shared";
+import { useUser } from "@/5.entities";
 
 const cx = classNames.bind(styles);
 export default function Checking({
@@ -22,7 +21,7 @@ export default function Checking({
 }) {
   const [isValid, setIsValid] = React.useState<boolean>(false);
   const [isBusy, setIsBusy] = React.useState<boolean>(false);
-  const checkUsername = useMutation(api.user.checkUsername);
+  const { checkUsername } = useUser();
   const debounceCheck = debounce(check, 200);
 
   async function check() {

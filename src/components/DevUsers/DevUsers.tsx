@@ -1,5 +1,5 @@
 import styles from "./DevUsers.module.scss";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 import { Doc, Id } from "../../../convex/_generated/dataModel";
@@ -10,6 +10,7 @@ import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 import classNames from "classnames/bind";
 import { useInter } from "@/6.shared";
+import { useUser } from "@/5.entities";
 
 const cx = classNames.bind(styles);
 export default function DevUsers({
@@ -19,7 +20,7 @@ export default function DevUsers({
   user?: Doc<"user">;
   chats?: ChatType[];
 }) {
-  const users = useQuery(api.user.devGetAll);
+  const { devGetAll: users } = useUser();
   const { i18n, nextLang } = useInter();
   const { setTheme } = useTheme();
   const [active, setActive] = React.useState(true);

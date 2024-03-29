@@ -1,17 +1,16 @@
 "use client";
 
-import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
 import Main from "@/components/Main/Main";
 import React, { useEffect, useState } from "react";
 import { Doc } from "../../convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
 import NewUser from "@/components/NewUser/NewUser";
 import { Loading } from "@/6.shared";
+import { useUser } from "@/5.entities";
 
 export default function Home() {
   const { data } = useSession();
-  const getUser = useMutation(api.user.store);
+  const { store: getUser } = useUser();
   const [user, setUser] = useState<Doc<"user"> | null>(null);
   const [loading, setLoading] = useState(true);
 
