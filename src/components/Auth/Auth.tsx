@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./Auth.module.scss";
-import IconLogo from "@/components/Icon/IconLogo";
-import IconGithub from "@/components/Icon/IconGithub";
-import IconGoogle from "@/components/Icon/IconGoogle";
 import { signIn } from "next-auth/react";
-
+import { IconGithub, IconGoogle, IconLogo } from "@/6.shared";
 export default function Auth() {
   return (
     <div className={styles.wrapper}>

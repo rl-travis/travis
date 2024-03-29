@@ -3,10 +3,10 @@ import styles from "./AdaptiveFull.module.scss";
 import { ChatType } from "@/types/interfaces/Chat";
 import ChatList from "@/components/ChatList/ChatList";
 import { Doc } from "../../../../convex/_generated/dataModel";
-import IconLogo from "@/components/Icon/IconLogo";
 import { Bolt } from "lucide-react";
 import useResize from "@/hooks/useResize";
 import { signOut } from "next-auth/react";
+import { IconLogo } from "@/6.shared";
 
 export default function AdaptiveFull({
   chats,
