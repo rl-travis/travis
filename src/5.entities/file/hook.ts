@@ -1,9 +1,9 @@
 import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { Doc, Id } from "../../convex/_generated/dataModel";
 import ky from "ky";
+import { api } from "../../../convex/_generated/api";
+import { Doc, Id } from "../../../convex/_generated/dataModel";
 
-export default function useFiles() {
+export function useFiles() {
   const generateUrl = useMutation(api.file.generateUploadUrl);
   const create = useMutation(api.file.createFile);
   const uploadFile = async (files: File[]) => {

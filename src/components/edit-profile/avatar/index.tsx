@@ -4,10 +4,10 @@ import Image from "next/image";
 import { Check, ImagePlus } from "lucide-react";
 import { CropperType } from "@/components/Crop/cropper";
 import Crop from "@/components/Crop/Crop";
-import useFiles from "@/hooks/useFiles";
 import { UseFormSetValue } from "react-hook-form";
 import { FormInterface } from "@/components/edit-profile";
 import { i18nType, MiniLoading, Portal, UploadWrapper } from "@/6.shared";
+import { useFiles } from "@/5.entities";
 
 export default function Avatar({
   setValue,
