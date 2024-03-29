@@ -18,6 +18,7 @@
   padding: 10px;
   cursor: pointer;
   align-items: center;
+
   &:hover {
     background-color: var(--hover);
   }
@@ -26,6 +27,7 @@
 .avatar {
   border-radius: 50%;
 }
+
 .right {
   display: flex;
   flex-direction: column;
@@ -33,13 +35,14 @@
   gap: 5px;
   overflow: hidden;
   max-width: 100%;
-  .top {
 
+  .top {
     align-items: center;
     display: flex;
     gap: 5px;
     flex: 1;
     max-width: 100%;
+
     .title {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -49,20 +52,24 @@
       flex: 1;
       white-space: nowrap;
     }
+
     .info {
       display: flex;
       align-items: center;
       gap: 5px;
     }
+
     .date {
       color: var(--gray);
       font-size: 12px;
     }
   }
+
   .bottom {
     display: flex;
     gap: 10px;
     align-items: center;
+
     .unread {
       font-size: 12px;
       height: 20px;
@@ -75,6 +82,7 @@
       padding: 0 5px;
       border-radius: 50px;
     }
+
     .message {
       overflow: hidden;
       text-overflow: ellipsis;

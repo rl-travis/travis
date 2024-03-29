@@ -9,6 +9,7 @@ import Crop from "@/components/Crop/Crop";
 import useFiles from "@/hooks/useFiles";
 import { Doc } from "../../../convex/_generated/dataModel";
 import MiniLoading from "@/components/Loading/MiniLoading";
+
 export default function Avatar({
   avatar,
   setAvatarDoc,

@@ -33,7 +33,7 @@ export default function ChangeProfile({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>{title}</div>
+      <h3 className={styles.title}>{title}</h3>
       <Avatar avatar={avatar} setAvatarDoc={setAvatarDoc} />
       <TextArea
         maxLength={70}
