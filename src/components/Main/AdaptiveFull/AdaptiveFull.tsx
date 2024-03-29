@@ -6,6 +6,7 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 import IconLogo from "@/components/Icon/IconLogo";
 import { Bolt } from "lucide-react";
 import useResize from "@/hooks/useResize";
+import { signOut } from "next-auth/react";
 
 export default function AdaptiveFull({
   chats,
@@ -20,7 +21,9 @@ export default function AdaptiveFull({
     <div className={styles.wrapper}>
       <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
-          <IconLogo />
+          <div onClick={() => signOut()}>
+            <IconLogo />
+          </div>
           <button className={styles.btn}>
             <Bolt size={20} />
           </button>
