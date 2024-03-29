@@ -1,20 +1,9 @@
 import React from "react";
-import styles from "./UploadWrapper.module.scss";
+import styles from "./index.module.scss";
 import { MiniLoading } from "@/6.shared";
+import { PropsType } from "./types";
 
-type PropsType = {
-  children: React.ReactNode;
-  onUpload: (files: File[]) => void;
-  multiple?: boolean;
-  accept?: string;
-};
-
-export default function UploadWrapper({
-  children,
-  onUpload,
-  multiple,
-  accept,
-}: PropsType) {
+export function UploadWrapper({ children, onUpload, multiple, accept }: PropsType) {
   const [files, setFiles] = React.useState<File[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
