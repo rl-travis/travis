@@ -31,6 +31,6 @@ export default function Home() {
   } else if (user) {
     return <Main user={user} />;
   } else {
-    return <NewUser email={data.user!.email!} />;
+    return <NewUser email={data.user!.email!} setUser={setUser} />;
   }
 }

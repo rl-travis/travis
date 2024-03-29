@@ -27,7 +27,11 @@
   font-size: 16px;
 
   &:disabled {
-    opacity: 0.1;
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--travis);
+    }
   }
 
   &:hover {
@@ -44,31 +48,31 @@
   }
 }
 
-.langWrapper {
+.lang {
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
 
-.langBlock {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
+  .block {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
 
-.langActive {
-  background-color: var(--travis);
-  border-radius: 5px;
-  padding: 4px 10px 5px;
-}
+  .active {
+    background-color: var(--travis);
+    border-radius: 5px;
+    padding: 4px 10px 5px;
+  }
 
-.lang {
-  border-radius: 4px;
-  padding: 4px 10px 5px;
+  .inactive {
+    border-radius: 4px;
+    padding: 4px 10px 5px;
 
-  &:hover {
-    background-color: var(--hover);
+    &:hover {
+      background-color: var(--hover);
+    }
   }
 }
 
@@ -90,7 +94,7 @@
 }
 
 .busy {
-  background: #ff3232;
+  background: var(--buzy);
   font-size: 12px;
   padding: 0 5px;
   border-radius: 8px;
@@ -101,7 +105,7 @@
 }
 
 .free {
-  background: #48ba46;
+  background: var(--free);
   font-size: 12px;
   padding: 0 5px;
   border-radius: 8px;
@@ -111,22 +115,24 @@
   gap: 3px;
 }
 
-.image {
-  border-radius: 50%;
+.avatar {
+  .image {
+    border-radius: 50%;
+  }
+
+  .block {
+    position: relative;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+  }
 }
 
-.avatarBlock {
-  position: relative;
-}
-
-.avatarBtn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  cursor: pointer;
-}
-
-.avatarDone {
+.done {
   width: 30px;
   height: 30px;
   border-radius: 5px;
