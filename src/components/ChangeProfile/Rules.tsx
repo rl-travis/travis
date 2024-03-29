@@ -1,6 +1,7 @@
 import React from "react";
 import { i18nType } from "@/i18n/types";
 import styles from "./styles.module.scss";
+
 export default function Rules({ i18n }: { i18n: i18nType }) {
   return (
     <div className={styles.rules}>

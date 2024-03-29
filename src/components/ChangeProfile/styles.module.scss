@@ -11,6 +11,7 @@
   font-size: 20px;
   font-weight: 700;
 }
+
 .username {
   position: relative;
   display: flex;
@@ -24,9 +25,11 @@
   background-color: var(--travis);
   padding: 8px 10px 10px 10px;
   font-size: 16px;
+
   &:disabled {
     opacity: 0.1;
   }
+
   &:hover {
     background-color: var(--dark-travis);
   }
@@ -35,6 +38,7 @@
 .rules {
   width: 100%;
   color: var(--gray);
+
   span {
     color: var(--color);
   }
@@ -45,20 +49,24 @@
   justify-content: space-between;
   width: 100%;
 }
+
 .langBlock {
   display: flex;
   gap: 10px;
   justify-content: center;
   align-items: center;
 }
+
 .langActive {
   background-color: var(--travis);
   border-radius: 5px;
   padding: 4px 10px 5px;
 }
+
 .lang {
   border-radius: 4px;
   padding: 4px 10px 5px;
+
   &:hover {
     background-color: var(--hover);
   }
@@ -110,6 +118,7 @@
 .avatarBlock {
   position: relative;
 }
+
 .avatarBtn {
   position: absolute;
   bottom: 0;
@@ -126,6 +135,7 @@
   align-items: center;
   background-color: var(--travis);
   margin: 0 auto;
+
   &:hover {
     background-color: var(--dark-travis);
   }

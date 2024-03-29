@@ -1,4 +1,5 @@
 import styles from "./Icon.module.scss";
+
 export default function IconGoogle() {
   return (
     <svg

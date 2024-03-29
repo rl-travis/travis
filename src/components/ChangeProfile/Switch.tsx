@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { i18nList, useInter } from "@/hooks/useInter";
+
 export default function Switch() {
   const { i18n, switchLang } = useInter();
   return (

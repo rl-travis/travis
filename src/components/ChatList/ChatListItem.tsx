@@ -6,6 +6,7 @@ import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 import reformatDateChats from "@/utils/reformatDateChats";
 import { useInter } from "@/hooks/useInter";
 import { Doc } from "../../../convex/_generated/dataModel";
+
 export default function ChatListItem({
   current,
   user,
@@ -39,9 +40,9 @@ export default function ChatListItem({
           ) : (
             ""
           )}
-          <div className={styles.title}>
+          <h3 className={styles.title}>
             {current.type === "dialog" ? current.chat.user.name : current.chat.name}
-          </div>
+          </h3>
           <div className={styles.info}>
             {current.pinned && <Pin size={12} />}
             {current.chat.last_message &&

@@ -24,7 +24,7 @@ export default function Portal({
           />
 
           <div className={styles.portal}>
-            <div className={styles.title}>{title}</div>
+            <h3 className={styles.title}>{title}</h3>
             {children}
           </div>
         </div>,
