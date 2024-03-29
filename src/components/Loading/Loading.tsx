@@ -7,7 +7,7 @@ export default function Loading() {
   return (
     <div className={styles.wrapper}>
       <IconLogo />
-      <Loader2 size={20} color={"#ffffff"} className={styles.loader} />
+      <Loader2 size={20} className={styles.loader} />
     </div>
   );
 }

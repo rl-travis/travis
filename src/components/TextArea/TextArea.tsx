@@ -35,8 +35,8 @@ export default function TextArea({
       <label
         htmlFor={title}
         className={cx(styles.label, {
-          labelTop: focus || value,
-          labelCenter: !focus && !value,
+          top: focus || value,
+          center: !focus && !value,
         })}
       >
         {title}
