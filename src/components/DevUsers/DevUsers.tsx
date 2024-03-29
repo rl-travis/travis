@@ -9,6 +9,9 @@ import React from "react";
 import { ChevronsDown, ChevronsUp } from "lucide-react";
 import { useInter } from "@/hooks/useInter";
 
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 export default function DevUsers({
   user,
   chats,
@@ -33,14 +36,18 @@ export default function DevUsers({
   }
 
   return (
-    <div className={active ? styles.wrapper + " " + styles.active : styles.wrapper}>
+    <div
+      className={cx(styles.wrapper, {
+        active,
+      })}
+    >
       <button onClick={() => setActive(!active)} className={styles.btn}>
         dev {active ? <ChevronsDown size={16} /> : <ChevronsUp size={16} />}
       </button>
       <span>cur lang - {i18n.name}</span>
       <button onClick={() => setTheme("light")}>change theme [light]</button>
       <button onClick={() => setTheme("dark")}>change theme [dark]</button>
-      <button onClick={() => nextLang()}>next lang without save </button>
+      <button onClick={() => nextLang()}>next lang without save</button>
       {user &&
         users?.map((userItem) => (
           <div key={userItem._id}>

@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./TextArea.module.scss";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 export default function TextArea({
   title,
   maxLength,
@@ -25,16 +27,17 @@ export default function TextArea({
   }, [value]);
 
   return (
-    <div className={focus ? styles.wrapper + " " + styles.active : styles.wrapper}>
+    <div
+      className={cx(styles.wrapper, {
+        active: focus,
+      })}
+    >
       <label
         htmlFor={title}
-        className={
-          focus
-            ? styles.labelTop + " " + styles.label
-            : value
-              ? styles.labelTop + " " + styles.label
-              : styles.label + " " + styles.labelCenter
-        }
+        className={cx(styles.label, {
+          labelTop: focus || value,
+          labelCenter: !focus && !value,
+        })}
       >
         {title}
       </label>
