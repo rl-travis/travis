@@ -33,7 +33,7 @@ export const create = mutation({
       locales: args.locales,
       about: args.about,
       name: args.name,
-      avatar_url: "https://i.ibb.co/XbKhr5X/avatar.jpg", // ругался convex на импорт константы из-за того, что в shared.index.ts не только просто ts файлы, но и tsx присутствует
+      avatar_url: "https://i.ibb.co/XbKhr5X/avatar.jpg", // ругался convex на импорт константы из-за того, что в shared.index.ts.ts не только просто ts файлы, но и tsx присутствует
     });
 
     const saved = await ctx.db.insert("saved", {
