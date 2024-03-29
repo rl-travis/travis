@@ -1,6 +1,4 @@
 import styles from "./DevUsers.module.scss";
-import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 
 import { Doc, Id } from "../../../convex/_generated/dataModel";
 import { ChatType } from "@/types/interfaces/Chat";
@@ -10,7 +8,7 @@ import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 import classNames from "classnames/bind";
 import { useInter } from "@/6.shared";
-import { useUser } from "@/5.entities";
+import { useDialog, useUser } from "@/5.entities";
 
 const cx = classNames.bind(styles);
 export default function DevUsers({
@@ -24,7 +22,7 @@ export default function DevUsers({
   const { i18n, nextLang } = useInter();
   const { setTheme } = useTheme();
   const [active, setActive] = React.useState(true);
-  const dialogCreateMutation = useMutation(api.dialog.create);
+  const { create: dialogCreateMutation } = useDialog();
 
   //interlocutor - собеседник, для общего развития
   async function createDialog(interlocutor_id: Id<"user">) {
