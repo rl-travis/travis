@@ -1,6 +1,5 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
-import { DEFAULT_AVATAR_URL } from "../src/constants/constants";
 
 export const store = mutation({
   args: { email: v.string() },
@@ -34,12 +33,12 @@ export const create = mutation({
       locales: args.locales,
       about: args.about,
       name: args.name,
-      avatar_url: DEFAULT_AVATAR_URL, //вынес в константу
+      avatar_url: "https://i.ibb.co/XbKhr5X/avatar.jpg", // ругался convex на импорт константы из-за того, что в shared.index.ts не только просто ts файлы, но и tsx присутствует
     });
 
     const saved = await ctx.db.insert("saved", {
       name: "saved",
-      avatar_url: DEFAULT_AVATAR_URL, //вынес в константу
+      avatar_url: "https://i.ibb.co/XbKhr5X/avatar.jpg",
     });
 
     await ctx.db.insert("user_chat", {
