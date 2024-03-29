@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./NewUser.module.scss";
-import { ChangeProfileType } from "@/types/ChangeProfileType";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Doc } from "../../../convex/_generated/dataModel";
-import EditProfile from "../edit-profile";
+import { EditProfileType, EditProfile } from "../edit-profile";
 import { Loading, useInter } from "@/6.shared";
 
 export default function NewUser({
@@ -19,7 +18,7 @@ export default function NewUser({
   const createUser = useMutation(api.user.create);
   const addAvatar = useMutation(api.user_avatar.add);
   const getUser = useMutation(api.user.store);
-  const onDone = async (p: ChangeProfileType) => {
+  const onDone = async (p: EditProfileType) => {
     setLoading(true);
     const user_id = await createUser({
       username: p.username,

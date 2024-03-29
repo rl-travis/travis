@@ -1,4 +1,3 @@
-import { ChangeProfileType } from "@/types/ChangeProfileType";
 import styles from "./index.module.scss";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,16 +7,11 @@ import Checking from "@/components/edit-profile/checking";
 import Switch from "@/components/edit-profile/switch";
 import Avatar from "@/components/edit-profile/avatar";
 import { useInter } from "@/6.shared";
+import { EditProfileType, FormInterface } from "./types";
 
-export interface FormInterface {
-  name: string;
-  about: string;
-  username: string;
-  busy: boolean;
-  avatar: string;
-}
+export * from "./types";
 
-export default function EditProfile({
+export function EditProfile({
   username = "",
   about = "",
   name = "",
@@ -25,7 +19,7 @@ export default function EditProfile({
   title,
   done,
 }: {
-  done: (profile: ChangeProfileType) => void;
+  done: (profile: EditProfileType) => void;
   username?: string;
   name?: string;
   about?: string;
