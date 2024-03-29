@@ -23,8 +23,8 @@ export default function Avatar({
   const cropper = React.useRef<CropperType | null>(null);
   const { uploadBlob } = useFiles();
   return (
-    <div>
-      <div className={styles.avatarBlock}>
+    <div className={styles.avatar}>
+      <div className={styles.block}>
         <Image
           priority
           src={avatarValue}
@@ -34,7 +34,7 @@ export default function Avatar({
           className={styles.image}
         />
         {loading ? (
-          <MiniLoading className={styles.avatarBtn} />
+          <MiniLoading className={styles.button} />
         ) : (
           <UploadWrapper
             onUpload={(files) => {
@@ -43,7 +43,7 @@ export default function Avatar({
             accept="image/*"
             multiple={false}
           >
-            <ImagePlus size={16} className={styles.avatarBtn} />
+            <ImagePlus size={16} className={styles.button} />
           </UploadWrapper>
         )}
       </div>
@@ -57,7 +57,7 @@ export default function Avatar({
         >
           <Crop file={file} cropp={cropper} />
           <button
-            className={styles.avatarDone}
+            className={styles.done}
             onClick={() => {
               if (cropper.current) {
                 setLoading(true);

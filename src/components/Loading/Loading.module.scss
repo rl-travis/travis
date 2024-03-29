@@ -9,6 +9,7 @@
 
 .loader {
   animation: spin 1s linear infinite;
+  color: var(--color);
 }
 
 @keyframes spin {

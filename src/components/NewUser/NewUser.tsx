@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styles from "./NewUser.module.scss";
 import ChangeProfile from "@/components/ChangeProfile/ChangeProfile";
@@ -6,15 +5,21 @@ import { useInter } from "@/hooks/useInter";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading/Loading";
+import { Doc } from "../../../convex/_generated/dataModel";
 
-export default function NewUser({ email }: { email: string }) {
+export default function NewUser({
+  email,
+  setUser,
+}: {
+  email: string;
+  setUser: React.Dispatch<React.SetStateAction<Doc<"user"> | null>>;
+}) {
   const { i18n } = useInter();
   const [loading, setLoading] = React.useState(false);
   const createUser = useMutation(api.user.create);
   const addAvatar = useMutation(api.user_avatar.add);
-  const router = useRouter();
+  const getUser = useMutation(api.user.store);
   const onDone = async (p: ChangeProfileType) => {
     setLoading(true);
     const user_id = await createUser({
@@ -31,7 +36,8 @@ export default function NewUser({ email }: { email: string }) {
         user_id,
       });
     }
-    router.refresh();
+    const user = await getUser({ email });
+    setUser(user);
   };
 
   if (loading) {
