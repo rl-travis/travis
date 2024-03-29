@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Portal.module.scss";
+import styles from "./index.module.scss";
 import { createPortal } from "react-dom";
+import React from "react";
 
-export default function Portal({
+export function Portal({
   close,
   children,
   title,

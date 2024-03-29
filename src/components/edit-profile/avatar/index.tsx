@@ -3,14 +3,13 @@ import styles from "./index.module.scss";
 import Image from "next/image";
 import UploadWrapper from "@/components/UploadWrapper/UploadWrapper";
 import { Check, ImagePlus } from "lucide-react";
-import Portal from "@/components/Portal/Portal";
 import { CropperType } from "@/components/Crop/cropper";
 import Crop from "@/components/Crop/Crop";
 import useFiles from "@/hooks/useFiles";
 import { UseFormSetValue } from "react-hook-form";
 import { FormInterface } from "@/components/edit-profile";
 import { i18nType } from "@/i18n/types";
-import { MiniLoading } from "@/6.shared";
+import { MiniLoading, Portal } from "@/6.shared";
 
 export default function Avatar({
   setValue,
