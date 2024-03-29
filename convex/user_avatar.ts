@@ -1,16 +1,14 @@
 import { mutation } from "./_generated/server";
-import { ConvexError, v } from "convex/values";
+import { v } from "convex/values";
 
 export const add = mutation({
-  args: { image_id: v.id("file"), user_id: v.id("user") },
+  args: { url: v.string(), user_id: v.id("user") },
   handler: async (ctx, args) => {
-    const file = await ctx.db.get(args.image_id);
-    if (!file) throw new ConvexError("Файл не найден");
     await ctx.db.patch(args.user_id, {
-      avatar_url: file.url,
+      avatar_url: args.url,
     });
     return await ctx.db.insert("user_avatar", {
-      url: file.url,
+      url: args.url,
       user_id: args.user_id,
     });
   },

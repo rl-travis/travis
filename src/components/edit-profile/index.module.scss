@@ -1,0 +1,48 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 500px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.submit {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: var(--travis);
+  border: 2px solid var(--travis);
+  color: white; // не баг
+  padding: 8px 10px 10px 10px;
+  font-size: 16px;
+
+  &:focus {
+    border: 2px solid var(--color);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--travis);
+    }
+  }
+
+  &:hover {
+    background-color: var(--dark-travis);
+  }
+}
+
+.username {
+  position: relative;
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  flex-direction: column;
+}

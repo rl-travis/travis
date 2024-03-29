@@ -11,6 +11,7 @@ export type i18nType = {
     username: string;
     rules: string[];
     language: string;
+    crop: string;
   };
   profile: {
     createTitle: string;

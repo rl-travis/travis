@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./NewUser.module.scss";
-import ChangeProfile from "@/components/ChangeProfile/ChangeProfile";
 import { useInter } from "@/hooks/useInter";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import Loading from "@/components/Loading/Loading";
 import { Doc } from "../../../convex/_generated/dataModel";
-import DevUsers from "@/components/DevUsers/DevUsers";
+import EditProfile from "../edit-profile";
 
 export default function NewUser({
   email,
@@ -31,12 +30,10 @@ export default function NewUser({
       locales: i18n.id,
     });
 
-    if (p.avatarDoc) {
-      await addAvatar({
-        image_id: p.avatarDoc._id,
-        user_id,
-      });
-    }
+    await addAvatar({
+      url: p.avatar,
+      user_id,
+    });
     const user = await getUser({ email });
     setUser(user);
   };
@@ -47,8 +44,7 @@ export default function NewUser({
 
   return (
     <div className={styles.wrapper}>
-      <ChangeProfile done={onDone} title={i18n.changeProfile.create} />
-      <DevUsers />
+      <EditProfile done={onDone} title={i18n.changeProfile.create} />
     </div>
   );
 }

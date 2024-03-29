@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles.module.scss";
+import styles from "./index.module.scss";
 import Image from "next/image";
 import UploadWrapper from "@/components/UploadWrapper/UploadWrapper";
 import { Check, ImagePlus } from "lucide-react";
@@ -7,21 +7,48 @@ import Portal from "@/components/Portal/Portal";
 import { CropperType } from "@/components/Crop/cropper";
 import Crop from "@/components/Crop/Crop";
 import useFiles from "@/hooks/useFiles";
-import { Doc } from "../../../convex/_generated/dataModel";
 import MiniLoading from "@/components/Loading/MiniLoading";
+import { UseFormSetValue } from "react-hook-form";
+import { FormInterface } from "@/components/edit-profile";
+import { i18nType } from "@/i18n/types";
 
 export default function Avatar({
+  setValue,
   avatar,
-  setAvatarDoc,
+  i18n,
 }: {
+  setValue: UseFormSetValue<FormInterface>;
   avatar: string;
-  setAvatarDoc: (file: Doc<"file">) => void;
+  i18n: i18nType;
 }) {
   const [file, setFile] = React.useState<File | null>(null);
   const [avatarValue, setAvatarValue] = React.useState(avatar);
   const [loading, setLoading] = React.useState(false);
   const cropper = React.useRef<CropperType | null>(null);
   const { uploadBlob } = useFiles();
+
+  const handleDone = () => {
+    if (cropper.current) {
+      setLoading(true);
+      const c = cropper.current!.crop();
+      c.toBlob(async (blob) => {
+        if (blob) {
+          const data = await uploadBlob([blob]);
+          if (data.length > 0) {
+            setAvatarValue(data[0].url);
+            setValue("avatar", data[0].url);
+          }
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      });
+      cropper.current!.removeHandlers();
+    }
+    setFile(null);
+    cropper.current = null;
+  };
+
   return (
     <div className={styles.avatar}>
       <div className={styles.block}>
@@ -53,33 +80,10 @@ export default function Avatar({
             setFile(null);
             cropper.current = null;
           }}
-          title={"12"}
+          title={i18n.changeProfile.crop}
         >
           <Crop file={file} cropp={cropper} />
-          <button
-            className={styles.done}
-            onClick={() => {
-              if (cropper.current) {
-                setLoading(true);
-                const c = cropper.current!.crop();
-                c.toBlob(async (blob) => {
-                  if (blob) {
-                    const data = await uploadBlob([blob]);
-                    if (data.length > 0) {
-                      setAvatarValue(data[0].url);
-                      setAvatarDoc(data[0]);
-                    }
-                    setLoading(false);
-                  } else {
-                    setLoading(false);
-                  }
-                });
-                cropper.current!.removeHandlers();
-              }
-              setFile(null);
-              cropper.current = null;
-            }}
-          >
+          <button className={styles.done} onClick={handleDone}>
             <Check width={20} />
           </button>
         </Portal>

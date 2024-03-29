@@ -1,5 +1,4 @@
 .wrapper {
-  //padding: 10px;
   border-radius: 7px;
   border: 1px solid var(--gray);
   position: relative;
@@ -33,20 +32,19 @@
   transition: all 0.3s;
   padding: 2px;
   background-color: var(--background);
-
-  &.center {
-    top: 16px;
-    left: 8px;
-  }
-
-  &.top {
-    left: 8px;
-    font-size: 16px;
-    top: -10px;
-    color: var(--gray);
-  }
 }
 
+.center {
+  top: 16px;
+  left: 8px;
+}
+
+.top {
+  left: 8px;
+  font-size: 16px;
+  top: -10px;
+  color: var(--gray);
+}
 .count {
   position: absolute;
   font-size: 16px;

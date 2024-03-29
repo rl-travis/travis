@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles.module.scss";
+import styles from "./index.module.scss";
 import { i18nList, useInter } from "@/hooks/useInter";
 import classNames from "classnames/bind";
 
@@ -14,8 +14,9 @@ export default function Switch() {
         {i18nList.map((e) => {
           return (
             <button
+              tabIndex={2}
               key={e.id}
-              className={cx({
+              className={cx(styles.btn, {
                 active: e.id === i18n.id,
                 inactive: e.id !== i18n.id,
               })}

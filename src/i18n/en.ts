@@ -5,6 +5,7 @@ export const en: i18nType = {
   slug: "en",
   name: "English",
   changeProfile: {
+    crop: "Crop Avatar",
     create: "Create Profile",
     change: "Change Profile",
     btn: "Save",

@@ -5,6 +5,7 @@ export const ru: i18nType = {
   slug: "ru",
   name: "Русский",
   changeProfile: {
+    crop: "Кадрировать Аватарку",
     create: "Создать Профиль",
     change: "Изменить Профиль",
     btn: "Сохранить",

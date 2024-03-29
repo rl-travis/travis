@@ -6,12 +6,6 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 export default function MiniLoading({ className }: { className?: string }) {
   return (
-    <Loader2
-      size={20}
-      color={"#ffffff"}
-      className={cx(styles.loader, {
-        className,
-      })}
-    />
+    <Loader2 size={20} color={"#ffffff"} className={cx(styles.loader, className)} />
   );
 }

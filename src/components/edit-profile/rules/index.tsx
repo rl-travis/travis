@@ -1,10 +1,10 @@
 import React from "react";
+import styles from "./index.module.scss";
 import { i18nType } from "@/i18n/types";
-import styles from "./styles.module.scss";
 
 export default function Rules({ i18n }: { i18n: i18nType }) {
   return (
-    <div className={styles.rules}>
+    <div className={styles.wrapper}>
       {i18n.changeProfile.rules[0]}
       <span>{i18n.changeProfile.rules[1]}</span>
       {i18n.changeProfile.rules[2]}
