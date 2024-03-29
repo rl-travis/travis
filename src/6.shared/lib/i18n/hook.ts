@@ -1,10 +1,7 @@
-import { i18nType } from "@/i18n/types";
-import { en } from "@/i18n/en";
-import { ru } from "@/i18n/ru";
 import { useContext } from "react";
-import { InternationalizationContext } from "@/providers/InternationalizationProvider";
+import { InternationalizationContext } from "./context";
+import { i18nList } from "./locales/list";
 
-export const i18nList: i18nType[] = [en, ru];
 export function useInter() {
   const { id, setId } = useContext(InternationalizationContext);
 

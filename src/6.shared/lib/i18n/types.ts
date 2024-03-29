@@ -31,3 +31,8 @@ export type i18nType = {
     and: string;
   };
 };
+
+export type InternationalizationContextType = {
+  id: number;
+  setId: (id: number) => void;
+};

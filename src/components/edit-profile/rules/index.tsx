@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { i18nType } from "@/i18n/types";
+import { i18nType } from "@/6.shared";
 
 export default function Rules({ i18n }: { i18n: i18nType }) {
   return (

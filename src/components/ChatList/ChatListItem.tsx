@@ -4,8 +4,8 @@ import { ChatType } from "@/types/interfaces/Chat";
 import Image from "next/image";
 import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 import reformatDateChats from "@/utils/reformatDateChats";
-import { useInter } from "@/hooks/useInter";
 import { Doc } from "../../../convex/_generated/dataModel";
+import { useInter } from "@/6.shared";
 
 export default function ChatListItem({
   current,

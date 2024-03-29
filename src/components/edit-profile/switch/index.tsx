@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { i18nList, useInter } from "@/hooks/useInter";
 import classNames from "classnames/bind";
+import { i18nList, useInter } from "@/6.shared";
 
 const cx = classNames.bind(styles);
 export default function Switch() {

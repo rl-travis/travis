@@ -1,4 +1,4 @@
-import { i18nType } from "@/i18n/types";
+import { i18nType } from "../types";
 
 export const en: i18nType = {
   id: 0,

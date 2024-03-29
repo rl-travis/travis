@@ -2,12 +2,12 @@ import { ChangeProfileType } from "@/types/ChangeProfileType";
 import styles from "./index.module.scss";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useInter } from "@/hooks/useInter";
 import Textarea from "@/components/edit-profile/textarea";
 import Rules from "@/components/edit-profile/rules";
 import Checking from "@/components/edit-profile/checking";
 import Switch from "@/components/edit-profile/switch";
 import Avatar from "@/components/edit-profile/avatar";
+import { useInter } from "@/6.shared";
 
 export interface FormInterface {
   name: string;

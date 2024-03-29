@@ -7,9 +7,9 @@ import { ChatType } from "@/types/interfaces/Chat";
 import { useTheme } from "next-themes";
 import React from "react";
 import { ChevronsDown, ChevronsUp } from "lucide-react";
-import { useInter } from "@/hooks/useInter";
 
 import classNames from "classnames/bind";
+import { useInter } from "@/6.shared";
 
 const cx = classNames.bind(styles);
 export default function DevUsers({

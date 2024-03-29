@@ -2,12 +2,12 @@ import React from "react";
 import { debounce } from "@/utils/debounce";
 import { useMutation } from "convex/react";
 import { Check, X } from "lucide-react";
-import { i18nType } from "@/i18n/types";
 import { api } from "../../../../convex/_generated/api";
 import styles from "./index.module.scss";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { FormInterface } from "@/components/edit-profile";
 import classNames from "classnames/bind";
+import { i18nType } from "@/6.shared";
 
 const cx = classNames.bind(styles);
 export default function Checking({
