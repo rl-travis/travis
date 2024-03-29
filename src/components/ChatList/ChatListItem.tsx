@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./ChatList.module.scss";
-import { ChatType } from "@/types/interfaces/Chat";
 import Image from "next/image";
 import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 import reformatDateChats from "@/utils/reformatDateChats";
 import { Doc } from "../../../convex/_generated/dataModel";
 import { useInter } from "@/6.shared";
+import { ChatType } from "@/5.entities";
 
 export default function ChatListItem({
   current,

@@ -1,14 +1,13 @@
 import styles from "./DevUsers.module.scss";
 
 import { Doc, Id } from "../../../convex/_generated/dataModel";
-import { ChatType } from "@/types/interfaces/Chat";
 import { useTheme } from "next-themes";
 import React from "react";
 import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 import classNames from "classnames/bind";
 import { useInter } from "@/6.shared";
-import { useDialog, useUser } from "@/5.entities";
+import { ChatType, useDialog, useUser } from "@/5.entities";
 
 const cx = classNames.bind(styles);
 export default function DevUsers({
