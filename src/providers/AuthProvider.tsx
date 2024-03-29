@@ -2,7 +2,7 @@
 import React from "react";
 import Auth from "@/components/Auth/Auth";
 import { useSession } from "next-auth/react";
-import Loading from "@/components/Loading/Loading";
+import { Loading } from "@/6.shared";
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const { data } = useSession();

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./UploadWrapper.module.scss";
-import MiniLoading from "@/components/Loading/MiniLoading";
+import { MiniLoading } from "@/6.shared";
 
 type PropsType = {
   children: React.ReactNode;

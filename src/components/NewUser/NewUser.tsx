@@ -4,9 +4,9 @@ import { useInter } from "@/hooks/useInter";
 import { ChangeProfileType } from "@/types/ChangeProfileType";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import Loading from "@/components/Loading/Loading";
 import { Doc } from "../../../convex/_generated/dataModel";
 import EditProfile from "../edit-profile";
+import { Loading } from "@/6.shared";
 
 export default function NewUser({
   email,

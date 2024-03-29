@@ -7,10 +7,10 @@ import Portal from "@/components/Portal/Portal";
 import { CropperType } from "@/components/Crop/cropper";
 import Crop from "@/components/Crop/Crop";
 import useFiles from "@/hooks/useFiles";
-import MiniLoading from "@/components/Loading/MiniLoading";
 import { UseFormSetValue } from "react-hook-form";
 import { FormInterface } from "@/components/edit-profile";
 import { i18nType } from "@/i18n/types";
+import { MiniLoading } from "@/6.shared";
 
 export default function Avatar({
   setValue,

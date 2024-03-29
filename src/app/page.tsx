@@ -6,8 +6,8 @@ import Main from "@/components/Main/Main";
 import React, { useEffect, useState } from "react";
 import { Doc } from "../../convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
-import Loading from "@/components/Loading/Loading";
 import NewUser from "@/components/NewUser/NewUser";
+import { Loading } from "@/6.shared";
 
 export default function Home() {
   const { data } = useSession();
