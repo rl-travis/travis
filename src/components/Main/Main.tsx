@@ -1,14 +1,12 @@
 import { Doc } from "../../../convex/_generated/dataModel";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import DevUsers from "@/components/DevUsers/DevUsers";
 import AdaptiveShort from "@/components/Main/AdaptiveShort/AdaptiveShort";
 import AdaptiveFull from "@/components/Main/AdaptiveFull/AdaptiveFull";
+import { useUserChat } from "@/5.entities";
 
 export default function Main({ user }: { user: Doc<"user"> }) {
-  const chats = useQuery(api.user_chat.getChats, {
-    user_id: user._id,
-  });
+  const { getChats: chats } = useUserChat(user);
+
   return (
     <>
       {chats && <DevUsers user={user} chats={chats} />}
