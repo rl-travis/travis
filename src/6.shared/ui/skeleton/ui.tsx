@@ -1,7 +1,15 @@
 import React from "react";
-import Skeleton from "@/components/Skeleton/Skeleton";
+import styles from "./index.module.scss";
 
-export default function SkeletonChat() {
+/*
+  В него нужно передавать только div-элементы, другие не пойдут
+  Пример можно увидеть в этой же папке - SkeletonChat.tsx
+ */
+export function Skeleton({ children }: { children: React.ReactNode }) {
+  return <div className={styles.wrapper}>{children}</div>;
+}
+
+export function SkeletonChat() {
   return (
     <Skeleton>
       <div

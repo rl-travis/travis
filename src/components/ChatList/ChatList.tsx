@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./ChatList.module.scss";
 import { ChatType } from "@/types/interfaces/Chat";
-import SkeletonChat from "@/components/Skeleton/SkeletonChat";
 import ChatListItem from "@/components/ChatList/ChatListItem";
 import { Doc } from "../../../convex/_generated/dataModel";
+import { SkeletonChat } from "@/6.shared";
 
 export default function ChatList({
   chats,
