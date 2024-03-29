@@ -7,6 +7,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import Loading from "@/components/Loading/Loading";
 import { Doc } from "../../../convex/_generated/dataModel";
+import DevUsers from "@/components/DevUsers/DevUsers";
 
 export default function NewUser({
   email,
@@ -47,6 +48,7 @@ export default function NewUser({
   return (
     <div className={styles.wrapper}>
       <ChangeProfile done={onDone} title={i18n.changeProfile.create} />
+      <DevUsers />
     </div>
   );
 }

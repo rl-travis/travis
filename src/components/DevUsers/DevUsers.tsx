@@ -16,8 +16,8 @@ export default function DevUsers({
   user,
   chats,
 }: {
-  user: Doc<"user">;
-  chats: ChatType[];
+  user?: Doc<"user">;
+  chats?: ChatType[];
 }) {
   const users = useQuery(api.user.devGetAll);
   const { i18n, nextLang } = useInter();
@@ -49,6 +49,7 @@ export default function DevUsers({
       <button onClick={() => setTheme("dark")}>change theme [dark]</button>
       <button onClick={() => nextLang()}>next lang without save</button>
       {user &&
+        chats &&
         users?.map((userItem) => (
           <div key={userItem._id}>
             {userItem._id !== user._id &&
