@@ -49,7 +49,7 @@ export default function Textarea({
 
   React.useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current!.style.height = `53px`;
+      textareaRef.current!.style.height = `55px`;
     }
   }, []);
   return (
