@@ -37,8 +37,10 @@ export default function Textarea({
         const cur = watch(label) as string;
         setValue(label, cur.slice(0, cur.length - 1));
       } else {
-        textareaRef.current!.style.height = `25px`;
-        textareaRef.current!.style.height = `${textareaRef.current!.scrollHeight}px`;
+        if (textareaRef.current) {
+          textareaRef.current.style.height = `54px`;
+          textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
       }
     },
     onBlur: () => {
@@ -49,7 +51,7 @@ export default function Textarea({
 
   React.useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current!.style.height = `55px`;
+      textareaRef.current.style.height = `54px`;
     }
   }, []);
   return (
