@@ -1,12 +1,11 @@
 "use client";
 
-import Main from "@/components/Main/Main";
 import React, { useEffect, useState } from "react";
 import { Doc } from "../../convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
-import NewUser from "@/components/NewUser/NewUser";
 import { Loading } from "@/6.shared";
 import { useUser } from "@/5.entities";
+import { MainPage, NewUserPage } from "@/2.pages";
 
 export default function Home() {
   const { data } = useSession();
@@ -25,11 +24,12 @@ export default function Home() {
       asyncGetUser();
     }
   }, [data]);
-  if (!data || loading) {
-    return <Loading />;
-  } else if (user) {
-    return <Main user={user} />;
+
+  if (user) {
+    return <MainPage user={user} />;
+  } else if (data?.user?.email && !loading) {
+    return <NewUserPage email={data.user.email} setUser={setUser} />;
   } else {
-    return <NewUser email={data.user!.email!} setUser={setUser} />;
+    return <Loading />;
   }
 }

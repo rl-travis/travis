@@ -1,2 +1,3 @@
-export * from "./hook";
-export * from "./types";
+export * from "./lib";
+//@ts-ignore
+export * from "./ui";
