@@ -1,16 +1,6 @@
 "use client";
-import React, { createContext, useState } from "react";
-
-type InternationalizationContextType = {
-  id: number;
-  setId: (id: number) => void;
-};
-
-export const InternationalizationContext =
-  createContext<InternationalizationContextType>({
-    id: 0,
-    setId: (_) => {},
-  });
+import { InternationalizationContext } from "@/6.shared";
+import React, { useState } from "react";
 
 export default function InternationalizationProvider({
   children,

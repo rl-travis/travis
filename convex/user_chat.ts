@@ -7,7 +7,7 @@ import {
   DialogInterface,
   GroupInterface,
   SavedInterface,
-} from "../src/types/interfaces/Chat";
+} from "../src/5.entities";
 
 export const getChats = query({
   args: { user_id: v.id("user") },
