@@ -1,7 +1,9 @@
 import { Doc } from "../../../../convex/_generated/dataModel";
+
+import { AdaptiveShort } from "./adaptive-short";
+import { AdaptiveFull } from "./adaptive-full";
+
 import { DevUsers } from "@/4.features/dev-users";
-import { AdaptiveShort } from "@/2.pages";
-import { AdaptiveFull } from "@/2.pages";
 import { useUserChat } from "@/5.entities";
 
 export function MainPage({ user }: { user: Doc<"user"> }) {
