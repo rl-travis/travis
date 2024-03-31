@@ -5,7 +5,8 @@ import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { useInter } from "@/6.shared";
-import { ChatType, reformatDateChats } from "@/5.entities";
+import { ChatType } from "@/5.entities";
+import { reformatDateChats } from "../lib";
 
 export function ChatListItem({
   current,

@@ -1,1 +1,2 @@
-export * from "./types/editProfile";
+export * from "./types";
+export * from "./interfaces";

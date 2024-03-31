@@ -3,8 +3,3 @@ export * from "./loading";
 export * from "./portal";
 export * from "./skeleton";
 export * from "./upload-wrapper";
-export * from "@/4.features/set-avatar/ui";
-export * from "@/4.features/edit-profile/username-checking/ui";
-export * from "./rules";
-export * from "./textarea";
-export * from "./switch";

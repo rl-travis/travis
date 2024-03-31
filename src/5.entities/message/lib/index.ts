@@ -1,1 +1,1 @@
-export * from "./reformatDateMessage";
+export * from "./reformat-date-message";

@@ -1,2 +1,1 @@
-export * from "./ui";
-export * from "./crop";
+export * from "./ui/component";

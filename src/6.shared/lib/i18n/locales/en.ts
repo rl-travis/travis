@@ -33,7 +33,7 @@ export const en: i18nType = {
     usernameLength: "Minimum length is 5 symbols",
     usernameSymbols: ["a-z", "0-9", "underlines"],
     and: "and",
-    check: "username-checking",
+    check: "checking",
     busy: "busy",
     free: "free",
     lang: "Language",
