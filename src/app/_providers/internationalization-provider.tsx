@@ -1,23 +1,21 @@
 "use client";
-import { InternationalizationContext } from "@/6.shared";
-import React, { useState } from "react";
 
-export default function InternationalizationProvider({
+import React from "react";
+
+import { InternationalizationContext } from "@/6.shared";
+
+export function InternationalizationProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [id, setId] = useState(0);
-
-  const changeId = (i: number) => {
-    setId(i);
-  };
+  const [id, setId] = React.useState(0);
 
   return (
     <InternationalizationContext.Provider
       value={{
         id,
-        setId: changeId,
+        setId,
       }}
     >
       {children}
