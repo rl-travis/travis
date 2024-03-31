@@ -1,9 +1,12 @@
 import React from "react";
-import { Check, X } from "lucide-react";
 import styles from "./component.module.scss";
+import { Check, X } from "lucide-react";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import classNames from "classnames/bind";
-import { debounce, FormInterface, i18nType } from "@/6.shared";
+
+import { FormInterface } from "../../lib";
+
+import { debounce, i18nType } from "@/6.shared";
 import { useUser } from "@/5.entities";
 
 const cx = classNames.bind(styles);

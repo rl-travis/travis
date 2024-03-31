@@ -1,9 +1,9 @@
 import React, { useImperativeHandle } from "react";
 import styles from "./component.module.scss";
 import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
-
 import classNames from "classnames/bind";
-import { FormInterface } from "@/6.shared";
+
+import { FormInterface } from "../../lib";
 
 const cx = classNames.bind(styles);
 export function Textarea({
@@ -14,6 +14,7 @@ export function Textarea({
   required,
   setValue,
   watch,
+  minLength,
   title,
 }: {
   label: Path<FormInterface>;
@@ -23,6 +24,7 @@ export function Textarea({
   required?: boolean;
   setValue?: UseFormSetValue<FormInterface>;
   watch: UseFormWatch<FormInterface>;
+  minLength?: number;
   title: string;
 }) {
   const [focus, setFocus] = React.useState(false);
@@ -32,6 +34,7 @@ export function Textarea({
     maxLength,
     pattern,
     required,
+    minLength,
     onChange: (e) => {
       if (setValue && !e.target.value.match(pattern)) {
         const cur = watch(label) as string;
@@ -70,7 +73,6 @@ export function Textarea({
         {title}
       </label>
       <textarea
-        tabIndex={1}
         ref={textareaRef}
         id={label}
         maxLength={maxLength}

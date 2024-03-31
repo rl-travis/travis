@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./component.module.scss";
 import classNames from "classnames/bind";
+
 import { i18nList, useInter } from "@/6.shared";
 
 const cx = classNames.bind(styles);
@@ -13,8 +14,8 @@ export function Switch() {
       <div className={styles.block}>
         {i18nList.map((e) => {
           return (
-            <button
-              tabIndex={2}
+            <div
+              role="button"
               key={e.id}
               className={cx(styles.btn, {
                 active: e.id === i18n.id,
@@ -23,7 +24,7 @@ export function Switch() {
               onClick={() => switchLang(e.id)}
             >
               {e.name}
-            </button>
+            </div>
           );
         })}
       </div>

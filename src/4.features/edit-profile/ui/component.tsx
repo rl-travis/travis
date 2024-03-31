@@ -1,15 +1,15 @@
-import styles from "./component.module.scss";
 import React from "react";
+import styles from "./component.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Avatar, EditProfileType } from "@/4.features";
+
 import { FormInterface } from "../lib";
-import { useInter } from "@/6.shared";
 import { Checking } from "./checking";
 import { Rules } from "./rules";
 import { Switch } from "./switch";
 import { Textarea } from "./textarea";
 
-export * from "../lib/types/edit-profile";
+import { Avatar, EditProfileType } from "@/4.features";
+import { useInter } from "@/6.shared";
 
 export function EditProfile({
   username = "",
@@ -74,6 +74,7 @@ export function EditProfile({
         />
         <div className={styles.username}>
           <Textarea
+            minLength={5}
             title={i18n.changeProfile.username}
             label={"username"}
             register={register}
@@ -88,7 +89,6 @@ export function EditProfile({
         </div>
         <Switch />
         <input
-          tabIndex={2}
           type="submit"
           value={i18n.changeProfile.btn}
           className={styles.submit}

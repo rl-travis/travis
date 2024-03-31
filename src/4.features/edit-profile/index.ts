@@ -1,2 +1,2 @@
 export * from "./ui";
-export * from "./lib";
+export type { EditProfileType, FormInterface } from "./lib";

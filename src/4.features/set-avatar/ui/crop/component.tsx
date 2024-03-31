@@ -1,9 +1,7 @@
 import React from "react";
-import ReadBlobAsDataURL from "@/4.features/set-avatar/lib/read-blob";
-
 import "./component.scss";
-import { CropperType } from "../../lib";
-import { cropper } from "../../lib";
+
+import { cropper, ReadBlobAsDataURL, CropperType } from "../../lib";
 export function Crop({
   file,
   cropp,
