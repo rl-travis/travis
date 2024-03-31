@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import styles from "./component.module.scss";
 import { createPortal } from "react-dom";
 import React from "react";
 

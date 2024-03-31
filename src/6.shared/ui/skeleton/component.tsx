@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.scss";
+import styles from "./component.module.scss";
 
 /*
   В него нужно передавать только div-элементы, другие не пойдут

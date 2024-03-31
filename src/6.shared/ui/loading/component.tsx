@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import styles from "./component.module.scss";
 import { IconLogo } from "@/6.shared";
 import { Loader2 } from "lucide-react";
 import classNames from "classnames/bind";

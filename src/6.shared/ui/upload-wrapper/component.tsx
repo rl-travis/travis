@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.module.scss";
+import styles from "./component.module.scss";
 import { MiniLoading } from "@/6.shared";
 import { PropsType } from "./types";
 
