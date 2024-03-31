@@ -1,8 +1,9 @@
 import React from "react";
 import { Doc } from "../../../convex/_generated/dataModel";
+import styles from "./component.module.scss";
+
 import { Loading, useInter } from "@/6.shared";
 import { useUser, useUserAvatar } from "@/5.entities";
-import styles from "./component.module.scss";
 import { EditProfile, EditProfileType } from "@/4.features";
 
 export function NewUser({
@@ -14,6 +15,7 @@ export function NewUser({
 }) {
   const { i18n } = useInter();
   const [loading, setLoading] = React.useState(false);
+
   const { create: createUser, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
   const onDone = async (p: EditProfileType) => {
