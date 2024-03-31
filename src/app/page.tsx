@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Doc } from "../../convex/_generated/dataModel";
 import { useSession } from "next-auth/react";
+import { Doc } from "../../convex/_generated/dataModel";
+
 import { Loading } from "@/6.shared";
 import { useUser } from "@/5.entities";
 import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
@@ -10,6 +11,7 @@ import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
 export default function Home() {
   const { data } = useSession();
   const { store: getUser } = useUser();
+
   const [user, setUser] = useState<Doc<"user"> | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,25 +22,28 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (data?.user?.email) {
-      asyncGetUser();
-    } else {
+    if (data === undefined) {
+      setLoading(true);
+    } else if (data === null) {
       setLoading(false);
+    } else {
+      asyncGetUser();
     }
   }, [data]);
 
-  useEffect(() => {
-    setLoading(true);
-    if (user) setLoading(false);
-  }, [user]);
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (data === null) {
+    return <AuthPage setLoading={setLoading} />;
+  }
+
+  if (user === null) {
+    return <NewUserPage email={data.user!.email!} setUser={setUser} />;
+  }
 
   if (user) {
     return <MainPage user={user} />;
-  } else if (data?.user?.email && !loading) {
-    return <NewUserPage email={data.user.email} setUser={setUser} />;
-  } else if (!data?.user?.email && !loading) {
-    return <AuthPage setLoading={setLoading}></AuthPage>;
-  } else {
-    return <Loading />;
   }
 }

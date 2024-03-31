@@ -9,5 +9,5 @@ export function NewUserPage({
   email: string;
   setUser: React.Dispatch<React.SetStateAction<Doc<"user"> | null>>;
 }) {
-  return <NewUser email={email} setUser={setUser}></NewUser>;
+  return <NewUser email={email} setUser={setUser} />;
 }
