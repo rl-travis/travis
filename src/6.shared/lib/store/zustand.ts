@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { ChatType } from "@/5.entities";
-import { Doc } from "../../../convex/_generated/dataModel";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
 type Store = {
   chat: null | ChatType;

@@ -17,18 +17,16 @@ export function AdaptiveShort({
 }) {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.left}>
-        <div className={styles.list}>
-          <ChatList chats={chats} user={user} />
+      <div className={styles.list}>
+        <ChatList chats={chats} user={user} />
+      </div>
+      <div className={styles.bottom}>
+        <div onClick={() => signOut()}>
+          <IconLogo />
         </div>
-        <div className={styles.bottom}>
-          <div onClick={() => signOut()}>
-            <IconLogo />
-          </div>
-          <button className={styles.btn}>
-            <Bolt size={20} />
-          </button>
-        </div>
+        <button className={styles.btn}>
+          <Bolt size={20} />
+        </button>
       </div>
     </div>
   );

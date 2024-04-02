@@ -32,8 +32,7 @@
 
 .resize {
   height: 100%;
-  width: 1px;
-  //убрал отсюда бордер, потому что не состыкуется с header-chat
+  width: 2px;
   background-color: var(--gray);
   cursor: ew-resize;
   box-sizing: content-box;

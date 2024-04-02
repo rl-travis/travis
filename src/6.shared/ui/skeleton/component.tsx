@@ -12,7 +12,7 @@ export function Skeleton({ children }: { children: React.ReactNode }) {
 export function SkeletonChat() {
   return (
     <Skeleton>
-      <div
+      <article
         style={{
           width: "100%",
           height: 60,
@@ -38,7 +38,7 @@ export function SkeletonChat() {
             borderRadius: 10,
           }}
         />
-      </div>
+      </article>
     </Skeleton>
   );
 }
@@ -51,131 +51,44 @@ type SkeletonMessageType = {
 
 export function SkeletonMessage({ width, isGroup, isReply }: SkeletonMessageType) {
   return (
-    <>
-      {isGroup && !isReply && (
-        <Skeleton>
+    <Skeleton>
+      <div
+        style={{
+          display: "flex",
+          gap: 10,
+          alignItems: "flex-end",
+        }}
+      >
+        {isGroup && (
           <div
             style={{
-              maxWidth: width,
-              width: "100%",
-              height: 90,
-              borderRadius: 5,
-              padding: 10,
-              gap: 10,
-              display: "flex",
-              alignItems: "flex-end",
+              width: 40,
+              height: 40,
+              borderRadius: "50%",
             }}
-          >
+          />
+        )}
+        <div
+          style={{
+            maxWidth: width,
+            width: "100%",
+            padding: "5px 5px 20px 5px",
+
+            minHeight: 40,
+            borderRadius: 5,
+          }}
+        >
+          {isReply && (
             <div
               style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
+                width: "100%",
+                height: 30,
+                borderRadius: 5,
               }}
             />
-            <div
-              style={{
-                flex: 1,
-                borderRadius: 10,
-                height: 70,
-              }}
-            ></div>
-          </div>
-        </Skeleton>
-      )}
-      {isReply && !isGroup && (
-        <Skeleton>
-          <div
-            style={{
-              maxWidth: width,
-              width: "100%",
-              height: 90,
-              borderRadius: 5,
-              padding: 10,
-              gap: 10,
-              display: "flex",
-              alignItems: "flex-end",
-            }}
-          >
-            <div
-              style={{
-                flex: 1,
-                borderRadius: 10,
-                height: 70,
-                padding: 10,
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  borderRadius: 10,
-                  height: 30,
-                }}
-              ></div>
-            </div>
-          </div>
-        </Skeleton>
-      )}
-      {isReply && isGroup && (
-        <Skeleton>
-          <div
-            style={{
-              maxWidth: width,
-              width: "100%",
-              height: 90,
-              borderRadius: 5,
-              padding: 10,
-              gap: 10,
-              display: "flex",
-              alignItems: "flex-end",
-            }}
-          >
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-              }}
-            />
-            <div
-              style={{
-                flex: 1,
-                borderRadius: 10,
-                height: 70,
-                padding: 10,
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  borderRadius: 10,
-                  height: 30,
-                }}
-              ></div>
-            </div>
-          </div>
-        </Skeleton>
-      )}
-      {!isReply && !isGroup && (
-        <Skeleton>
-          <div
-            style={{
-              maxWidth: width,
-              width: "100%",
-              height: 90,
-              borderRadius: 5,
-              padding: 10,
-              gap: 10,
-              display: "flex",
-              alignItems: "flex-end",
-            }}
-          ></div>
-        </Skeleton>
-      )}
-    </>
+          )}
+        </div>
+      </div>
+    </Skeleton>
   );
 }

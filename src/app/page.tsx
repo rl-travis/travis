@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { Loading } from "@/6.shared";
 import { useUser } from "@/5.entities";
 import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
-import { useStore } from "@/app/_store/zustand";
+import { useStore } from "@/6.shared/lib/store/zustand";
 
 export default function Home() {
   const { data } = useSession();

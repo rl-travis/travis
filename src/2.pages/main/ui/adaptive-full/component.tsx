@@ -8,7 +8,7 @@ import { ChatList } from "@/3.widgets";
 import { IconLogo } from "@/6.shared";
 import { ChatType } from "@/5.entities";
 import { useResize } from "@/2.pages";
-import { useStore } from "@/app/_store/zustand";
+import { useStore } from "@/6.shared/lib/store/zustand";
 import { Chat } from "@/3.widgets/chat";
 
 export function AdaptiveFull({
@@ -43,7 +43,7 @@ export function AdaptiveFull({
         onDoubleClick={resetSize}
         onMouseDown={initResize}
       />
-      <div className={styles.chat}>{chat && <Chat chat={chat} />}</div>
+      <div className={styles.chat}>{chat && <Chat />}</div>
     </div>
   );
 }
