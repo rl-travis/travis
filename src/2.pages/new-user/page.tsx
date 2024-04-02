@@ -8,7 +8,7 @@ export function NewUserPage({
   setUser,
 }: {
   email: string;
-  setUser: React.Dispatch<React.SetStateAction<Doc<"user"> | null>>;
+  setUser: (user: Doc<"user"> | null) => void;
 }) {
   return <NewUser email={email} setUser={setUser} />;
 }

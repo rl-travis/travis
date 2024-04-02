@@ -2,17 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { Doc } from "../../convex/_generated/dataModel";
 
 import { Loading } from "@/6.shared";
 import { useUser } from "@/5.entities";
 import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
+import { useStore } from "@/app/_store/zustand";
 
 export default function Home() {
   const { data } = useSession();
   const { store: getUser } = useUser();
 
-  const [user, setUser] = useState<Doc<"user"> | null>(null);
+  const { user, setUser } = useStore();
+
   const [loading, setLoading] = useState(true);
 
   const asyncGetUser = async () => {

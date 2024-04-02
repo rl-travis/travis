@@ -33,7 +33,7 @@
 .resize {
   height: 100%;
   width: 1px;
-  border-right: 3px solid var(--background);
+  //убрал отсюда бордер, потому что не состыкуется с header-chat
   background-color: var(--gray);
   cursor: ew-resize;
   box-sizing: content-box;
@@ -41,4 +41,8 @@
   &:hover {
     background-color: var(--color);
   }
+}
+
+.chat {
+  flex: 1 1 auto;
 }

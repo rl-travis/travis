@@ -11,7 +11,7 @@ export function NewUser({
   setUser,
 }: {
   email: string;
-  setUser: React.Dispatch<React.SetStateAction<Doc<"user"> | null>>;
+  setUser: (user: Doc<"user"> | null) => void;
 }) {
   const { i18n } = useInter();
   const [loading, setLoading] = React.useState(false);
