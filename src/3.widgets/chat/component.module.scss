@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100%;
+  animation: 0.2s transform forwards;
+}
+
+@keyframes transform {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: none;
+  }
+}

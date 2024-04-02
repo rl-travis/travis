@@ -12,7 +12,7 @@ export function Skeleton({ children }: { children: React.ReactNode }) {
 export function SkeletonChat() {
   return (
     <Skeleton>
-      <div
+      <article
         style={{
           width: "100%",
           height: 60,
@@ -38,6 +38,56 @@ export function SkeletonChat() {
             borderRadius: 10,
           }}
         />
+      </article>
+    </Skeleton>
+  );
+}
+
+type SkeletonMessageType = {
+  width: number;
+  isGroup: boolean;
+  isReply: boolean;
+};
+
+export function SkeletonMessage({ width, isGroup, isReply }: SkeletonMessageType) {
+  return (
+    <Skeleton>
+      <div
+        style={{
+          display: "flex",
+          gap: 10,
+          alignItems: "flex-end",
+        }}
+      >
+        {isGroup && (
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: "50%",
+            }}
+          />
+        )}
+        <div
+          style={{
+            maxWidth: width,
+            width: "100%",
+            padding: "5px 5px 20px 5px",
+
+            minHeight: 40,
+            borderRadius: 5,
+          }}
+        >
+          {isReply && (
+            <div
+              style={{
+                width: "100%",
+                height: 30,
+                borderRadius: 5,
+              }}
+            />
+          )}
+        </div>
       </div>
     </Skeleton>
   );

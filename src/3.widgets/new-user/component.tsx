@@ -1,23 +1,20 @@
 import React from "react";
-import { Doc } from "../../../convex/_generated/dataModel";
+
 import styles from "./component.module.scss";
 
 import { Loading, useInter } from "@/6.shared";
 import { useUser, useUserAvatar } from "@/5.entities";
 import { EditProfile, EditProfileType } from "@/4.features";
+import { useStore } from "@/6.shared/lib/store/zustand";
 
-export function NewUser({
-  email,
-  setUser,
-}: {
-  email: string;
-  setUser: React.Dispatch<React.SetStateAction<Doc<"user"> | null>>;
-}) {
+export function NewUser({ email }: { email: string }) {
   const { i18n } = useInter();
   const [loading, setLoading] = React.useState(false);
 
   const { create: createUser, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
+
+  const { setUser } = useStore();
   const onDone = async (p: EditProfileType) => {
     setLoading(true);
     const user_id = await createUser({

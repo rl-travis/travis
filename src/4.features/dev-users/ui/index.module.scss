@@ -8,6 +8,7 @@
   color: var(--background);
   background-color: var(--color);
   position: fixed;
+  z-index: 2; //чтобы devUsers продолжал функционировать
   bottom: 0;
   right: 0;
   display: flex;

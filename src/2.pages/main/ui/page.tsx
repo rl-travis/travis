@@ -14,7 +14,7 @@ export function MainPage({ user }: { user: Doc<"user"> }) {
       {chats && <DevUsers user={user} chats={chats} />}
 
       {navigator.maxTouchPoints > 0 ? (
-        <AdaptiveShort />
+        <AdaptiveShort chats={chats} user={user} />
       ) : (
         <AdaptiveFull chats={chats} user={user} />
       )}
