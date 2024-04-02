@@ -7,7 +7,7 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 import { useInter } from "@/6.shared";
 import { ChatType } from "@/5.entities";
 import { reformatDateChats } from "../lib";
-import { useStore } from "@/6.shared/lib/store/zustand";
+import { useStore } from "@/6.shared";
 
 export function ChatListItem({
   current,

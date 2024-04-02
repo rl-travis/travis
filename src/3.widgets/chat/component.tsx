@@ -3,7 +3,7 @@ import styles from "./component.module.scss";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { HeaderChat } from "@/3.widgets/chat/ui/header-chat/component";
-import { useStore } from "@/6.shared/lib/store/zustand";
+import { useStore } from "@/6.shared";
 
 export function Chat() {
   const { chat } = useStore();
