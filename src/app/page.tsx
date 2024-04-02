@@ -41,7 +41,7 @@ export default function Home() {
   }
 
   if (user === null) {
-    return <NewUserPage email={data.user!.email!} setUser={setUser} />;
+    return <NewUserPage email={data.user!.email!} />;
   }
 
   if (user) {
