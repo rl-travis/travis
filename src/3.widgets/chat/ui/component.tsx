@@ -7,6 +7,7 @@ import { BottomChat } from "./bottom-chat";
 import { HeaderChat } from "./header-chat";
 
 import { useStore } from "@/6.shared";
+import { MessageList } from "@/3.widgets/chat/ui/message-list";
 
 export function Chat() {
   const { chat } = useStore();
@@ -19,7 +20,9 @@ export function Chat() {
       <HeaderChat chat={chat!} />
       <div className={styles.main}>
         <div className={styles.center}>
-          <div className={styles.list}>1</div>
+          <div className={styles.list}>
+            <MessageList messages={messages} />
+          </div>
           <BottomChat />
         </div>
       </div>

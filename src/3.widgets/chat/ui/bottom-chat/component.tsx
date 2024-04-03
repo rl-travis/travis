@@ -7,7 +7,7 @@ import { useStore } from "@/6.shared";
 import { useMessage } from "@/5.entities";
 
 export function BottomChat() {
-  const { message, chat, user } = useStore();
+  const { message, chat, user, setMessage } = useStore();
   const { send } = useMessage();
 
   return (
@@ -31,6 +31,7 @@ export function BottomChat() {
               chat_id: chat!.chat._id,
               value: message,
             });
+            setMessage("");
           }
         }}
       >
