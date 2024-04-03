@@ -9,14 +9,14 @@ import { Switch } from "./switch";
 import { Textarea } from "./textarea";
 
 import { Avatar, EditProfileType } from "@/4.features";
-import { useInter } from "@/6.shared";
-
+import { useInter, useStore } from "@/6.shared";
 export function EditProfile({
   username = "",
   about = "",
   name = "",
   avatar = "https://i.ibb.co/XbKhr5X/avatar.jpg",
   title,
+  showLanguage,
   done,
 }: {
   done: (profile: EditProfileType) => void;
@@ -25,7 +25,9 @@ export function EditProfile({
   about?: string;
   avatar?: string;
   title: string;
+  showLanguage?: boolean;
 }) {
+  const { user } = useStore();
   const {
     register,
     handleSubmit,
@@ -34,11 +36,11 @@ export function EditProfile({
     formState: { isValid },
   } = useForm<FormInterface>({
     defaultValues: {
-      username,
-      name,
-      about,
+      username: user ? user.username : "",
+      name: user ? user.name : "",
+      about: user ? user.about : "",
       busy: !!username,
-      avatar,
+      avatar: user ? user.avatar_url : "https://i.ibb.co/XbKhr5X/avatar.jpg",
     },
   });
   const { i18n } = useInter();
@@ -87,7 +89,8 @@ export function EditProfile({
           <Checking watch={watch} username={username} i18n={i18n} setValue={setValue} />
           <Rules i18n={i18n} />
         </div>
-        <Switch />
+        {showLanguage && <Switch />}
+
         <input
           type="submit"
           value={i18n.changeProfile.btn}

@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./component.module.scss";
 import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import { HeaderChat } from "@/3.widgets/chat/ui/header-chat/component";
+import { api } from "../../../../convex/_generated/api";
+
+import { BottomChat } from "./bottom-chat";
+import { HeaderChat } from "./header-chat";
+
 import { useStore } from "@/6.shared";
 
 export function Chat() {
@@ -14,6 +17,12 @@ export function Chat() {
   return (
     <div className={styles.wrapper}>
       <HeaderChat chat={chat!} />
+      <div className={styles.main}>
+        <div className={styles.center}>
+          <div className={styles.list}>1</div>
+          <BottomChat />
+        </div>
+      </div>
     </div>
   );
 }
