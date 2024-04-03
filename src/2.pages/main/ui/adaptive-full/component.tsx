@@ -42,7 +42,11 @@ export function AdaptiveFull({
         onDoubleClick={resetSize}
         onMouseDown={initResize}
       />
-      <div className={styles.chat}>{chat && <Chat />}</div>
+      {chat && (
+        <div className={styles.chat}>
+          <Chat />
+        </div>
+      )}
     </div>
   );
 }
