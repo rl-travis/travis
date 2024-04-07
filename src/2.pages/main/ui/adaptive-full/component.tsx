@@ -31,12 +31,11 @@ export function AdaptiveFull({
 
   //обработчик события на кнопку Escape
   useEffect(() => {
-    document.body.addEventListener("keydown", (event) => keydownCallback(event));
+    document.body.addEventListener("keydown", keydownCallback);
     return () => {
-      document.body.removeEventListener("keydown", (event) => keydownCallback(event));
+      document.body.removeEventListener("keydown", keydownCallback);
     };
-  });
-
+  }, []);
   /*
     состояние, которое отслеживает,
     меняем ли мы сейчас размер нашего sidebar с чатами
