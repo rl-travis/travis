@@ -15,8 +15,8 @@ export function MessageList({ messages }: { messages: Doc<"message">[] | undefin
   }
   return (
     <div className={styles.wrapper}>
-      {messages.map((m) => {
-        return <MessageItem message={m} key={m._id} />;
+      {messages.map((message) => {
+        return <MessageItem message={message} key={message._id} />;
       })}
     </div>
   );
