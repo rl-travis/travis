@@ -12,7 +12,14 @@ export const get = query({
       v.literal("channel"),
     ),
   },
-  handler: async (ctx, args) => {
+  handler: async (
+    ctx,
+    args,
+  ): Promise<{
+    username: null | string;
+    avatar_url: string[];
+    about: null | string;
+  }> => {
     let document = await ctx.db.get(args.doc);
     if (!document) throw new ConvexError("Документ не найден");
     if (args.type !== "user") {
@@ -20,13 +27,13 @@ export const get = query({
         document = document as Doc<"group"> | Doc<"channel">;
         return {
           username: null,
-          avatar_url: document.avatar_url,
+          avatar_url: [document.avatar_url],
           about: document.about,
         };
       } else {
         return {
           username: null,
-          avatar_url: document.avatar_url,
+          avatar_url: [document.avatar_url],
           about: null,
         };
       }

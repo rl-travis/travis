@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./component.module.scss";
 import { Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
@@ -25,19 +25,15 @@ export function AdaptiveFull({
 
   const { chat, close } = useStore();
 
+  const keydownCallback = useCallback((event: KeyboardEvent) => {
+    if (event.key === "Escape") close();
+  }, []);
+
   //обработчик события на кнопку Escape
   useEffect(() => {
-    document.body.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        close();
-      }
-    });
+    document.body.addEventListener("keydown", (event) => keydownCallback(event));
     return () => {
-      document.body.removeEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          close();
-        }
-      });
+      document.body.removeEventListener("keydown", (event) => keydownCallback(event));
     };
   });
 
