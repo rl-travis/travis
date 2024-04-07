@@ -2,6 +2,9 @@ export type i18nType = {
   id: number;
   slug: string;
   name: string;
+  chat: {
+    placeholder: string;
+  };
   changeProfile: {
     create: string;
     change: string;

@@ -11,12 +11,13 @@ export function MainPage({ user }: { user: Doc<"user"> }) {
 
   return (
     <>
-      {chats && <DevUsers user={user} chats={chats} />}
-
       {navigator.maxTouchPoints > 0 ? (
         <AdaptiveShort chats={chats} user={user} />
       ) : (
-        <AdaptiveFull chats={chats} user={user} />
+        <>
+          {chats && <DevUsers user={user} chats={chats} />}
+          <AdaptiveFull chats={chats} user={user} />
+        </>
       )}
     </>
   );

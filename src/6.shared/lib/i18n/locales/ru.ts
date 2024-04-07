@@ -3,6 +3,9 @@ export const ru: i18nType = {
   id: 1,
   slug: "ru",
   name: "Русский",
+  chat: {
+    placeholder: "Сообщение...",
+  },
   changeProfile: {
     crop: "Кадрировать Аватарку",
     create: "Создать Профиль",

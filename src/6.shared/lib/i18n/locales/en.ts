@@ -4,6 +4,9 @@ export const en: i18nType = {
   id: 0,
   slug: "en",
   name: "English",
+  chat: {
+    placeholder: "Message...",
+  },
   changeProfile: {
     crop: "Crop Avatar",
     create: "Create Profile",

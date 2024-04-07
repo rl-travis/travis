@@ -8,6 +8,8 @@ type Store = {
   close: () => void;
   user: Doc<"user"> | null;
   setUser: (user: Doc<"user"> | null) => void;
+  message: string;
+  setMessage: (value: string) => void;
 };
 
 export const useStore = create<Store>()((set) => ({
@@ -16,4 +18,6 @@ export const useStore = create<Store>()((set) => ({
   close: () => set(() => ({ chat: null })),
   user: null,
   setUser: (user) => set(() => ({ user: user })),
+  message: "",
+  setMessage: (value) => set(() => ({ message: value })),
 }));
