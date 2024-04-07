@@ -70,3 +70,21 @@ export const devGetAll = query({
     return await ctx.db.query("user").collect();
   },
 });
+
+export const edit = mutation({
+  args: {
+    user_id: v.id("user"),
+    username: v.string(),
+    about: v.string(),
+    name: v.string(),
+    locales: v.number(),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.patch(args.user_id, {
+      username: args.username,
+      about: args.about,
+      name: args.name,
+      locales: args.locales,
+    });
+  },
+});
