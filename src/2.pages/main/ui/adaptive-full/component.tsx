@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./component.module.scss";
-import { Bolt } from "lucide-react";
+import { ArrowLeft, Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
-import { ChatList } from "@/3.widgets";
+import { ChatList, Settings } from "@/3.widgets";
 import { IconLogo, useStore } from "@/6.shared";
 import { ChatType } from "@/5.entities";
 import { useResize } from "@/2.pages";
@@ -29,31 +29,38 @@ export function AdaptiveFull({
     if (event.key === "Escape") close();
   }, []);
 
-  //обработчик события на кнопку Escape
   useEffect(() => {
     document.body.addEventListener("keydown", keydownCallback);
     return () => {
       document.body.removeEventListener("keydown", keydownCallback);
     };
   }, []);
-  /*
-    состояние, которое отслеживает,
-    меняем ли мы сейчас размер нашего sidebar с чатами
-    нужно для того, чтобы при resize не учитывалось наведение на sidebar
-    и не показывался scrollbar
-    без этого были подёргивания при resize (scrollbar то появлялся, то исчезал)
-  */
 
   const [isResizing, setIsResizing] = useState<boolean>(false);
+
+  const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false);
+
+  const [isPending, setIsPending] = useState<boolean>(false);
+
+  function closeSettings() {
+    setIsPending(true);
+    setTimeout(() => {
+      setIsPending(false);
+      setIsOpenSettings(false);
+    }, 150);
+  }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
+          {isOpenSettings && !isPending && (
+            <ArrowLeft size={20} onClick={() => closeSettings()} />
+          )}
           <div onClick={() => signOut()}>
             <IconLogo />
           </div>
-          <button className={styles.btn}>
+          <button className={styles.btn} onClick={() => setIsOpenSettings(true)}>
             <Bolt size={20} />
           </button>
         </div>
@@ -62,6 +69,7 @@ export function AdaptiveFull({
             scroll: !isResizing,
           })}
         >
+          {isOpenSettings && <Settings isPending={isPending} />}
           <ChatList chats={chats} user={user} />
         </div>
       </div>
