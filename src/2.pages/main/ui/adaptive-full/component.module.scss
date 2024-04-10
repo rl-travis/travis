@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.lucide {
+  cursor: pointer;
+}
+
 .header {
   display: flex;
   padding: 10px 5px;
@@ -75,4 +79,12 @@
   100% {
     transform: none;
   }
+}
+
+.edit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: 0.3s transform forwards;
 }

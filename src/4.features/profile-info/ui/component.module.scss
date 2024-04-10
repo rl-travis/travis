@@ -1,2 +1,11 @@
 .wrapper {
+  padding: 10px;
+  background: #525252;
+  border-radius: 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.image {
+  border-radius: 50%;
 }

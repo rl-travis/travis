@@ -6,10 +6,11 @@ import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import { ChatList, Settings } from "@/3.widgets";
 import { IconLogo, useStore } from "@/6.shared";
-import { ChatType } from "@/5.entities";
+import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 import { useResize } from "@/2.pages";
 import { Chat } from "@/3.widgets/chat";
 import classNames from "classnames/bind";
+import { EditProfile, EditProfileType } from "@/4.features";
 
 const cx = classNames.bind(styles);
 
@@ -23,11 +24,37 @@ export function AdaptiveFull({
   const LeftRef = React.useRef<HTMLDivElement>(null);
   const { initResize, resetSize } = useResize(LeftRef, 500, 200, 300);
 
-  const { chat, close } = useStore();
+  const [isAccount, setIsAccount] = useState(false);
+
+  const { chat, close, setUser } = useStore();
+
+  const { edit, store: getUser } = useUser();
+  const { add: addAvatar } = useUserAvatar();
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") close();
   }, []);
+
+  const onDone = async (p: EditProfileType) => {
+    setIsAccount(false);
+    await edit({
+      user_id: user._id,
+      username: p.username,
+      name: p.name,
+      about: p.about,
+      locales: user.locales,
+    });
+
+    if (user.avatar_url[user.avatar_url.length - 1] !== p.avatar) {
+      await addAvatar({
+        url: p.avatar,
+        user_id: user._id,
+      });
+    }
+
+    const updatedUser = await getUser({ email: user.email });
+    setUser(updatedUser);
+  };
 
   useEffect(() => {
     document.body.addEventListener("keydown", keydownCallback);
@@ -44,6 +71,7 @@ export function AdaptiveFull({
 
   function closeSettings() {
     setIsPending(true);
+    setIsAccount(false);
     setTimeout(() => {
       setIsPending(false);
       setIsOpenSettings(false);
@@ -55,7 +83,11 @@ export function AdaptiveFull({
       <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
           {isOpenSettings && !isPending && (
-            <ArrowLeft size={20} onClick={() => closeSettings()} />
+            <ArrowLeft
+              size={20}
+              onClick={() => closeSettings()}
+              className={styles.lucide}
+            />
           )}
           <div onClick={() => signOut()}>
             <IconLogo />
@@ -69,7 +101,9 @@ export function AdaptiveFull({
             scroll: !isResizing,
           })}
         >
-          {isOpenSettings && <Settings isPending={isPending} />}
+          {isOpenSettings && (
+            <Settings isPending={isPending} setIsAccount={setIsAccount} />
+          )}
           <ChatList chats={chats} user={user} />
         </div>
       </div>
@@ -89,6 +123,11 @@ export function AdaptiveFull({
       {chat && (
         <div className={styles.chat}>
           <Chat />
+        </div>
+      )}
+      {isAccount && isOpenSettings && (
+        <div className={styles.edit}>
+          <EditProfile title={"Edit Profile"} done={onDone} />
         </div>
       )}
     </div>

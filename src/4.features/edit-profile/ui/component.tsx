@@ -11,19 +11,11 @@ import { Textarea } from "./textarea";
 import { Avatar, EditProfileType } from "@/4.features";
 import { useInter, useStore } from "@/6.shared";
 export function EditProfile({
-  username = "",
-  about = "",
-  name = "",
-  avatar = "https://i.ibb.co/XbKhr5X/avatar.jpg",
   title,
   showLanguage,
   done,
 }: {
   done: (profile: EditProfileType) => void;
-  username?: string;
-  name?: string;
-  about?: string;
-  avatar?: string;
   title: string;
   showLanguage?: boolean;
 }) {
@@ -39,7 +31,7 @@ export function EditProfile({
       username: user ? user.username : "",
       name: user ? user.name : "",
       about: user ? user.about : "",
-      busy: !!username,
+      busy: !!user?.username,
       avatar: user ? user.avatar_url : "https://i.ibb.co/XbKhr5X/avatar.jpg",
     },
   });
@@ -57,7 +49,11 @@ export function EditProfile({
   return (
     <section className={styles.wrapper}>
       <h3 className={styles.title}>{title}</h3>
-      <Avatar avatar={avatar} setValue={setValue} i18n={i18n} />
+      <Avatar
+        avatar={user ? user.avatar_url : "https://i.ibb.co/XbKhr5X/avatar.jpg"}
+        setValue={setValue}
+        i18n={i18n}
+      />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Textarea
           title={i18n.changeProfile.name}
@@ -86,7 +82,12 @@ export function EditProfile({
             required={true}
             watch={watch}
           />
-          <Checking watch={watch} username={username} i18n={i18n} setValue={setValue} />
+          <Checking
+            watch={watch}
+            username={user ? user.username : ""}
+            i18n={i18n}
+            setValue={setValue}
+          />
           <Rules i18n={i18n} />
         </div>
         {showLanguage && <Switch />}

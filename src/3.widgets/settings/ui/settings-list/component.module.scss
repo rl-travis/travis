@@ -1,0 +1,19 @@
+.wrapper {
+  background: #525252;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile {
+  background: var(--dark-travis);
+}
