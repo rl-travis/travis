@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.next {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  transition: all 0.3s;
+  &.animation {
+    right: 0;
+  }
+}
+
+.prev {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transition: all 0.3s;
+  &.animation {
+    left: 0;
+  }
+}
