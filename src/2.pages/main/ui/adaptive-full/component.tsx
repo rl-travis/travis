@@ -64,10 +64,10 @@ export function AdaptiveFull({
         >
           <SliderAvatar
             images={[
-              "https://elegant-hedgehog-865.convex.cloud/api/storage/e3eced81-3b8d-4a96-ac89-dabb82f6f525",
-              "https://elegant-hedgehog-865.convex.cloud/api/storage/58e57f7e-5ec5-42a0-9dc1-9c569228e4ea",
-              "https://elegant-hedgehog-865.convex.cloud/api/storage/6d152636-dc57-4957-959c-559f507f834b",
-              "https://elegant-hedgehog-865.convex.cloud/api/storage/c1512587-7741-4c7c-8816-96cf9a36b2ed",
+              "https://i.ibb.co/LrdFGb2/Frame-141.png",
+              "https://i.ibb.co/y4gCFjD/Frame-142.png",
+              "https://i.ibb.co/yB5MP0S/Frame-143.png",
+              "https://i.ibb.co/19M3r4P/Frame-144.png",
             ]}
           />
           <ChatList chats={chats} user={user} />

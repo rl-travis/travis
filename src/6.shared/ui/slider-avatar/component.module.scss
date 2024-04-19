@@ -1,28 +1,82 @@
 .wrapper {
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
+.block {
+  display: flex;
+  justify-content: center;
+}
+
 .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  transform: translateX(0);
+}
+.in {
+  transform: translateX(100%);
+  animation: in_anim 0.3s forwards;
+}
+.out {
+  animation: out_anim 0.3s forwards;
+}
+
+@keyframes out_anim {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes in_anim {
+  to {
+    transform: translateX(0);
+  }
+}
+
+.lower {
+  //opacity: 0.01;
   width: 100%;
   height: auto;
 }
 
-.next {
-  position: absolute;
-  top: 0;
-  right: -100%;
-  transition: all 0.3s;
-  &.animation {
-    right: 0;
+.chevron {
+  color: var(--travis);
+  opacity: 0.5;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  &:last-child {
+    justify-content: flex-end;
+  }
+  &:hover {
+    & .chevron {
+      opacity: 1;
+    }
   }
 }
 
-.prev {
+.btns {
   position: absolute;
   top: 0;
-  left: -100%;
-  transition: all 0.3s;
-  &.animation {
-    left: 0;
-  }
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.count {
+  color: var(--travis);
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  opacity: 0.5;
+  font-size: 10px;
 }
