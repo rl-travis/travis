@@ -38,6 +38,7 @@ export const create = mutation({
 
     const saved = await ctx.db.insert("saved", {
       name: "saved",
+      about: "",
       avatar_url: "https://i.ibb.co/XbKhr5X/avatar.jpg",
     });
 

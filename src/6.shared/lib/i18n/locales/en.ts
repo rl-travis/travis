@@ -43,4 +43,8 @@ export const en: i18nType = {
     createButton: "Next",
     changeButton: "Save",
   },
+  settings: {
+    profile: "My profile",
+    language: "Language",
+  },
 };

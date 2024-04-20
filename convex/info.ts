@@ -1,6 +1,7 @@
 import { query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { Doc } from "./_generated/dataModel";
+import { ProfileInfoReturnType } from "../src/5.entities";
 
 export const get = query({
   args: {
@@ -12,31 +13,16 @@ export const get = query({
       v.literal("channel"),
     ),
   },
-  handler: async (
-    ctx,
-    args,
-  ): Promise<{
-    username: null | string;
-    avatar_url: string[];
-    about: null | string;
-  }> => {
+  handler: async (ctx, args): Promise<ProfileInfoReturnType> => {
     let document = await ctx.db.get(args.doc);
     if (!document) throw new ConvexError("Документ не найден");
     if (args.type !== "user") {
-      if (Object.keys(document).includes("about")) {
-        document = document as Doc<"group"> | Doc<"channel">;
-        return {
-          username: null,
-          avatar_url: [document.avatar_url],
-          about: document.about,
-        };
-      } else {
-        return {
-          username: null,
-          avatar_url: [document.avatar_url],
-          about: null,
-        };
-      }
+      document = document as Doc<"group"> | Doc<"channel"> | Doc<"saved">;
+      return {
+        name: document.name,
+        avatar_urls: [document.avatar_url],
+        about: document.about,
+      };
     } else {
       document = document as Doc<"user">;
       const avatars = await ctx.db
@@ -46,7 +32,8 @@ export const get = query({
       const avatars_url = avatars.map((avatar) => avatar.url);
       return {
         username: document.username,
-        avatar_url: avatars_url,
+        name: document.name,
+        avatar_urls: avatars_url,
         about: document.about,
       };
     }

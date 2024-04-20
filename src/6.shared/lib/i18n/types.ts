@@ -33,6 +33,11 @@ export type i18nType = {
     changeButton: string;
     and: string;
   };
+
+  settings: {
+    profile: string;
+    language: string;
+  };
 };
 
 export type InternationalizationContextType = {

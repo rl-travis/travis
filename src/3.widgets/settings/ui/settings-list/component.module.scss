@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+  gap: 10px;
+}
+
+.item {
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+.active {
+  background: var(--travis) !important;
+  .lucide {
+    background: var(--color);
+    color: var(--background);
+  }
+}
+
+.title {
+  flex: 1 1 auto;
+}
+
+.lucide {
+  padding: 5px;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.profile {
+  background: #fe2c55;
+}
+
+.language {
+  background: #cf75e5;
+}
