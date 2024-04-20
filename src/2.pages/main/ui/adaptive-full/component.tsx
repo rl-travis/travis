@@ -1,18 +1,11 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./component.module.scss";
 import { ArrowLeft, Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import { ChatList, Settings } from "@/3.widgets";
-import {
-  i18nList,
-  IconLogo,
-  InternationalizationContext,
-  useInter,
-  useSettingsStore,
-  useStore,
-} from "@/6.shared";
+import { IconLogo, useInter, useSettingsStore, useStore } from "@/6.shared";
 import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 import { useResize } from "@/2.pages";
 import { Chat } from "@/3.widgets/chat";

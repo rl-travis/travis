@@ -1,6 +1,7 @@
 import { query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { Doc } from "./_generated/dataModel";
+import { ProfileInfoReturnType } from "../src/5.entities";
 
 export const get = query({
   args: {
@@ -12,15 +13,7 @@ export const get = query({
       v.literal("channel"),
     ),
   },
-  handler: async (
-    ctx,
-    args,
-  ): Promise<{
-    username?: string;
-    name: string;
-    avatar_urls: string[];
-    about: string;
-  }> => {
+  handler: async (ctx, args): Promise<ProfileInfoReturnType> => {
     let document = await ctx.db.get(args.doc);
     if (!document) throw new ConvexError("Документ не найден");
     if (args.type !== "user") {
