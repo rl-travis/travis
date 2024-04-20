@@ -1,9 +1,9 @@
 import { Id } from "../../../../convex/_generated/dataModel";
 
 export type ProfileInfoReturnType = {
-  username?: string | null;
-  name: string | null;
-  about: string | null;
+  username?: string;
+  name: string;
+  about: string;
   avatar_urls: string[];
 };
 

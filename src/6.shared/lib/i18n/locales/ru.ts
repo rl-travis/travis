@@ -13,7 +13,7 @@ export const ru: i18nType = {
     btn: "Сохранить",
     name: "Имя*",
     about: "О себе",
-    username: "Username*",
+    username: "Имя пользователя*",
     rules: [
       "Вы можете использовать символы ",
       "a-z",
@@ -41,5 +41,9 @@ export const ru: i18nType = {
     lang: "Язык",
     createButton: "Далее",
     changeButton: "Сохранить",
+  },
+  settings: {
+    profile: "Мой профиль",
+    language: "Язык",
   },
 };

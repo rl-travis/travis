@@ -5,9 +5,12 @@ import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import { ChatList, Settings } from "@/3.widgets";
-import { IconLogo, useStore } from "@/6.shared";
+import { IconLogo, useSettingsStore, useStore } from "@/6.shared";
 import { ChatType } from "@/5.entities";
 import { Chat } from "@/3.widgets";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 
 export function AdaptiveShort({
   chats,
@@ -16,9 +19,9 @@ export function AdaptiveShort({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
-  const [isAccount, setIsAccount] = useState(false);
-
   const { chat, close } = useStore();
+
+  const { reset: resetSettings } = useSettingsStore();
 
   const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false);
 
@@ -26,7 +29,7 @@ export function AdaptiveShort({
 
   function closeSettings() {
     setIsPending(true);
-    setIsAccount(false);
+    resetSettings();
     setTimeout(() => {
       setIsPending(false);
       setIsOpenSettings(false);
@@ -36,9 +39,7 @@ export function AdaptiveShort({
   return (
     <div className={styles.wrapper}>
       <div className={styles.list}>
-        {isOpenSettings && (
-          <Settings isPending={isPending} setIsAccount={setIsAccount} />
-        )}
+        {isOpenSettings && <Settings isPending={isPending} />}
         <ChatList chats={chats} user={user} />
         {chat && (
           <div className={styles.chat}>
@@ -54,16 +55,19 @@ export function AdaptiveShort({
         )}
 
         {isOpenSettings && !isPending && (
-          <ArrowLeft
-            size={20}
-            onClick={() => closeSettings()}
-            className={styles.lucide}
-          />
+          <button onClick={() => closeSettings()} className={styles.btn}>
+            <ArrowLeft size={20} />
+          </button>
         )}
         <div onClick={() => signOut()}>
           <IconLogo />
         </div>
-        <button className={styles.btn} onClick={() => setIsOpenSettings(true)}>
+        <button
+          className={cx(styles.btn, {
+            active: isOpenSettings && !isPending,
+          })}
+          onClick={() => setIsOpenSettings(true)}
+        >
           <Bolt size={20} />
         </button>
       </div>

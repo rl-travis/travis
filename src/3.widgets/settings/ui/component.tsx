@@ -4,15 +4,7 @@ import { ProfileInfo } from "@/4.features";
 import { useStore } from "@/6.shared";
 import { SettingsList } from "@/3.widgets/settings/ui/settings-list/component";
 
-export function Settings({
-  isAccount,
-  isPending,
-  setIsAccount,
-}: {
-  isAccount: boolean;
-  isPending: boolean;
-  setIsAccount: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export function Settings({ isPending }: { isPending: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const { user } = useStore();
@@ -47,7 +39,7 @@ export function Settings({
   return (
     <div className={styles.wrapper} ref={ref}>
       <ProfileInfo doc={user!._id} type={"user"} />
-      <SettingsList setIsAccount={setIsAccount} isAccount={isAccount} />
+      <SettingsList />
     </div>
   );
 }

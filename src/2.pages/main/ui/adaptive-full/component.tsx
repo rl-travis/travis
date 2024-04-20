@@ -1,11 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./component.module.scss";
 import { ArrowLeft, Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import { ChatList, Settings } from "@/3.widgets";
-import { IconLogo, useStore } from "@/6.shared";
+import {
+  i18nList,
+  IconLogo,
+  InternationalizationContext,
+  useInter,
+  useSettingsStore,
+  useStore,
+} from "@/6.shared";
 import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 import { useResize } from "@/2.pages";
 import { Chat } from "@/3.widgets/chat";
@@ -24,19 +31,27 @@ export function AdaptiveFull({
   const LeftRef = React.useRef<HTMLDivElement>(null);
   const { initResize, resetSize } = useResize(LeftRef, 500, 200, 300);
 
-  const [isAccount, setIsAccount] = useState(false);
-
   const { chat, close, setUser } = useStore();
+
+  const { isProfile, reset: resetSettings, closeProfile } = useSettingsStore();
+
+  const { i18n } = useInter();
 
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
+
+  const [isResizing, setIsResizing] = useState<boolean>(false);
+
+  const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false);
+
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") close();
   }, []);
 
   const onDone = async (p: EditProfileType) => {
-    setIsAccount(false);
+    closeProfile();
     await edit({
       user_id: user._id,
       username: p.username,
@@ -45,7 +60,7 @@ export function AdaptiveFull({
       locales: user.locales,
     });
 
-    if (user.avatar_url[user.avatar_url.length - 1] !== p.avatar) {
+    if (user.avatar_url !== p.avatar) {
       await addAvatar({
         url: p.avatar,
         user_id: user._id,
@@ -63,15 +78,9 @@ export function AdaptiveFull({
     };
   }, []);
 
-  const [isResizing, setIsResizing] = useState<boolean>(false);
-
-  const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false);
-
-  const [isPending, setIsPending] = useState<boolean>(false);
-
   function closeSettings() {
     setIsPending(true);
-    setIsAccount(false);
+    resetSettings();
     setTimeout(() => {
       setIsPending(false);
       setIsOpenSettings(false);
@@ -83,16 +92,19 @@ export function AdaptiveFull({
       <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
           {isOpenSettings && !isPending && (
-            <ArrowLeft
-              size={20}
-              onClick={() => closeSettings()}
-              className={styles.lucide}
-            />
+            <button className={styles.btn} onClick={() => closeSettings()}>
+              <ArrowLeft size={20} />
+            </button>
           )}
           <div onClick={() => signOut()}>
             <IconLogo />
           </div>
-          <button className={styles.btn} onClick={() => setIsOpenSettings(true)}>
+          <button
+            className={cx(styles.btn, {
+              active: isOpenSettings && !isPending,
+            })}
+            onClick={() => setIsOpenSettings(true)}
+          >
             <Bolt size={20} />
           </button>
         </div>
@@ -101,13 +113,7 @@ export function AdaptiveFull({
             scroll: !isResizing,
           })}
         >
-          {isOpenSettings && (
-            <Settings
-              isPending={isPending}
-              setIsAccount={setIsAccount}
-              isAccount={isAccount}
-            />
-          )}
+          {isOpenSettings && <Settings isPending={isPending} />}
           <ChatList chats={chats} user={user} />
         </div>
       </div>
@@ -124,14 +130,14 @@ export function AdaptiveFull({
           setIsResizing(false);
         }}
       />
-      {!isAccount && chat && (
+      {chat && (
         <div className={styles.chat}>
           <Chat />
         </div>
       )}
-      {isAccount && isOpenSettings && (
+      {isProfile && isOpenSettings && (
         <div className={styles.edit}>
-          <EditProfile title={"Edit Profile"} done={onDone} />
+          <EditProfile title={i18n.changeProfile.change} done={onDone} />
         </div>
       )}
     </div>
