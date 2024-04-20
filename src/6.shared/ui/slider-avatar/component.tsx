@@ -4,10 +4,11 @@ import Image from "next/image";
 import classNames from "classnames/bind";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 const cx = classNames.bind(styles);
-
+import { v4 as hash } from "uuid";
 type StackType = {
   i: string;
   type: "in" | "out" | "no";
+  key: string;
 };
 // два рендера при смене изображения
 export function SliderAvatar({ images }: { images: string[] }) {
@@ -47,6 +48,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
       const buffer = [...stack];
       buffer.shift();
       buffer.push({
+        key: hash(),
         i: images[getNext()],
         type: "in",
       });
@@ -62,7 +64,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
     if (can) {
       setCan(false);
       const buffer = [...stack];
-      buffer.unshift({ i: images[getPrevPrevCur()], type: "no" });
+      buffer.unshift({ i: images[getPrevPrevCur()], type: "no", key: hash() });
       buffer[buffer.length - 1].type = "out";
       setStack(buffer);
       setTimeout(() => {
@@ -77,8 +79,8 @@ export function SliderAvatar({ images }: { images: string[] }) {
   React.useEffect(() => {
     if (images.length >= 2) {
       setStack([
-        { i: images[images.length - 1], type: "no" },
-        { i: images[0], type: "no" },
+        { i: images[images.length - 1], type: "no", key: hash() },
+        { i: images[0], type: "no", key: hash() },
       ]);
     }
   }, []);
@@ -116,7 +118,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
         {stack.map((image) => {
           return (
             <Image
-              key={image.i}
+              key={image.key}
               src={image.i}
               alt="avatar"
               className={cx(styles.image, {
