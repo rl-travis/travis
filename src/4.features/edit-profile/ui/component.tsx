@@ -31,7 +31,7 @@ export function EditProfile({
       username: user ? user.username : "",
       name: user ? user.name : "",
       about: user ? user.about : "",
-      busy: !!user?.username,
+      busy: !user?.username,
       avatar: user ? user.avatar_url : "https://i.ibb.co/XbKhr5X/avatar.jpg",
     },
   });

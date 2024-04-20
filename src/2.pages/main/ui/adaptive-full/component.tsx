@@ -44,7 +44,6 @@ export function AdaptiveFull({
   }, []);
 
   const onDone = async (p: EditProfileType) => {
-    closeProfile();
     await edit({
       user_id: user._id,
       username: p.username,
@@ -59,9 +58,9 @@ export function AdaptiveFull({
         user_id: user._id,
       });
     }
-
     const updatedUser = await getUser({ email: user.email });
     setUser(updatedUser);
+    closeProfile();
   };
 
   useEffect(() => {
