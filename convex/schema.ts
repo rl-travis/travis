@@ -76,6 +76,7 @@ export default defineSchema({
   saved: defineTable({
     avatar_url: v.string(),
     name: v.string(),
+    about: v.string(),
     last_message_id: v.optional(v.id("message")),
   }),
 });

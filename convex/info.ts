@@ -16,24 +16,25 @@ export const get = query({
     ctx,
     args,
   ): Promise<{
-    username: null | string;
-    avatar_url: string[];
+    username?: null | string;
+    name: null | string;
+    avatar_urls: string[];
     about: null | string;
   }> => {
     let document = await ctx.db.get(args.doc);
     if (!document) throw new ConvexError("Документ не найден");
     if (args.type !== "user") {
       if (Object.keys(document).includes("about")) {
-        document = document as Doc<"group"> | Doc<"channel">;
+        document = document as Doc<"group"> | Doc<"channel"> | Doc<"saved">;
         return {
-          username: null,
-          avatar_url: [document.avatar_url],
+          name: document.name,
+          avatar_urls: [document.avatar_url],
           about: document.about,
         };
       } else {
         return {
-          username: null,
-          avatar_url: [document.avatar_url],
+          name: document.name,
+          avatar_urls: [document.avatar_url],
           about: null,
         };
       }
@@ -46,7 +47,8 @@ export const get = query({
       const avatars_url = avatars.map((avatar) => avatar.url);
       return {
         username: document.username,
-        avatar_url: avatars_url,
+        name: document.name,
+        avatar_urls: avatars_url,
         about: document.about,
       };
     }
