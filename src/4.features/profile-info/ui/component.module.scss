@@ -1,11 +1,38 @@
 .wrapper {
   padding: 10px;
-  background: #525252;
-  border-radius: 5px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  border-bottom: 1px solid var(--gray);
 }
 
 .image {
-  border-radius: 50%;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.username,
+.about {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lucide {
+  padding: 5px;
+  border-radius: 5px;
+  background: var(--hover);
 }

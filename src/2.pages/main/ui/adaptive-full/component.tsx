@@ -102,7 +102,11 @@ export function AdaptiveFull({
           })}
         >
           {isOpenSettings && (
-            <Settings isPending={isPending} setIsAccount={setIsAccount} />
+            <Settings
+              isPending={isPending}
+              setIsAccount={setIsAccount}
+              isAccount={isAccount}
+            />
           )}
           <ChatList chats={chats} user={user} />
         </div>
@@ -120,7 +124,7 @@ export function AdaptiveFull({
           setIsResizing(false);
         }}
       />
-      {chat && (
+      {!isAccount && chat && (
         <div className={styles.chat}>
           <Chat />
         </div>
