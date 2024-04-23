@@ -33,10 +33,13 @@ export type i18nType = {
     changeButton: string;
     and: string;
   };
-
   settings: {
     profile: string;
     language: string;
+  };
+  language: {
+    ru: string;
+    en: string;
   };
 };
 

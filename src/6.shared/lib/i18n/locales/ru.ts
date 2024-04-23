@@ -46,4 +46,8 @@ export const ru: i18nType = {
     profile: "Мой профиль",
     language: "Язык",
   },
+  language: {
+    ru: "Русский",
+    en: "Английский",
+  },
 };
