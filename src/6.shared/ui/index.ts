@@ -1,4 +1,5 @@
 export * from "./icon";
+export * from "./checkbox";
 export * from "./loading";
 export * from "./portal";
 export * from "./skeleton";

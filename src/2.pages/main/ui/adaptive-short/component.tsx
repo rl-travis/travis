@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./component.module.scss";
-import { ArrowLeft, ArrowLeftFromLine, Bolt } from "lucide-react";
+import { ArrowLeft, Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
@@ -50,7 +50,7 @@ export function AdaptiveShort({
       <div className={styles.bottom}>
         {chat && (
           <button className={styles.btn} onClick={() => close()}>
-            <ArrowLeftFromLine size={20} />
+            <ArrowLeft size={20} />
           </button>
         )}
 

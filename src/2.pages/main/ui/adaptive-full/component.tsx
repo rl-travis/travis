@@ -11,6 +11,7 @@ import { useResize } from "@/2.pages";
 import { Chat } from "@/3.widgets/chat";
 import classNames from "classnames/bind";
 import { EditProfile, EditProfileType } from "@/4.features";
+import { LanguageInfo } from "@/4.features/language";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,15 @@ export function AdaptiveFull({
 
   const { chat, close, setUser } = useStore();
 
-  const { isProfile, reset: resetSettings, closeProfile } = useSettingsStore();
+  const {
+    isProfile,
+    reset: resetSettings,
+    closeProfile,
+    open: openSettings,
+    isOpen: isOpenSettings,
+    close: closeSettings,
+    isLanguage,
+  } = useSettingsStore();
 
   const { i18n } = useInter();
 
@@ -35,8 +44,6 @@ export function AdaptiveFull({
 
   const [isResizing, setIsResizing] = useState<boolean>(false);
 
-  const [isOpenSettings, setIsOpenSettings] = useState<boolean>(false);
-
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
@@ -44,6 +51,8 @@ export function AdaptiveFull({
   }, []);
 
   const onDone = async (p: EditProfileType) => {
+    closeProfile();
+    closeSettings();
     await edit({
       user_id: user._id,
       username: p.username,
@@ -60,7 +69,6 @@ export function AdaptiveFull({
     }
     const updatedUser = await getUser({ email: user.email });
     setUser(updatedUser);
-    closeProfile();
   };
 
   useEffect(() => {
@@ -70,12 +78,12 @@ export function AdaptiveFull({
     };
   }, []);
 
-  function closeSettings() {
+  function closeSettingsWithAnimation() {
     setIsPending(true);
     resetSettings();
     setTimeout(() => {
       setIsPending(false);
-      setIsOpenSettings(false);
+      closeSettings();
     }, 150);
   }
 
@@ -84,7 +92,7 @@ export function AdaptiveFull({
       <div className={styles.left} ref={LeftRef}>
         <div className={styles.header}>
           {isOpenSettings && !isPending && (
-            <button className={styles.btn} onClick={() => closeSettings()}>
+            <button className={styles.btn} onClick={() => closeSettingsWithAnimation()}>
               <ArrowLeft size={20} />
             </button>
           )}
@@ -95,7 +103,7 @@ export function AdaptiveFull({
             className={cx(styles.btn, {
               active: isOpenSettings && !isPending,
             })}
-            onClick={() => setIsOpenSettings(true)}
+            onClick={() => openSettings()}
           >
             <Bolt size={20} />
           </button>
@@ -132,6 +140,7 @@ export function AdaptiveFull({
           <EditProfile title={i18n.changeProfile.change} done={onDone} />
         </div>
       )}
+      {isLanguage && <LanguageInfo />}
     </div>
   );
 }

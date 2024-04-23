@@ -20,6 +20,9 @@
   width: 30px;
   height: 30px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: var(--hover);
@@ -39,6 +42,7 @@
   overflow: auto;
   transition: all 0.3s;
   position: relative;
+
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -47,9 +51,11 @@
 .scroll {
   &:hover {
     scrollbar-color: rgba(90, 90, 90, 0.3) transparent;
+
     &::-webkit-scrollbar-thumb {
       background-color: rgba(90, 90, 90, 0.3);
     }
+
     //&::-webkit-scrollbar {
     //  width: 5px;
     //}
@@ -73,6 +79,11 @@
   &:hover {
     background-color: var(--color);
   }
+}
+
+.active {
+  background: var(--dark-travis);
+  color: #ffffff;
 }
 
 .chat {
