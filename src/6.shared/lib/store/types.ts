@@ -4,4 +4,5 @@ export type ShortStackType =
   | "settings"
   | "settings_profile"
   | "settings_language"
-  | "chat";
+  | "chat"
+  | "chat_info";

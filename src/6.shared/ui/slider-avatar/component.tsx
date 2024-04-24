@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 const cx = classNames.bind(styles);
 import { v4 as hash } from "uuid";
-import { useTheme } from "next-themes";
 
 type StackType = {
   i: string;
@@ -17,8 +16,6 @@ export function SliderAvatar({ images }: { images: string[] }) {
   const [cur, setCur] = React.useState(0);
   const [can, setCan] = React.useState(true);
   const [stack, setStack] = React.useState<StackType[]>([]);
-
-  const { resolvedTheme } = useTheme();
 
   const getNext = () => {
     return (cur + 1) % images.length;
@@ -89,12 +86,6 @@ export function SliderAvatar({ images }: { images: string[] }) {
     }
   }, []);
 
-  const imageLoader = () => {
-    return resolvedTheme === "dark"
-      ? `https://i.ibb.co/SfjCc8Q/dark-square.png?w=500&q=$100`
-      : `https://i.ibb.co/Yt94MJN/light-square.png?w=500&q=$100`;
-  };
-
   if (images.length === 1) {
     return (
       <div className={styles.wrapper}>
@@ -107,7 +98,6 @@ export function SliderAvatar({ images }: { images: string[] }) {
             width={0}
             height={0}
             sizes="100vw"
-            loader={imageLoader}
           />
         </div>
       </div>
@@ -125,7 +115,6 @@ export function SliderAvatar({ images }: { images: string[] }) {
           width={0}
           height={0}
           sizes="100vw"
-          loader={imageLoader}
         />
         {stack.map((image) => {
           return (

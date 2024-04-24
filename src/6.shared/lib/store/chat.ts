@@ -6,6 +6,8 @@ interface StoreType {
   setChat: (b: ChatType | null) => void;
   message: string;
   setMessage: (value: string) => void;
+  openChatInfo: boolean;
+  setOpenChatInfo: (b: boolean) => void;
 }
 
 export const useChatStore = create<StoreType>()((setState, getState) => ({
@@ -13,4 +15,6 @@ export const useChatStore = create<StoreType>()((setState, getState) => ({
   setChat: (b) => setState({ chat: b }),
   message: "",
   setMessage: (value) => setState(() => ({ message: value })),
+  openChatInfo: false,
+  setOpenChatInfo: (b) => setState({ openChatInfo: b }),
 }));

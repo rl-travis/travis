@@ -17,6 +17,8 @@ import { Header } from "./header";
 import { Resize } from "./resize";
 import { ChatList, Settings } from "@/3.widgets";
 import { LanguageInfo } from "@/4.features/language";
+import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
+import { X } from "lucide-react";
 
 const cx = classNames.bind(styles);
 
@@ -30,14 +32,11 @@ export function AdaptiveFull({
   const leftRef = React.useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
-  const { chat, setChat } = useChatStore();
+  const { chat, setChat, openChatInfo, setOpenChatInfo } = useChatStore();
   const { i18n } = useInter();
-
   const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
-
-  const [isPending, setIsPending] = useState<boolean>(false);
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -71,7 +70,6 @@ export function AdaptiveFull({
       document.body.removeEventListener("keydown", keydownCallback);
     };
   }, []);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.left} ref={leftRef}>
@@ -111,6 +109,23 @@ export function AdaptiveFull({
           })}
         >
           {chat ? <Chat /> : <Loading />}
+          <div
+            className={cx(styles.stub, {
+              stub__active: openChatInfo,
+            })}
+          />
+          <div
+            className={cx(styles.mini, {
+              mini__active: openChatInfo,
+            })}
+          >
+            <div className={styles.mini__top}>
+              <button className={styles.btn} onClick={() => setOpenChatInfo(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            <ChatInfo />
+          </div>
         </div>
       </div>
     </div>

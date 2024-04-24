@@ -4,10 +4,8 @@ import styles from "./component.module.scss";
 import { BottomChat } from "./bottom-chat";
 import { HeaderChat } from "./header-chat";
 
-import { MessageList } from "@/3.widgets/chat/ui/message-list";
-import { useMessageList } from "@/5.entities";
 import { useChatStore } from "@/6.shared";
-
+import classNames from "classnames/bind";
 export function Chat() {
   const { chat } = useChatStore();
   // const { messages } = useMessageList(chat!.chat_id);
