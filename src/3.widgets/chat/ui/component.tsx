@@ -18,6 +18,7 @@ export function Chat() {
       <div className={styles.main}>
         <div className={styles.center}>
           <div className={styles.list}>
+            {/*здесь пагинация идёт рабочая уже*/}
             <MessageList messages={messages} />
           </div>
           <BottomChat />

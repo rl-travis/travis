@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { InternationalizationContext } from "./context";
-import { i18nList } from "./locales/list";
+import { i18nList } from "@/6.shared";
 
 export function useInter() {
   const { id, setId } = useContext(InternationalizationContext);

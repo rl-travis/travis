@@ -89,3 +89,15 @@ export const edit = mutation({
     });
   },
 });
+
+export const switchLang = mutation({
+  args: {
+    user_id: v.id("user"),
+    locales: v.number(),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.patch(args.user_id, {
+      locales: args.locales,
+    });
+  },
+});

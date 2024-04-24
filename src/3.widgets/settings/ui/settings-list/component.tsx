@@ -28,8 +28,14 @@ export function SettingsList() {
         }}
       >
         <UserRound size={20} className={cx(styles.lucide, styles.profile)} />
-        <span className={styles.title}>{i18n.settings.profile}</span>
-        {!isProfile && <ChevronRight size={20} />}
+        <span
+          className={cx(styles.title, {
+            chosen: isProfile,
+          })}
+        >
+          {i18n.settings.profile}
+        </span>
+        {!isProfile && <ChevronRight size={20} color={"#929292"} />}
       </div>
       <div
         className={cx(styles.item, {
@@ -41,8 +47,14 @@ export function SettingsList() {
         }}
       >
         <Languages size={20} className={cx(styles.lucide, styles.language)} />
-        <span className={styles.title}>{i18n.settings.language}</span>
-        {!isLanguage && <ChevronRight size={20} />}
+        <span
+          className={cx(styles.title, {
+            chosen: isLanguage,
+          })}
+        >
+          {i18n.settings.language}
+        </span>
+        {!isLanguage && <ChevronRight size={20} color={"#929292"} />}
       </div>
     </div>
   );

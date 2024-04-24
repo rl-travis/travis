@@ -1,6 +1,6 @@
 import { query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
-import { Doc } from "./_generated/dataModel";
+import { Doc, Id } from "./_generated/dataModel";
 import { ProfileInfoReturnType } from "../src/5.entities";
 
 export const get = query({
@@ -27,9 +27,11 @@ export const get = query({
       document = document as Doc<"user">;
       const avatars = await ctx.db
         .query("user_avatar")
-        .filter((q) => q.eq(q.field("user_id"), args.doc))
+        .withIndex("user_id", (q) => q.eq("user_id", args.doc as Id<"user">))
         .collect();
-      const avatars_url = avatars.map((avatar) => avatar.url);
+      const avatars_url = avatars
+        .sort((a, b) => b._creationTime - a._creationTime)
+        .map((avatar) => avatar.url);
       return {
         username: document.username,
         name: document.name,

@@ -3,38 +3,34 @@ import { ProfileInfoParamsType } from "@/5.entities";
 
 import styles from "./component.module.scss";
 import { AtSign, Info } from "lucide-react";
-import { MiniLoading, SliderAvatar } from "@/6.shared";
+import { SliderAvatar } from "@/6.shared";
+import React from "react";
 
 export function ProfileInfo({ doc, type }: ProfileInfoParamsType) {
   const info = useProfileInfo({ doc, type });
+
   return (
-    <>
-      {info ? (
-        <div className={styles.wrapper}>
-          <div className={styles.name}>{info?.name}</div>
-          <div className={styles.avatar}>
-            <SliderAvatar images={info.avatar_urls} />
-          </div>
-          <div className={styles.info}>
-            {info?.username && (
-              <div className={styles.username}>
-                <div className={styles.btn}>
-                  <AtSign size={20} />
-                </div>
-                <span>{info.username}</span>
-              </div>
-            )}
-            <div className={styles.about}>
-              <div className={styles.btn}>
-                <Info size={20} />
-              </div>
-              <span>{info.about}</span>
+    <div className={styles.wrapper}>
+      <div className={styles.name}>{info?.name ? info.name : "Загрузка..."}</div>
+      {info?.avatar_urls && <SliderAvatar images={info.avatar_urls} />}
+      <div className={styles.info}>
+        {info?.username && (
+          <div className={styles.username}>
+            <div className={styles.btn}>
+              <AtSign size={20} />
             </div>
+            <span>{info.username}</span>
           </div>
-        </div>
-      ) : (
-        <MiniLoading />
-      )}
-    </>
+        )}
+        {info?.about && (
+          <div className={styles.about}>
+            <div className={styles.btn}>
+              <Info size={20} />
+            </div>
+            <span>{info.about}</span>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

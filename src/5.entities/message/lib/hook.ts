@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, usePaginatedQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 
@@ -11,9 +11,15 @@ export function useMessage() {
 export function useMessageList(
   chat_id: Id<"group"> | Id<"channel"> | Id<"dialog"> | Id<"saved">,
 ) {
-  const messages = useQuery(api.message.getAll, {
-    chat_id,
-  });
+  const { results: messages } = usePaginatedQuery(
+    api.message.getAll,
+    {
+      chat_id,
+    },
+    {
+      initialNumItems: 52,
+    },
+  );
 
   return { messages };
 }

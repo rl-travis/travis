@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./component.module.scss";
-import { ArrowLeft, ArrowLeftFromLine, Bolt } from "lucide-react";
+import { ArrowLeft, Bolt } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
@@ -38,19 +38,25 @@ export function AdaptiveShort({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.list}>
-        {isOpenSettings && <Settings isPending={isPending} />}
-        <ChatList chats={chats} user={user} />
-        {chat && (
-          <div className={styles.chat}>
-            <Chat />
-          </div>
-        )}
-      </div>
+      {(!isOpenSettings || isPending) && (
+        <div className={cx(styles.list)}>
+          <ChatList chats={chats} user={user} />
+          {chat && (
+            <div className={styles.chat}>
+              <Chat />
+            </div>
+          )}
+        </div>
+      )}
+      {isOpenSettings && (
+        <div className={styles.settings}>
+          <Settings isPending={isPending} />
+        </div>
+      )}
       <div className={styles.bottom}>
         {chat && (
           <button className={styles.btn} onClick={() => close()}>
-            <ArrowLeftFromLine size={20} />
+            <ArrowLeft size={20} />
           </button>
         )}
 
