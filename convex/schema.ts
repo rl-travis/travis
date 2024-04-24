@@ -46,7 +46,7 @@ export default defineSchema({
     user_id: v.id("user"),
     chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
     edited: v.boolean(),
-    reply: v.optional(v.id("message")),
+    reply_id: v.optional(v.id("message")),
     forward: v.boolean(),
     value: v.string(),
   }),
