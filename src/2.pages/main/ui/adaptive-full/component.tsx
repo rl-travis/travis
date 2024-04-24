@@ -48,8 +48,9 @@ export function AdaptiveFull({
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      close();
       closeSettings();
+      resetSettings();
+      close();
     }
   }, []);
 

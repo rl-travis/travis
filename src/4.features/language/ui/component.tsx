@@ -6,15 +6,12 @@ export function LanguageInfo() {
   const { i18n, switchLang } = useInter();
 
   const { user } = useStore();
-  const { edit } = useUser();
+  const { switchLang: edit } = useUser();
 
   async function switchLanguage(id: number) {
     switchLang(id);
     await edit({
       user_id: user!._id,
-      username: user!.username,
-      about: user!.about,
-      name: user!.name,
       locales: id,
     });
   }
