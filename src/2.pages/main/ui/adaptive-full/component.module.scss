@@ -84,6 +84,9 @@
 .active {
   background: var(--dark-travis);
   color: #ffffff;
+  &:hover {
+    background: var(--dark-travis);
+  }
 }
 
 .chat {

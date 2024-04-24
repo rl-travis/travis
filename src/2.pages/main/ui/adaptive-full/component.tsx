@@ -47,7 +47,10 @@ export function AdaptiveFull({
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
-    if (event.key === "Escape") close();
+    if (event.key === "Escape") {
+      close();
+      closeSettings();
+    }
   }, []);
 
   const onDone = async (p: EditProfileType) => {

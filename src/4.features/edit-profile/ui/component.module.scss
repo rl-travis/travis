@@ -23,10 +23,6 @@
   padding: 8px 10px 10px 10px;
   font-size: 16px;
 
-  //убрать бы это...
-  &:focus {
-    border: 2px solid var(--color);
-  }
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;

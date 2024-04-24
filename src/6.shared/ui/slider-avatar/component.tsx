@@ -7,9 +7,6 @@ const cx = classNames.bind(styles);
 import { v4 as hash } from "uuid";
 import { useTheme } from "next-themes";
 
-// import dark from "/public/dark_square.png";
-// import light from "/public/light_square.png";
-
 type StackType = {
   i: string;
   type: "in" | "out" | "no";
@@ -21,7 +18,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
   const [can, setCan] = React.useState(true);
   const [stack, setStack] = React.useState<StackType[]>([]);
 
-  const theme = useTheme();
+  const resolvedTheme = useTheme();
 
   const getNext = () => {
     return (cur + 1) % images.length;
@@ -93,7 +90,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
   }, []);
 
   const imageLoader = () => {
-    return theme.theme === "dark"
+    return resolvedTheme.theme === "dark"
       ? `https://i.ibb.co/SfjCc8Q/dark-square.png?w=500&q=$100`
       : `https://i.ibb.co/Yt94MJN/light-square.png?w=500&q=$100`;
   };

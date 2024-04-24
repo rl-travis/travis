@@ -9,9 +9,9 @@ import { MessageList } from "@/3.widgets/chat/ui/message-list";
 import { useMessageList } from "@/5.entities";
 
 export function Chat() {
-  const { chat, user } = useStore();
+  const { chat } = useStore();
 
-  const { messages } = useMessageList(user!._id, chat!.chat_id);
+  const { messages } = useMessageList(chat!.chat_id);
   return (
     <div className={styles.wrapper}>
       <HeaderChat chat={chat!} />
