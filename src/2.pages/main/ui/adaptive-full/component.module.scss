@@ -2,18 +2,42 @@
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
 }
 
 .left {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
 }
 
 .header {
-  display: flex;
   padding: 10px 5px;
-  gap: 10px;
-  align-items: center;
   border-bottom: 1px solid var(--gray);
+  position: relative;
+  &__overlay {
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: var(--background);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  &__active {
+    left: 40px;
+  }
 }
 
 .btn {
@@ -27,25 +51,39 @@
   &:hover {
     background-color: var(--hover);
   }
+  &__active {
+    background: var(--dark-travis);
+    color: #ffffff;
+    &:hover {
+      background: var(--dark-travis);
+    }
+  }
 }
-
-.edit {
-  flex: 1 1 auto;
+.right {
+  flex: 1;
+  position: relative;
+}
+.block {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--background);
+  &__active {
+    right: 0;
+  }
 }
 
 .list {
-  height: 100%;
-  padding: 5px;
-  overflow: auto;
-  transition: all 0.3s;
+  flex: 1;
   position: relative;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
+  overflow: hidden;
 }
 
 .scroll {
@@ -75,46 +113,40 @@
   background-color: var(--gray);
   cursor: ew-resize;
   box-sizing: content-box;
-
   &:hover {
     background-color: var(--color);
   }
 }
 
-.active {
-  background: var(--dark-travis);
-  color: #ffffff;
-  &:hover {
-    background: var(--dark-travis);
-  }
-}
-
 .chat {
   flex: 1 1 auto;
-  animation: 0.2s transform forwards;
-}
-
-@keyframes transform {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: none;
-  }
 }
 
 .settings {
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: -100%;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  transition: all 0.3s;
-  position: relative;
-  &::-webkit-scrollbar {
-    width: 8px;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  &__active {
+    left: 0;
   }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: rgba(90, 90, 90, 0.3);
-    border: 1px solid var(--background);
-  }
+  //width: 100%;
+  //height: 100%;
+  //overflow: auto;
+  //transition: all 0.3s;
+  //position: relative;
+  //&::-webkit-scrollbar {
+  //  width: 8px;
+  //}
+  //&::-webkit-scrollbar-thumb {
+  //  border-radius: 5px;
+  //  background-color: rgba(90, 90, 90, 0.3);
+  //  border: 1px solid var(--background);
+  //}
 }

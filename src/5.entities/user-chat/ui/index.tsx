@@ -7,7 +7,7 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 import { useInter } from "@/6.shared";
 import { ChatType } from "@/5.entities";
 import { reformatDateChats } from "../lib";
-import { useStore } from "@/6.shared";
+import { useChatStore } from "@/6.shared";
 
 export function ChatListItem({
   current,
@@ -18,10 +18,10 @@ export function ChatListItem({
 }) {
   const { i18n } = useInter();
 
-  const { open } = useStore();
+  const { setChat } = useChatStore();
 
   return (
-    <div className={styles.item} onClick={() => open(current)}>
+    <div className={styles.item} onClick={() => setChat(current)}>
       <Image
         src={
           current.type === "dialog"

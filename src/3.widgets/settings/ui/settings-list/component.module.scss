@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   padding: 10px 5px;
-  gap: 10px;
+  gap: 5px;
+  overflow-y: auto;
 }
 
 .item {
@@ -13,32 +14,37 @@
   gap: 10px;
   padding: 5px;
   color: var(--color);
-  .lucide {
+  &:hover {
+    background-color: var(--hover);
+  }
+
+  &__lucide {
     color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
   }
-}
-
-.active {
-  background: var(--travis) !important;
-  .lucide {
-    background: #ffffff;
-    color: #000000;
+  &__arrow {
+    color: #929292;
   }
-}
-
-.title {
-  flex: 1 1 auto;
-}
-
-.chosen {
-  color: #ffffff;
-}
-
-.lucide {
-  padding: 5px;
-  border-radius: 5px;
-  width: 30px;
-  height: 30px;
+  &__active {
+    background: var(--travis) !important;
+    .item__lucide {
+      background: #ffffff;
+      color: #000000;
+    }
+    .item__title {
+      color: white;
+    }
+    .item__arrow {
+      color: var(--travis);
+    }
+  }
+  &__title {
+    flex: 1;
+    text-align: left;
+  }
 }
 
 .profile {

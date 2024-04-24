@@ -3,11 +3,12 @@ import styles from "./component.module.scss";
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
 import { TextEditor } from "@/4.features";
-import { useStore } from "@/6.shared";
+import { useChatStore, useUserStore } from "@/6.shared";
 import { useMessage } from "@/5.entities";
 
 export function BottomChat() {
-  const { message, chat, user, setMessage } = useStore();
+  const { user } = useUserStore();
+  const { chat, message, setMessage } = useChatStore();
   const { send } = useMessage();
 
   return (
