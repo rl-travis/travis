@@ -3,7 +3,12 @@ import { ChevronRight, Languages, UserRound } from "lucide-react";
 
 import classNames from "classnames/bind";
 import React from "react";
-import { useChatStore, useInter, useSettingsStore } from "@/6.shared";
+import {
+  useChatStore,
+  useInter,
+  useSettingsStore,
+  useShortStackStore,
+} from "@/6.shared";
 
 const cx = classNames.bind(styles);
 
@@ -11,7 +16,7 @@ export function SettingsList() {
   const { setChat } = useChatStore();
 
   const { menuSettings, setMenuSettings } = useSettingsStore();
-
+  const { add } = useShortStackStore();
   const { i18n } = useInter();
 
   return (
@@ -22,6 +27,7 @@ export function SettingsList() {
         })}
         onClick={() => {
           setChat(null);
+          add("settings_profile");
           setMenuSettings("profile");
         }}
       >
@@ -35,6 +41,7 @@ export function SettingsList() {
         })}
         onClick={() => {
           setChat(null);
+          add("settings_language");
           setMenuSettings("language");
         }}
       >
