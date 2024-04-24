@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 export function Footer() {
   const { openSettings, setOpenSettings, setMenuSettings } = useSettingsStore();
   const { stack, add, pop } = useShortStackStore();
-  const { setChat } = useChatStore();
+  const { setChat, setOpenChatInfo } = useChatStore();
   const close = () => {
     const p = pop();
     if (p === "settings") {
@@ -22,6 +22,8 @@ export function Footer() {
       setMenuSettings(null);
     } else if (p === "chat") {
       setChat(null);
+    } else if (p === "chat_info") {
+      setOpenChatInfo(false);
     } else {
       throw new Error("Критическая ошибка в логике");
     }

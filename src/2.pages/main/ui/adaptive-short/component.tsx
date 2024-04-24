@@ -16,6 +16,7 @@ import classNames from "classnames/bind";
 import { Footer } from "./footer";
 import { EditProfile, EditProfileType } from "@/4.features";
 import { LanguageInfo } from "@/4.features/language";
+import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
 
 const cx = classNames.bind(styles);
 
@@ -26,10 +27,10 @@ export function AdaptiveShort({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
-  const { chat, setChat } = useChatStore();
+  const { chat, openChatInfo } = useChatStore();
   const { i18n } = useInter();
   const { setUser } = useUserStore();
-  const { setOpenSettings, openSettings, menuSettings } = useSettingsStore();
+  const { openSettings, menuSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
   const onDone = async (p: EditProfileType) => {
@@ -84,6 +85,13 @@ export function AdaptiveShort({
           })}
         >
           {chat ? <Chat /> : <Loading />}
+        </div>
+        <div
+          className={cx(styles.block, {
+            block__active: openChatInfo,
+          })}
+        >
+          <ChatInfo />
         </div>
       </div>
       <Footer />
