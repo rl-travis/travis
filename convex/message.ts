@@ -10,13 +10,17 @@ export const send = mutation({
     value: v.string(),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("message", {
+    const message_id = await ctx.db.insert("message", {
       chat_id: args.chat_id,
       value: args.value,
       edited: false,
       user_id: args.user_id,
       forward: false,
     });
+    await ctx.db.patch(args.chat_id, {
+      last_message_id: message_id,
+    });
+    return message_id;
   },
 });
 
