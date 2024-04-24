@@ -38,15 +38,21 @@ export function AdaptiveShort({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.list}>
-        {isOpenSettings && <Settings isPending={isPending} />}
-        <ChatList chats={chats} user={user} />
-        {chat && (
-          <div className={styles.chat}>
-            <Chat />
-          </div>
-        )}
-      </div>
+      {(!isOpenSettings || isPending) && (
+        <div className={cx(styles.list)}>
+          <ChatList chats={chats} user={user} />
+          {chat && (
+            <div className={styles.chat}>
+              <Chat />
+            </div>
+          )}
+        </div>
+      )}
+      {isOpenSettings && (
+        <div className={styles.settings}>
+          <Settings isPending={isPending} />
+        </div>
+      )}
       <div className={styles.bottom}>
         {chat && (
           <button className={styles.btn} onClick={() => close()}>

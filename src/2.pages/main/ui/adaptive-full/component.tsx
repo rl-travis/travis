@@ -108,14 +108,20 @@ export function AdaptiveFull({
             <Bolt size={20} />
           </button>
         </div>
-        <div
-          className={cx(styles.list, {
-            scroll: !isResizing,
-          })}
-        >
-          {isOpenSettings && <Settings isPending={isPending} />}
-          <ChatList chats={chats} user={user} />
-        </div>
+        {(!isOpenSettings || isPending) && (
+          <div
+            className={cx(styles.list, {
+              scroll: !isResizing,
+            })}
+          >
+            <ChatList chats={chats} user={user} />
+          </div>
+        )}
+        {isOpenSettings && (
+          <div className={styles.settings}>
+            <Settings isPending={isPending} />
+          </div>
+        )}
       </div>
       <div
         className={styles.resize}
