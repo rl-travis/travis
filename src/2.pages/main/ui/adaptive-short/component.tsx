@@ -1,8 +1,19 @@
 import React from "react";
+
+import classNames from "classnames/bind";
+
 import styles from "./component.module.scss";
+
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
-import { ChatList, Settings } from "@/3.widgets";
+import { Footer } from "./footer";
+
+import { Chat, ChatInfo, ChatList, Settings } from "@/3.widgets";
+
+import { EditProfile, EditProfileType, LanguageInfo } from "@/4.features";
+
+import { ChatType, useUser, useUserAvatar } from "@/5.entities";
+
 import {
   Loading,
   useChatStore,
@@ -11,13 +22,6 @@ import {
   useShortStackStore,
   useUserStore,
 } from "@/6.shared";
-import { ChatType, useUser, useUserAvatar } from "@/5.entities";
-import { Chat } from "@/3.widgets";
-import classNames from "classnames/bind";
-import { EditProfile, EditProfileType } from "@/4.features";
-import { LanguageInfo } from "@/4.features/language";
-import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
-import { Footer } from "./footer";
 
 const cx = classNames.bind(styles);
 

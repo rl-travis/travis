@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import { SettingsMenuType } from "./types";
+import { create } from "zustand";
 
 interface StoreType {
   openSettings: boolean;

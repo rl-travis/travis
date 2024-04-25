@@ -1,6 +1,8 @@
 import styles from "./component.module.scss";
-import { Checkbox, useInter, useUserStore } from "@/6.shared";
+
 import { useUser } from "@/5.entities";
+
+import { Checkbox, useInter, useUserStore } from "@/6.shared";
 
 export function LanguageInfo() {
   const { i18n, switchLang } = useInter();

@@ -1,6 +1,21 @@
 import React, { useCallback, useEffect } from "react";
+
+import classNames from "classnames";
+
 import styles from "./component.module.scss";
+
 import { Doc } from "../../../../../convex/_generated/dataModel";
+
+import { Header } from "./header";
+import { Resize } from "./resize";
+
+import { X } from "lucide-react";
+
+import { Chat, ChatInfo, ChatList, Settings } from "@/3.widgets";
+
+import { EditProfile, EditProfileType, LanguageInfo } from "@/4.features";
+
+import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 
 import {
   Loading,
@@ -9,16 +24,6 @@ import {
   useSettingsStore,
   useUserStore,
 } from "@/6.shared";
-import { ChatType, useUser, useUserAvatar } from "@/5.entities";
-import { Chat } from "@/3.widgets/chat";
-import classNames from "classnames/bind";
-import { EditProfile, EditProfileType } from "@/4.features";
-import { Header } from "./header";
-import { Resize } from "./resize";
-import { ChatList, Settings } from "@/3.widgets";
-import { LanguageInfo } from "@/4.features/language";
-import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
-import { X } from "lucide-react";
 
 const cx = classNames.bind(styles);
 

@@ -1,6 +1,7 @@
-import styles from "./component.module.scss";
-import { createPortal } from "react-dom";
 import React from "react";
+import { createPortal } from "react-dom";
+
+import styles from "./component.module.scss";
 
 export function Portal({
   close,

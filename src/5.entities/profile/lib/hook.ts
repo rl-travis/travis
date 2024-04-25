@@ -1,6 +1,7 @@
 import { api } from "../../../../convex/_generated/api";
-import { useQuery } from "convex/react";
+
 import { ProfileInfoParamsType, ProfileInfoReturnType } from "./types";
+import { useQuery } from "convex/react";
 
 export function useProfileInfo({
   doc,

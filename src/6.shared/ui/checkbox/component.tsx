@@ -1,4 +1,5 @@
 import styles from "./component.module.scss";
+
 import { Check } from "lucide-react";
 
 export function Checkbox() {

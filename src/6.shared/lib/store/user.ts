@@ -1,5 +1,6 @@
-import { create } from "zustand";
 import { Doc } from "../../../../convex/_generated/dataModel";
+
+import { create } from "zustand";
 
 type Store = {
   user: Doc<"user"> | null;

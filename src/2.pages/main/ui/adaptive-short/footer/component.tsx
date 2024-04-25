@@ -1,12 +1,16 @@
-import styles from "./component.module.scss";
 import classNames from "classnames/bind";
+
+import styles from "./component.module.scss";
+
+import { ArrowLeft, Bolt } from "lucide-react";
+
 import {
   IconLogo,
   useChatStore,
   useSettingsStore,
   useShortStackStore,
 } from "@/6.shared";
-import { ArrowLeft, Bolt } from "lucide-react";
+
 const cx = classNames.bind(styles);
 export function Footer() {
   const { openSettings, setOpenSettings, setMenuSettings } = useSettingsStore();

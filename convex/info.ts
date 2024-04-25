@@ -1,7 +1,8 @@
+import { ProfileInfoReturnType } from "../src/5.entities";
+
+import { Doc, Id } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
-import { Doc, Id } from "./_generated/dataModel";
-import { ProfileInfoReturnType } from "../src/5.entities";
 
 export const get = query({
   args: {

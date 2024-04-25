@@ -1,8 +1,11 @@
-import styles from "./component.module.scss";
-import { ChevronRight, Languages, UserRound } from "lucide-react";
+import React from "react";
 
 import classNames from "classnames/bind";
-import React from "react";
+
+import styles from "./component.module.scss";
+
+import { ChevronRight, Languages, UserRound } from "lucide-react";
+
 import {
   useChatStore,
   useInter,

@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import { ShortStackType } from "./types";
+import { create } from "zustand";
 
 interface StoreType {
   stack: ShortStackType[];

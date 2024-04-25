@@ -1,10 +1,13 @@
 import React from "react";
+
 import styles from "./component.module.scss";
+
 import { Doc } from "../../../convex/_generated/dataModel";
 
 import { ChatListItem } from "@/5.entities";
-import { SkeletonChat } from "@/6.shared";
 import { ChatType } from "@/5.entities";
+
+import { SkeletonChat } from "@/6.shared";
 
 export function ChatList({
   chats,

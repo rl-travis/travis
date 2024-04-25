@@ -1,10 +1,13 @@
+import React from "react";
+
+import styles from "./component.module.scss";
+
+import { AtSign, Info } from "lucide-react";
+
 import { useProfileInfo } from "@/5.entities";
 import { ProfileInfoParamsType } from "@/5.entities";
 
-import styles from "./component.module.scss";
-import { AtSign, Info } from "lucide-react";
 import { SliderAvatar } from "@/6.shared";
-import React from "react";
 
 export function ProfileInfo({ doc, type }: ProfileInfoParamsType) {
   const info = useProfileInfo({ doc, type });
