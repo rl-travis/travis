@@ -8,15 +8,16 @@ import {
   useChatStore,
   useInter,
   useSettingsStore,
+  useShortStackStore,
   useUserStore,
 } from "@/6.shared";
 import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 import { Chat } from "@/3.widgets";
 import classNames from "classnames/bind";
-import { Footer } from "./footer";
 import { EditProfile, EditProfileType } from "@/4.features";
 import { LanguageInfo } from "@/4.features/language";
 import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
+import { Footer } from "./footer";
 
 const cx = classNames.bind(styles);
 
@@ -30,10 +31,14 @@ export function AdaptiveShort({
   const { chat, openChatInfo } = useChatStore();
   const { i18n } = useInter();
   const { setUser } = useUserStore();
-  const { openSettings, menuSettings } = useSettingsStore();
+  const { pop } = useShortStackStore();
+  const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
   const onDone = async (p: EditProfileType) => {
+    pop();
+    pop();
+    setOpenSettings(false);
     await edit({
       user_id: user._id,
       username: p.username,
@@ -70,7 +75,9 @@ export function AdaptiveShort({
             block__active: menuSettings === "profile",
           })}
         >
-          <EditProfile done={onDone} title={i18n.changeProfile.change} />
+          <div className={styles.edit}>
+            <EditProfile done={onDone} title={i18n.changeProfile.change} />
+          </div>
         </div>
         <div
           className={cx(styles.block, {

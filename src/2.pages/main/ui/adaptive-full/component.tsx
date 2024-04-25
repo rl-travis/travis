@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import styles from "./component.module.scss";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
@@ -46,6 +46,8 @@ export function AdaptiveFull({
   }, []);
 
   const onDone = async (p: EditProfileType) => {
+    setOpenSettings(false);
+
     await edit({
       user_id: user._id,
       username: p.username,
@@ -119,7 +121,7 @@ export function AdaptiveFull({
               mini__active: openChatInfo,
             })}
           >
-            <div className={styles.mini__top}>
+            <div className={styles.top}>
               <button className={styles.btn} onClick={() => setOpenChatInfo(false)}>
                 <X size={20} />
               </button>

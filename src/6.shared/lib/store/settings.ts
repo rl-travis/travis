@@ -8,7 +8,7 @@ interface StoreType {
   setMenuSettings: (b: SettingsMenuType) => void;
 }
 
-export const useSettingsStore = create<StoreType>()((setState, getState) => ({
+export const useSettingsStore = create<StoreType>()((setState) => ({
   openSettings: false,
   setOpenSettings: (b) => {
     if (!b) setState({ menuSettings: null });

@@ -26,7 +26,6 @@ export function BottomChat() {
         className={styles.send}
         onClick={() => {
           if (message.length > 0) {
-            // отправление будет другое, сейчас добавил для теста и потому что в задаче это написано:)
             send({
               user_id: user!._id,
               chat_id: chat!.chat._id,

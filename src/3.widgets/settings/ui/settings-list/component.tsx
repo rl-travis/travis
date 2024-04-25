@@ -23,7 +23,7 @@ export function SettingsList() {
     <div className={styles.wrapper}>
       <button
         className={cx(styles.item, {
-          item__active: menuSettings === "profile",
+          active: menuSettings === "profile",
         })}
         onClick={() => {
           setChat(null);
@@ -31,13 +31,13 @@ export function SettingsList() {
           setMenuSettings("profile");
         }}
       >
-        <UserRound size={20} className={cx(styles.item__lucide, styles.profile)} />
-        <span className={styles.item__title}>{i18n.settings.profile}</span>
-        <ChevronRight size={20} className={styles.item__arrow} />
+        <UserRound size={20} className={cx(styles.lucide, styles.profile)} />
+        <span className={styles.title}>{i18n.settings.profile}</span>
+        <ChevronRight size={20} className={styles.arrow} />
       </button>
       <button
         className={cx(styles.item, {
-          item__active: menuSettings === "language",
+          active: menuSettings === "language",
         })}
         onClick={() => {
           setChat(null);
@@ -45,9 +45,9 @@ export function SettingsList() {
           setMenuSettings("language");
         }}
       >
-        <Languages size={20} className={cx(styles.item__lucide, styles.language)} />
-        <span className={styles.item__title}>{i18n.settings.language}</span>
-        <ChevronRight size={20} className={styles.item__arrow} />
+        <Languages size={20} className={cx(styles.lucide, styles.language)} />
+        <span className={styles.title}>{i18n.settings.language}</span>
+        <ChevronRight size={20} className={styles.arrow} />
       </button>
     </div>
   );

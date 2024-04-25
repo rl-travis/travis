@@ -5,7 +5,6 @@ import { BottomChat } from "./bottom-chat";
 import { HeaderChat } from "./header-chat";
 
 import { useChatStore } from "@/6.shared";
-import classNames from "classnames/bind";
 export function Chat() {
   const { chat } = useChatStore();
   // const { messages } = useMessageList(chat!.chat_id);

@@ -16,9 +16,7 @@ export function Footer() {
     const p = pop();
     if (p === "settings") {
       setOpenSettings(false);
-    } else if (p === "settings_language") {
-      setMenuSettings(null);
-    } else if (p === "settings_profile") {
+    } else if (p === "settings_language" || p === "settings_profile") {
       setMenuSettings(null);
     } else if (p === "chat") {
       setChat(null);
@@ -31,13 +29,13 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div
-        className={cx(styles.footer__overlay, {
-          footer__overlay_active: stack.length > 0,
+        className={cx(styles.overlay, {
+          transform: stack.length > 0,
         })}
       >
         <IconLogo />
         <button
-          className={cx(styles.btn, { btn__active: openSettings })}
+          className={cx(styles.btn, { active: openSettings })}
           onClick={() => {
             setOpenSettings(!openSettings);
             add("settings");

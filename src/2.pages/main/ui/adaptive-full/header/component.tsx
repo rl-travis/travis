@@ -9,14 +9,14 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div
-        className={cx(styles.header__overlay, {
-          header__active: openSettings,
+        className={cx(styles.overlay, {
+          transform: openSettings,
         })}
       >
         <IconLogo />
         <button
           className={cx(styles.btn, {
-            btn__active: openSettings,
+            active: openSettings,
           })}
           onClick={() => setOpenSettings(!openSettings)}
         >

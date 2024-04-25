@@ -17,34 +17,33 @@
   &:hover {
     background-color: var(--hover);
   }
-
-  &__lucide {
-    color: #ffffff;
-    padding: 5px;
-    border-radius: 5px;
-    width: 30px;
-    height: 30px;
+}
+.lucide {
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+.arrow {
+  color: #929292;
+}
+.active {
+  background: var(--travis) !important;
+  .lucide {
+    background: #ffffff;
+    color: #000000;
   }
-  &__arrow {
-    color: #929292;
+  .title {
+    color: white;
   }
-  &__active {
-    background: var(--travis) !important;
-    .item__lucide {
-      background: #ffffff;
-      color: #000000;
-    }
-    .item__title {
-      color: white;
-    }
-    .item__arrow {
-      color: var(--travis);
-    }
+  .arrow {
+    color: var(--travis);
   }
-  &__title {
-    flex: 1;
-    text-align: left;
-  }
+}
+.title {
+  flex: 1;
+  text-align: left;
 }
 
 .profile {
