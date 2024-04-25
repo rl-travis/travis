@@ -10,8 +10,7 @@ import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 
 import { ChatType } from "@/5.entities";
 
-import { useInter, useShortStackStore } from "@/6.shared";
-import { useChatStore } from "@/6.shared";
+import { useInter, useShortStackStore, useChatStore } from "@/6.shared";
 
 export function ChatListItem({
   current,

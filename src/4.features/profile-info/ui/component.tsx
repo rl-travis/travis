@@ -4,8 +4,7 @@ import styles from "./component.module.scss";
 
 import { AtSign, Info } from "lucide-react";
 
-import { useProfileInfo } from "@/5.entities";
-import { ProfileInfoParamsType } from "@/5.entities";
+import { useProfileInfo, ProfileInfoParamsType } from "@/5.entities";
 
 import { SliderAvatar } from "@/6.shared";
 
