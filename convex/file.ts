@@ -7,13 +7,6 @@ export const generateUploadUrl = mutation({
   },
 });
 
-export const getUrl = mutation({
-  args: { storageId: v.id("_storage") },
-  handler: async (ctx, args) => {
-    return await ctx.storage.getUrl(args.storageId);
-  },
-});
-
 export const createFile = mutation({
   args: { storageId: v.id("_storage"), name: v.string(), size: v.number() },
   handler: async (ctx, args) => {

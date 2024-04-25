@@ -8,7 +8,6 @@ import React from "react";
 
 export function ProfileInfo({ doc, type }: ProfileInfoParamsType) {
   const info = useProfileInfo({ doc, type });
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.name}>{info?.name ? info.name : "Загрузка..."}</div>

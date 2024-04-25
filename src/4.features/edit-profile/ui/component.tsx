@@ -9,7 +9,7 @@ import { Switch } from "./switch";
 import { Textarea } from "./textarea";
 
 import { Avatar, EditProfileType } from "@/4.features";
-import { useInter, useStore } from "@/6.shared";
+import { useInter, useUserStore } from "@/6.shared";
 export function EditProfile({
   title,
   showLanguage,
@@ -19,7 +19,7 @@ export function EditProfile({
   title: string;
   showLanguage?: boolean;
 }) {
-  const { user } = useStore();
+  const { user } = useUserStore();
   const {
     register,
     handleSubmit,

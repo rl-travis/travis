@@ -3,21 +3,21 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-import { Loading } from "@/6.shared";
+import { Loading, useInter, useUserStore } from "@/6.shared";
 import { useUser } from "@/5.entities";
 import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
-import { useStore } from "@/6.shared";
 
 export default function Home() {
   const { data } = useSession();
   const { store: getUser } = useUser();
 
-  const { user, setUser } = useStore();
-
+  const { user, setUser } = useUserStore();
+  const { switchLang } = useInter();
   const [loading, setLoading] = useState(true);
 
   const asyncGetUser = async () => {
     const user = await getUser({ email: data!.user!.email! });
+    if (user) switchLang(user.locales);
     setUser(user);
     setLoading(false);
   };

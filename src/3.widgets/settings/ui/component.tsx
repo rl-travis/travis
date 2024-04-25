@@ -1,43 +1,14 @@
 import styles from "./component.module.scss";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { ProfileInfo } from "@/4.features";
-import { useStore } from "@/6.shared";
-import { SettingsList } from "@/3.widgets/settings/ui/settings-list/component";
+import { useUserStore } from "@/6.shared";
+import { SettingsList } from "./settings-list";
 
-export function Settings({ isPending }: { isPending: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { user } = useStore();
-
-  useEffect(() => {
-    ref.current?.animate(
-      [
-        {
-          transform: "translateX(-100%)",
-        },
-        {
-          transform: "translateX(0)",
-        },
-      ],
-      200,
-    );
-    if (isPending) {
-      ref.current?.animate(
-        [
-          {
-            transform: "translateX(0)",
-          },
-          {
-            transform: "translateX(-100%)",
-          },
-        ],
-        200,
-      );
-    }
-  }, [isPending]);
+export function Settings() {
+  const { user } = useUserStore();
 
   return (
-    <div className={styles.wrapper} ref={ref}>
+    <div className={styles.wrapper}>
       <ProfileInfo doc={user!._id} type={"user"} />
       <SettingsList />
     </div>

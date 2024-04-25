@@ -1,11 +1,11 @@
 import styles from "./component.module.scss";
-import { Checkbox, useInter, useStore } from "@/6.shared";
+import { Checkbox, useInter, useUserStore } from "@/6.shared";
 import { useUser } from "@/5.entities";
 
 export function LanguageInfo() {
   const { i18n, switchLang } = useInter();
 
-  const { user } = useStore();
+  const { user } = useUserStore();
   const { switchLang: edit } = useUser();
 
   async function switchLanguage(id: number) {

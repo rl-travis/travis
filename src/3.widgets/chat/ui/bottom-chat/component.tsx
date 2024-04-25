@@ -3,11 +3,12 @@ import styles from "./component.module.scss";
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
 import { TextEditor } from "@/4.features";
-import { useStore } from "@/6.shared";
+import { useChatStore, useUserStore } from "@/6.shared";
 import { useMessage } from "@/5.entities";
 
 export function BottomChat() {
-  const { message, chat, user, setMessage } = useStore();
+  const { user } = useUserStore();
+  const { chat, message, setMessage } = useChatStore();
   const { send } = useMessage();
 
   return (
@@ -25,7 +26,6 @@ export function BottomChat() {
         className={styles.send}
         onClick={() => {
           if (message.length > 0) {
-            // отправление будет другое, сейчас добавил для теста и потому что в задаче это написано:)
             send({
               user_id: user!._id,
               chat_id: chat!.chat._id,

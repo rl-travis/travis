@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./component.module.scss";
 
-import { useInter, useStore } from "@/6.shared";
+import { useChatStore, useInter } from "@/6.shared";
 export function TextEditor() {
   const { i18n } = useInter();
-  const { setMessage } = useStore();
+  const { setMessage } = useChatStore();
   return (
     <div className={styles.wrapper}>
       <textarea

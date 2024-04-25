@@ -1,17 +1,24 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import styles from "./component.module.scss";
-import { ArrowLeft, Bolt } from "lucide-react";
-import { signOut } from "next-auth/react";
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
-import { ChatList, Settings } from "@/3.widgets";
-import { IconLogo, useInter, useSettingsStore, useStore } from "@/6.shared";
+import {
+  Loading,
+  useChatStore,
+  useInter,
+  useSettingsStore,
+  useUserStore,
+} from "@/6.shared";
 import { ChatType, useUser, useUserAvatar } from "@/5.entities";
-import { useResize } from "@/2.pages";
 import { Chat } from "@/3.widgets/chat";
 import classNames from "classnames/bind";
 import { EditProfile, EditProfileType } from "@/4.features";
+import { Header } from "./header";
+import { Resize } from "./resize";
+import { ChatList, Settings } from "@/3.widgets";
 import { LanguageInfo } from "@/4.features/language";
+import { ChatInfo } from "@/3.widgets/chat/ui/chat-info";
+import { X } from "lucide-react";
 
 const cx = classNames.bind(styles);
 
@@ -22,41 +29,25 @@ export function AdaptiveFull({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
-  const LeftRef = React.useRef<HTMLDivElement>(null);
-  const { initResize, resetSize } = useResize(LeftRef, 500, 200, 300);
+  const leftRef = React.useRef<HTMLDivElement>(null);
 
-  const { chat, close, setUser } = useStore();
-
-  const {
-    isProfile,
-    reset: resetSettings,
-    closeProfile,
-    open: openSettings,
-    isOpen: isOpenSettings,
-    close: closeSettings,
-    isLanguage,
-  } = useSettingsStore();
-
+  const { setUser } = useUserStore();
+  const { chat, setChat, openChatInfo, setOpenChatInfo } = useChatStore();
   const { i18n } = useInter();
-
+  const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
 
-  const [isResizing, setIsResizing] = useState<boolean>(false);
-
-  const [isPending, setIsPending] = useState<boolean>(false);
-
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      closeSettings();
-      resetSettings();
-      close();
+      setChat(null);
+      setOpenSettings(false);
     }
   }, []);
 
   const onDone = async (p: EditProfileType) => {
-    closeProfile();
-    closeSettings();
+    setOpenSettings(false);
+
     await edit({
       user_id: user._id,
       username: p.username,
@@ -81,76 +72,64 @@ export function AdaptiveFull({
       document.body.removeEventListener("keydown", keydownCallback);
     };
   }, []);
-
-  function closeSettingsWithAnimation() {
-    setIsPending(true);
-    resetSettings();
-    setTimeout(() => {
-      setIsPending(false);
-      closeSettings();
-    }, 150);
-  }
-
   return (
     <div className={styles.wrapper}>
-      <div className={styles.left} ref={LeftRef}>
-        <div className={styles.header}>
-          {isOpenSettings && !isPending && (
-            <button className={styles.btn} onClick={() => closeSettingsWithAnimation()}>
-              <ArrowLeft size={20} />
-            </button>
-          )}
-          <div onClick={() => signOut()}>
-            <IconLogo />
-          </div>
-          <button
-            className={cx(styles.btn, {
-              active: isOpenSettings && !isPending,
-            })}
-            onClick={() => openSettings()}
-          >
-            <Bolt size={20} />
-          </button>
-        </div>
-        {(!isOpenSettings || isPending) && (
+      <div className={styles.left} ref={leftRef}>
+        <Header />
+        <div className={styles.left__content}>
           <div
-            className={cx(styles.list, {
-              scroll: !isResizing,
+            className={cx(styles.settings, {
+              settings__active: openSettings,
             })}
           >
+            <Settings />
+          </div>
+          <div className={styles.list}>
             <ChatList chats={chats} user={user} />
           </div>
-        )}
-        {isOpenSettings && (
-          <div className={styles.settings}>
-            <Settings isPending={isPending} />
-          </div>
-        )}
+        </div>
       </div>
-      <div
-        className={styles.resize}
-        onDoubleClick={resetSize}
-        onMouseDown={(event) => {
-          initResize(event);
-        }}
-        onMouseOverCapture={() => {
-          setIsResizing(true);
-        }}
-        onMouseOutCapture={() => {
-          setIsResizing(false);
-        }}
-      />
-      {chat && (
-        <div className={styles.chat}>
-          <Chat />
+      {leftRef.current !== null && <Resize leftRef={leftRef} />}
+      <div className={styles.right}>
+        <div
+          className={cx(styles.block, {
+            block__active: menuSettings === "profile",
+          })}
+        >
+          <EditProfile done={onDone} title={i18n.changeProfile.change} />
         </div>
-      )}
-      {isProfile && isOpenSettings && (
-        <div className={styles.edit}>
-          <EditProfile title={i18n.changeProfile.change} done={onDone} />
+        <div
+          className={cx(styles.block, {
+            block__active: menuSettings === "language",
+          })}
+        >
+          <LanguageInfo />
         </div>
-      )}
-      {isLanguage && <LanguageInfo />}
+        <div
+          className={cx(styles.block, {
+            block__active: !!chat,
+          })}
+        >
+          {chat ? <Chat /> : <Loading />}
+          <div
+            className={cx(styles.stub, {
+              stub__active: openChatInfo,
+            })}
+          />
+          <div
+            className={cx(styles.mini, {
+              mini__active: openChatInfo,
+            })}
+          >
+            <div className={styles.top}>
+              <button className={styles.btn} onClick={() => setOpenChatInfo(false)}>
+                <X size={20} />
+              </button>
+            </div>
+            <ChatInfo />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
