@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 /**
  * Generated utilities for implementing server-side Convex query and mutation functions.
  *
@@ -9,7 +8,7 @@
  * To regenerate, run `npx convex dev`.
  * @module
  */
-import type { DataModel } from "./dataModel.js";
+
 import {
   ActionBuilder,
   HttpActionBuilder,
@@ -21,6 +20,7 @@ import {
   GenericDatabaseReader,
   GenericDatabaseWriter,
 } from "convex/server";
+import type { DataModel } from "./dataModel.js";
 
 /**
  * Define a query in this Convex app's public API.

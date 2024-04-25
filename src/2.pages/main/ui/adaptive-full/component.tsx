@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 
-import classNames from "classnames";
+import classNames from "classnames/bind";
 
 import styles from "./component.module.scss";
 
