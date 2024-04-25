@@ -1,9 +1,15 @@
-import styles from "./component.module.scss";
-import { IconLogo, useSettingsStore } from "@/6.shared";
 import React from "react";
-import { ArrowLeft, Bolt } from "lucide-react";
+
 import classNames from "classnames/bind";
+
+import styles from "./component.module.scss";
+
+import { ArrowLeft, Bolt } from "lucide-react";
+
+import { IconLogo, useSettingsStore } from "@/6.shared";
+
 const cx = classNames.bind(styles);
+
 export function Header() {
   const { openSettings, setOpenSettings } = useSettingsStore();
   return (

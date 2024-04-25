@@ -1,10 +1,14 @@
 import React from "react";
+
 import styles from "./component.module.scss";
+
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
 import { TextEditor } from "@/4.features";
-import { useChatStore, useUserStore } from "@/6.shared";
+
 import { useMessage } from "@/5.entities";
+
+import { useChatStore, useUserStore } from "@/6.shared";
 
 export function BottomChat() {
   const { user } = useUserStore();

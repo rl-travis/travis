@@ -1,10 +1,15 @@
 import React from "react";
-import styles from "./component.module.scss";
-import Image from "next/image";
+
 import classNames from "classnames/bind";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-const cx = classNames.bind(styles);
+
+import styles from "./component.module.scss";
+
+import Image from "next/image";
 import { v4 as hash } from "uuid";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const cx = classNames.bind(styles);
 
 type StackType = {
   i: string;

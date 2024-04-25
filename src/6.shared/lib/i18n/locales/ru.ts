@@ -1,4 +1,5 @@
 import { i18nType } from "../types";
+
 export const ru: i18nType = {
   id: 1,
   slug: "ru",

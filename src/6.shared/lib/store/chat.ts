@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 import { ChatType } from "@/5.entities";
 
 interface StoreType {

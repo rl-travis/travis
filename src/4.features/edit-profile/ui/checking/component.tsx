@@ -1,13 +1,17 @@
 import React from "react";
-import styles from "./component.module.scss";
-import { Check, X } from "lucide-react";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
+
 import classNames from "classnames/bind";
+
+import styles from "./component.module.scss";
 
 import { FormInterface } from "../../lib";
 
-import { debounce, i18nType } from "@/6.shared";
+import { Check, X } from "lucide-react";
+
 import { useUser } from "@/5.entities";
+
+import { debounce, i18nType } from "@/6.shared";
 
 const cx = classNames.bind(styles);
 export function Checking({

@@ -1,7 +1,11 @@
 import React from "react";
+
 import styles from "./component.module.scss";
+
 import { ProfileInfo } from "@/4.features";
+
 import { useChatStore } from "@/6.shared";
+
 export function ChatInfo() {
   const { chat } = useChatStore();
   if (!chat) {

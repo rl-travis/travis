@@ -1,8 +1,13 @@
-import { ChatType } from "@/5.entities";
 import styles from "./component.module.scss";
+
 import Image from "next/image";
+
 import { Search } from "lucide-react";
+
+import { ChatType } from "@/5.entities";
+
 import { useChatStore, useShortStackStore } from "@/6.shared";
+
 export function HeaderChat({ chat }: { chat: ChatType }) {
   const { openChatInfo, setOpenChatInfo } = useChatStore();
   const { add } = useShortStackStore();

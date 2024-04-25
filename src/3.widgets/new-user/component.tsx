@@ -2,9 +2,11 @@ import React from "react";
 
 import styles from "./component.module.scss";
 
-import { Loading, useInter, useUserStore } from "@/6.shared";
-import { useUser, useUserAvatar } from "@/5.entities";
 import { EditProfile, EditProfileType } from "@/4.features";
+
+import { useUser, useUserAvatar } from "@/5.entities";
+
+import { Loading, useInter, useUserStore } from "@/6.shared";
 
 export function NewUser({ email }: { email: string }) {
   const { i18n } = useInter();

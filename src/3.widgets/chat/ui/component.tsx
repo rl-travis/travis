@@ -1,10 +1,12 @@
 import React from "react";
+
 import styles from "./component.module.scss";
 
 import { BottomChat } from "./bottom-chat";
 import { HeaderChat } from "./header-chat";
 
 import { useChatStore } from "@/6.shared";
+
 export function Chat() {
   const { chat } = useChatStore();
   // const { messages } = useMessageList(chat!.chat_id);

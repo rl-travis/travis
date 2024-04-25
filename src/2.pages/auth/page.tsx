@@ -1,8 +1,10 @@
 import React from "react";
+
 import styles from "./page.module.scss";
 
-import { IconGithub, IconGoogle, IconLogo } from "@/6.shared";
 import { signIn } from "next-auth/react";
+
+import { IconGithub, IconGoogle, IconLogo } from "@/6.shared";
 
 export function AuthPage({
   setLoading,

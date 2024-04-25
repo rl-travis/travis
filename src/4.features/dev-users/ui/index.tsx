@@ -1,13 +1,17 @@
-import styles from "./index.module.scss";
-
-import { Doc, Id } from "../../../../convex/_generated/dataModel";
-import { useTheme } from "next-themes";
 import React from "react";
-import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 import classNames from "classnames/bind";
-import { useInter } from "@/6.shared";
+
+import { Doc, Id } from "../../../../convex/_generated/dataModel";
+
+import styles from "./index.module.scss";
+import { useTheme } from "next-themes";
+
+import { ChevronsDown, ChevronsUp } from "lucide-react";
+
 import { ChatType, useDialog, useUser } from "@/5.entities";
+
+import { useInter } from "@/6.shared";
 
 const cx = classNames.bind(styles);
 export function DevUsers({ user, chats }: { user?: Doc<"user">; chats?: ChatType[] }) {

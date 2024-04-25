@@ -1,15 +1,20 @@
 import React from "react";
-import styles from "./component.module.scss";
-import Image from "next/image";
-import { Check, ImagePlus } from "lucide-react";
 import { UseFormSetValue } from "react-hook-form";
 
-import { Crop } from "./crop";
+import styles from "./component.module.scss";
+
 import { CropperType } from "../lib";
 
-import { useFiles } from "@/5.entities";
-import { i18nType, MiniLoading, Portal, UploadWrapper } from "@/6.shared";
+import { Crop } from "./crop";
+import Image from "next/image";
+
+import { Check, ImagePlus } from "lucide-react";
+
 import { FormInterface } from "@/4.features";
+
+import { useFiles } from "@/5.entities";
+
+import { i18nType, MiniLoading, Portal, UploadWrapper } from "@/6.shared";
 
 export function Avatar({
   setValue,

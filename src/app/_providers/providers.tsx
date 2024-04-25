@@ -1,8 +1,9 @@
 import React from "react";
-import { NextAuthProvider } from "./next-auth-provider";
+
 import { ConvexClientProvider } from "./convex-client-provider";
-import { ThemeProviderTravis } from "./theme-provider-travis";
 import { InternationalizationProvider } from "./internationalization-provider";
+import { NextAuthProvider } from "./next-auth-provider";
+import { ThemeProviderTravis } from "./theme-provider-travis";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

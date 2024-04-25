@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import { useSession } from "next-auth/react";
 
-import { Loading, useInter, useUserStore } from "@/6.shared";
-import { useUser } from "@/5.entities";
 import { AuthPage, MainPage, NewUserPage } from "@/2.pages";
+
+import { useUser } from "@/5.entities";
+
+import { Loading, useInter, useUserStore } from "@/6.shared";
 
 export default function Home() {
   const { data } = useSession();

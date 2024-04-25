@@ -1,13 +1,16 @@
 import React from "react";
-import styles from "./index.module.scss";
-import Image from "next/image";
-import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 
 import { Doc } from "../../../../convex/_generated/dataModel";
-import { useInter, useShortStackStore } from "@/6.shared";
-import { ChatType } from "@/5.entities";
 import { reformatDateChats } from "../lib";
-import { useChatStore } from "@/6.shared";
+
+import styles from "./index.module.scss";
+import Image from "next/image";
+
+import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
+
+import { ChatType } from "@/5.entities";
+
+import { useInter, useShortStackStore, useChatStore } from "@/6.shared";
 
 export function ChatListItem({
   current,

@@ -1,6 +1,3 @@
-import { query } from "./_generated/server";
-import { ConvexError, v } from "convex/values";
-import { Doc } from "./_generated/dataModel";
 import {
   ChannelInterface,
   ChatType,
@@ -8,6 +5,10 @@ import {
   GroupInterface,
   SavedInterface,
 } from "../src/5.entities";
+
+import { Doc } from "./_generated/dataModel";
+import { query } from "./_generated/server";
+import { ConvexError, v } from "convex/values";
 
 export const getChats = query({
   args: { user_id: v.id("user") },

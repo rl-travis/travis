@@ -1,15 +1,19 @@
 import React from "react";
-import styles from "./component.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import styles from "./component.module.scss";
+
 import { FormInterface } from "../lib";
+
 import { Checking } from "./checking";
 import { Rules } from "./rules";
 import { Switch } from "./switch";
 import { Textarea } from "./textarea";
 
 import { Avatar, EditProfileType } from "@/4.features";
+
 import { useInter, useUserStore } from "@/6.shared";
+
 export function EditProfile({
   title,
   showLanguage,

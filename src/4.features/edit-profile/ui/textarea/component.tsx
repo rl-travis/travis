@@ -1,7 +1,9 @@
 import React, { useImperativeHandle } from "react";
-import styles from "./component.module.scss";
 import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
+
 import classNames from "classnames/bind";
+
+import styles from "./component.module.scss";
 
 import { FormInterface } from "../../lib";
 
