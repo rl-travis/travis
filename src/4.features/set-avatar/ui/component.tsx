@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
 import styles from "./component.module.scss";
@@ -25,10 +25,10 @@ export function Avatar({
   avatar: string;
   i18n: i18nType;
 }) {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [avatarValue, setAvatarValue] = React.useState(avatar);
-  const [loading, setLoading] = React.useState(false);
-  const cropper = React.useRef<CropperType | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [avatarValue, setAvatarValue] = useState(avatar);
+  const [loading, setLoading] = useState(false);
+  const cropper = useRef<CropperType | null>(null);
   const { uploadBlob } = useFiles();
 
   const handleDone = () => {

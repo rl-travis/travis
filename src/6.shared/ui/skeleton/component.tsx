@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 
 import styles from "./component.module.scss";
 
@@ -6,7 +6,7 @@ import styles from "./component.module.scss";
   В него нужно передавать только div-элементы, другие не пойдут
   Пример можно увидеть в этой же папке - SkeletonChat.tsx
  */
-export function Skeleton({ children }: { children: React.ReactNode }) {
+export function Skeleton({ children }: { children: ReactNode }) {
   return <div className={styles.wrapper}>{children}</div>;
 }
 

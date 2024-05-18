@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import styles from "./component.module.scss";
 
@@ -10,7 +10,7 @@ import { Loading, useInter, useUserStore } from "@/6.shared";
 
 export function NewUser({ email }: { email: string }) {
   const { i18n } = useInter();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { create: createUser, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();

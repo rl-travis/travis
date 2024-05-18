@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import classNames from "classnames/bind";
 
@@ -18,7 +18,7 @@ export function DevUsers({ user, chats }: { user?: Doc<"user">; chats?: ChatType
   const { devGetAll: users } = useUser();
   const { i18n, nextLang } = useInter();
   const { setTheme } = useTheme();
-  const [active, setActive] = React.useState(true);
+  const [active, setActive] = useState(true);
   const { create: dialogCreateMutation } = useDialog();
 
   //interlocutor - собеседник, для общего развития

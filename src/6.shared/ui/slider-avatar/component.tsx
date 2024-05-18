@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import classNames from "classnames/bind";
 
@@ -18,9 +18,9 @@ type StackType = {
 };
 // два рендера при смене изображения
 export function SliderAvatar({ images }: { images: string[] }) {
-  const [cur, setCur] = React.useState(0);
-  const [can, setCan] = React.useState(true);
-  const [stack, setStack] = React.useState<StackType[]>([]);
+  const [cur, setCur] = useState(0);
+  const [can, setCan] = useState(true);
+  const [stack, setStack] = useState<StackType[]>([]);
 
   const getNext = () => {
     return (cur + 1) % images.length;
@@ -82,7 +82,7 @@ export function SliderAvatar({ images }: { images: string[] }) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (images.length >= 2) {
       setStack([
         { i: images[images.length - 1], type: "no", key: hash() },

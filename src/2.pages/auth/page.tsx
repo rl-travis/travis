@@ -1,4 +1,4 @@
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import styles from "./page.module.scss";
 
@@ -9,7 +9,7 @@ import { IconGithub, IconGoogle, IconLogo } from "@/6.shared";
 export function AuthPage({
   setLoading,
 }: {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <div className={styles.wrapper}>

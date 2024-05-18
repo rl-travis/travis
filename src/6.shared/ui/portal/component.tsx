@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 import styles from "./component.module.scss";
@@ -9,7 +9,7 @@ export function Portal({
   title,
 }: {
   close: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
   title: string;
 }) {
   return (

@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 import classNames from "classnames/bind";
@@ -29,8 +29,8 @@ export function Textarea({
   minLength?: number;
   title: string;
 }) {
-  const [focus, setFocus] = React.useState(false);
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const [focus, setFocus] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { ref, ...rest } = register(label, {
     maxLength,
@@ -54,7 +54,7 @@ export function Textarea({
   });
   useImperativeHandle(ref, () => textareaRef.current);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = `54px`;
     }

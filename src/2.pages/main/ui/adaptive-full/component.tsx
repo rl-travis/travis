@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 import classNames from "classnames/bind";
 
@@ -34,7 +34,7 @@ export function AdaptiveFull({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
-  const leftRef = React.useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
   const { chat, setChat, openChatInfo, setOpenChatInfo } = useChatStore();

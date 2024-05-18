@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { RefObject, useEffect, useState } from "react";
 
 export function useResize(
   ref: RefObject<HTMLDivElement>,
@@ -6,10 +6,10 @@ export function useResize(
   minWidth: number,
   standardWidth: number,
 ) {
-  const [width, setWidth] = React.useState(0);
-  const [x, setX] = React.useState(0);
+  const [width, setWidth] = useState(0);
+  const [x, setX] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!ref.current!.style.width) {
       ref.current!.style.width = `${standardWidth}px`;
     }
