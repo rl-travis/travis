@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
@@ -13,7 +13,6 @@ import { ChatType, useDialog, useUser } from "@/5.entities";
 
 import { useInter } from "@/6.shared";
 
-const cx = classNames.bind(styles);
 export function DevUsers({ user, chats }: { user?: Doc<"user">; chats?: ChatType[] }) {
   const { devGetAll: users } = useUser();
   const { i18n, nextLang } = useInter();
@@ -34,7 +33,7 @@ export function DevUsers({ user, chats }: { user?: Doc<"user">; chats?: ChatType
   return (
     <div
       className={cx(styles.wrapper, {
-        active,
+        [styles.active]: active,
       })}
     >
       <button onClick={() => setActive(!active)} className={styles.btn}>

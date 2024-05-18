@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./component.module.scss";
 
 import { i18nType } from "@/6.shared";

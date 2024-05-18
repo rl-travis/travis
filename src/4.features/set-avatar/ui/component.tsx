@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
 import styles from "./component.module.scss";

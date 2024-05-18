@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./component.module.scss";
 
 import { Doc } from "../../../convex/_generated/dataModel";

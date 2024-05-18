@@ -1,12 +1,10 @@
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
 import { Loader2 } from "lucide-react";
 
 import { IconLogo } from "@/6.shared";
-
-const cx = classNames.bind(styles);
 
 export function Loading() {
   return (

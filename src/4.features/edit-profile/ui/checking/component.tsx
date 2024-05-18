@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -13,7 +13,6 @@ import { useUser } from "@/5.entities";
 
 import { debounce, i18nType } from "@/6.shared";
 
-const cx = classNames.bind(styles);
 export function Checking({
   username,
   i18n,
@@ -49,8 +48,8 @@ export function Checking({
   return (
     <div
       className={cx(styles.check, {
-        busy: isValid && isBusy,
-        free: isValid && !isBusy,
+        [styles.busy]: isValid && isBusy,
+        [styles.free]: isValid && !isBusy,
       })}
     >
       {isBusy && (

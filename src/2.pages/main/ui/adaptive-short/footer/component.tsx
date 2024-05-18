@@ -1,4 +1,4 @@
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -11,7 +11,6 @@ import {
   useShortStackStore,
 } from "@/6.shared";
 
-const cx = classNames.bind(styles);
 export function Footer() {
   const { openSettings, setOpenSettings, setMenuSettings } = useSettingsStore();
   const { stack, add, pop } = useShortStackStore();
@@ -34,12 +33,12 @@ export function Footer() {
     <footer className={styles.footer}>
       <div
         className={cx(styles.overlay, {
-          transform: stack.length > 0,
+          [styles.transform]: stack.length > 0,
         })}
       >
         <IconLogo />
         <button
-          className={cx(styles.btn, { active: openSettings })}
+          className={cx(styles.btn, { [styles.active]: openSettings })}
           onClick={() => {
             setOpenSettings(!openSettings);
             add("settings");

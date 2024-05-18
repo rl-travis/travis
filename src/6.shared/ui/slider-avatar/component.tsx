@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -9,14 +9,12 @@ import { v4 as hash } from "uuid";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const cx = classNames.bind(styles);
-
 type StackType = {
   i: string;
   type: "in" | "out" | "no";
   key: string;
 };
-// два рендера при смене изображения
+
 export function SliderAvatar({ images }: { images: string[] }) {
   const [cur, setCur] = useState(0);
   const [can, setCan] = useState(true);
@@ -128,8 +126,8 @@ export function SliderAvatar({ images }: { images: string[] }) {
               src={image.i}
               alt="avatar"
               className={cx(styles.image, {
-                in: image.type === "in",
-                out: image.type === "out",
+                [styles.in]: image.type === "in",
+                [styles.out]: image.type === "out",
               })}
               width={0}
               height={0}

@@ -1,13 +1,12 @@
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
 import { FormInterface } from "../../lib";
 
-const cx = classNames.bind(styles);
 export function Textarea({
   label,
   register,
@@ -62,14 +61,14 @@ export function Textarea({
   return (
     <div
       className={cx(styles.wrapper, {
-        active: focus,
+        [styles.active]: focus,
       })}
     >
       <label
         htmlFor={label}
         className={cx(styles.label, {
-          top: focus || watch(label),
-          center: !focus && !watch(label),
+          [styles.top]: focus || watch(label),
+          [styles.center]: !focus && !watch(label),
         })}
       >
         {title}

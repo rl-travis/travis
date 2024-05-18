@@ -1,6 +1,4 @@
-import React from "react";
-
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -13,8 +11,6 @@ import {
   useShortStackStore,
 } from "@/6.shared";
 
-const cx = classNames.bind(styles);
-
 export function SettingsList() {
   const { setChat } = useChatStore();
 
@@ -26,7 +22,7 @@ export function SettingsList() {
     <div className={styles.wrapper}>
       <button
         className={cx(styles.item, {
-          active: menuSettings === "profile",
+          [styles.active]: menuSettings === "profile",
         })}
         onClick={() => {
           setChat(null);
@@ -40,7 +36,7 @@ export function SettingsList() {
       </button>
       <button
         className={cx(styles.item, {
-          active: menuSettings === "language",
+          [styles.active]: menuSettings === "language",
         })}
         onClick={() => {
           setChat(null);
