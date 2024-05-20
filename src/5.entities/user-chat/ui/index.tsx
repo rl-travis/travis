@@ -1,3 +1,5 @@
+import cx from "classnames";
+
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { reformatDateChats } from "../lib";
 
@@ -19,11 +21,11 @@ export function ChatListItem({
 }) {
   const { i18n } = useInter();
   const { add } = useShortStackStore();
-  const { setChat } = useChatStore();
+  const { setChat, chat } = useChatStore();
 
   return (
     <div
-      className={styles.item}
+      className={cx(styles.item, { [styles.active]: chat?._id === current._id })}
       onClick={() => {
         add("chat");
         setChat(current);
