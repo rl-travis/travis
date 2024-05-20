@@ -46,6 +46,7 @@ export const ru: i18nType = {
   settings: {
     profile: "Мой профиль",
     language: "Язык",
+    theme: "Темная тема",
   },
   language: {
     ru: "Русский",
