@@ -2,7 +2,9 @@ import cx from "classnames";
 
 import styles from "./component.module.scss";
 
-import { ChevronRight, Languages, UserRound } from "lucide-react";
+import { useTheme } from "next-themes";
+
+import { ChevronRight, Languages, SunMoon, UserRound } from "lucide-react";
 
 import {
   useChatStore,
@@ -17,6 +19,7 @@ export function SettingsList() {
   const { menuSettings, setMenuSettings } = useSettingsStore();
   const { add } = useShortStackStore();
   const { i18n } = useInter();
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <div className={styles.wrapper}>
@@ -48,6 +51,23 @@ export function SettingsList() {
         <span className={styles.title}>{i18n.settings.language}</span>
         <ChevronRight size={20} className={styles.arrow} />
       </button>
+      <div className={styles.block}>
+        <SunMoon size={20} className={cx(styles.lucide, styles.theme)} />
+        <span className={styles.title}>{i18n.settings.theme}</span>
+        <div
+          className={styles.switch}
+          onClick={() => {
+            if (resolvedTheme === "dark") setTheme("light");
+            else setTheme("dark");
+          }}
+        >
+          <div
+            className={cx(styles.circle, {
+              [styles.selected]: resolvedTheme === "dark",
+            })}
+          ></div>
+        </div>
+      </div>
     </div>
   );
 }

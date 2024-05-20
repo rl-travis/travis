@@ -36,6 +36,7 @@ export type i18nType = {
   settings: {
     profile: string;
     language: string;
+    theme: string;
   };
   language: {
     ru: string;

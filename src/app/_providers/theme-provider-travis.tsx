@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes";
 export function ThemeProviderTravis({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider
-      storageKey="travis-theme"
+      storageKey="travis-component"
       defaultTheme="system"
       enableSystem
       attribute="data-theme"

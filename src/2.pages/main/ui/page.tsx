@@ -2,7 +2,6 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 
 import { AdaptiveFull } from "./adaptive-full";
 import { AdaptiveShort } from "./adaptive-short";
-import { DevUsers } from "@/4.features/dev-users";
 
 import { useUserChat } from "@/5.entities";
 
@@ -14,10 +13,7 @@ export function MainPage({ user }: { user: Doc<"user"> }) {
       {navigator.maxTouchPoints > 0 ? (
         <AdaptiveShort chats={chats} user={user} />
       ) : (
-        <>
-          {chats && <DevUsers user={user} chats={chats} />}
-          <AdaptiveFull chats={chats} user={user} />
-        </>
+        <AdaptiveFull chats={chats} user={user} />
       )}
     </>
   );
