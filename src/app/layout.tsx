@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 
 import "./_styles/global.scss";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>

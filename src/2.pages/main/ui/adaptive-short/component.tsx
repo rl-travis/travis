@@ -1,6 +1,4 @@
-import React from "react";
-
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -22,8 +20,6 @@ import {
   useShortStackStore,
   useUserStore,
 } from "@/6.shared";
-
-const cx = classNames.bind(styles);
 
 export function AdaptiveShort({
   chats,
@@ -69,14 +65,14 @@ export function AdaptiveShort({
         </div>
         <div
           className={cx(styles.block, {
-            block__active: openSettings,
+            [styles.block__active]: openSettings,
           })}
         >
           <Settings />
         </div>
         <div
           className={cx(styles.block, {
-            block__active: menuSettings === "profile",
+            [styles.block__active]: menuSettings === "profile",
           })}
         >
           <div className={styles.edit}>
@@ -85,21 +81,21 @@ export function AdaptiveShort({
         </div>
         <div
           className={cx(styles.block, {
-            block__active: menuSettings === "language",
+            [styles.block__active]: menuSettings === "language",
           })}
         >
           <LanguageInfo />
         </div>
         <div
           className={cx(styles.block, {
-            block__active: !!chat,
+            [styles.block__active]: !!chat,
           })}
         >
           {chat ? <Chat /> : <Loading />}
         </div>
         <div
           className={cx(styles.block, {
-            block__active: openChatInfo,
+            [styles.block__active]: openChatInfo,
           })}
         >
           <ChatInfo />

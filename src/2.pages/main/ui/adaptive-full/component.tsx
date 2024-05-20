@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -25,8 +25,6 @@ import {
   useUserStore,
 } from "@/6.shared";
 
-const cx = classNames.bind(styles);
-
 export function AdaptiveFull({
   chats,
   user,
@@ -34,7 +32,7 @@ export function AdaptiveFull({
   chats: ChatType[] | undefined;
   user: Doc<"user">;
 }) {
-  const leftRef = React.useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
   const { chat, setChat, openChatInfo, setOpenChatInfo } = useChatStore();
@@ -84,7 +82,7 @@ export function AdaptiveFull({
         <div className={styles.left__content}>
           <div
             className={cx(styles.settings, {
-              settings__active: openSettings,
+              [styles.settings__active]: openSettings,
             })}
           >
             <Settings />
@@ -98,32 +96,32 @@ export function AdaptiveFull({
       <div className={styles.right}>
         <div
           className={cx(styles.block, {
-            block__active: menuSettings === "profile",
+            [styles.block__active]: menuSettings === "profile",
           })}
         >
           <EditProfile done={onDone} title={i18n.changeProfile.change} />
         </div>
         <div
           className={cx(styles.block, {
-            block__active: menuSettings === "language",
+            [styles.block__active]: menuSettings === "language",
           })}
         >
           <LanguageInfo />
         </div>
         <div
           className={cx(styles.block, {
-            block__active: !!chat,
+            [styles.block__active]: !!chat,
           })}
         >
           {chat ? <Chat /> : <Loading />}
           <div
             className={cx(styles.stub, {
-              stub__active: openChatInfo,
+              [styles.stub__active]: openChatInfo,
             })}
           />
           <div
             className={cx(styles.mini, {
-              mini__active: openChatInfo,
+              [styles.mini__active]: openChatInfo,
             })}
           >
             <div className={styles.top}>

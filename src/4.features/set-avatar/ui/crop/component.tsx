@@ -1,4 +1,4 @@
-import React from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 
 import { cropper, ReadBlobAsDataURL, CropperType } from "../../lib";
 
@@ -9,10 +9,10 @@ export function Crop({
   cropp,
 }: {
   file: File;
-  cropp: React.MutableRefObject<CropperType | null>;
+  cropp: MutableRefObject<CropperType | null>;
 }) {
-  const originalImage = React.useRef<HTMLImageElement>(null);
-  React.useEffect(() => {
+  const originalImage = useRef<HTMLImageElement>(null);
+  useEffect(() => {
     if (!cropp.current) {
       ReadBlobAsDataURL(file).then((res) => {
         originalImage.current!.src = res;

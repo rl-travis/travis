@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./component.module.scss";
 
 import { ProfileInfo } from "@/4.features";

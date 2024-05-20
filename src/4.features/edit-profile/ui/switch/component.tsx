@@ -1,12 +1,9 @@
-import React from "react";
-
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
 import { i18nList, useInter } from "@/6.shared";
 
-const cx = classNames.bind(styles);
 export function Switch() {
   const { i18n, switchLang } = useInter();
 
@@ -20,8 +17,8 @@ export function Switch() {
               role="button"
               key={e.id}
               className={cx(styles.btn, {
-                active: e.id === i18n.id,
-                inactive: e.id !== i18n.id,
+                [styles.active]: e.id === i18n.id,
+                [styles.inactive]: e.id !== i18n.id,
               })}
               onClick={() => switchLang(e.id)}
             >

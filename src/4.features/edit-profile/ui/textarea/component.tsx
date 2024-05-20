@@ -1,13 +1,12 @@
-import React, { useImperativeHandle } from "react";
+import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
 import { FormInterface } from "../../lib";
 
-const cx = classNames.bind(styles);
 export function Textarea({
   label,
   register,
@@ -29,8 +28,8 @@ export function Textarea({
   minLength?: number;
   title: string;
 }) {
-  const [focus, setFocus] = React.useState(false);
-  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const [focus, setFocus] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { ref, ...rest } = register(label, {
     maxLength,
@@ -54,7 +53,7 @@ export function Textarea({
   });
   useImperativeHandle(ref, () => textareaRef.current);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = `54px`;
     }
@@ -62,14 +61,14 @@ export function Textarea({
   return (
     <div
       className={cx(styles.wrapper, {
-        active: focus,
+        [styles.active]: focus,
       })}
     >
       <label
         htmlFor={label}
         className={cx(styles.label, {
-          top: focus || watch(label),
-          center: !focus && !watch(label),
+          [styles.top]: focus || watch(label),
+          [styles.center]: !focus && !watch(label),
         })}
       >
         {title}

@@ -1,7 +1,7 @@
-import React from "react";
+import { ReactNode } from "react";
 
 export type PropsType = {
-  children: React.ReactNode;
+  children: ReactNode;
   onUpload: (files: File[]) => void;
   multiple?: boolean;
   accept?: string;

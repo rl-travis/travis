@@ -1,6 +1,4 @@
-import React from "react";
-
-import classNames from "classnames/bind";
+import cx from "classnames";
 
 import styles from "./component.module.scss";
 
@@ -8,21 +6,19 @@ import { ArrowLeft, Bolt } from "lucide-react";
 
 import { IconLogo, useSettingsStore } from "@/6.shared";
 
-const cx = classNames.bind(styles);
-
 export function Header() {
   const { openSettings, setOpenSettings } = useSettingsStore();
   return (
     <header className={styles.header}>
       <div
         className={cx(styles.overlay, {
-          transform: openSettings,
+          [styles.transform]: openSettings,
         })}
       >
         <IconLogo />
         <button
           className={cx(styles.btn, {
-            active: openSettings,
+            [styles.active]: openSettings,
           })}
           onClick={() => setOpenSettings(!openSettings)}
         >

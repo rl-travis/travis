@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./component.module.scss";
 
@@ -7,10 +7,10 @@ import { PropsType } from "./types";
 import { MiniLoading } from "@/6.shared";
 
 export function UploadWrapper({ children, onUpload, multiple, accept }: PropsType) {
-  const [files, setFiles] = React.useState<File[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [files, setFiles] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (files.length > 0) {
       setIsLoading(true);
       onUpload(files);

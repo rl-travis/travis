@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import { ReactNode } from "react";
 
 import { ThemeProvider } from "next-themes";
 
-export function ThemeProviderTravis({ children }: { children: React.ReactNode }) {
+export function ThemeProviderTravis({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider
       storageKey="travis-theme"
