@@ -6,17 +6,26 @@ import { TextEditor } from "@/4.features";
 
 import { useMessage } from "@/5.entities";
 
-import { useChatStore, useUserStore } from "@/6.shared";
+import { soc, useChatStore, useUserStore } from "@/6.shared";
 
 export function BottomChat() {
   const { user } = useUserStore();
-  const { chat, message, setMessage } = useChatStore();
+  const { chat, message, setMessage, statusSidebar, setStatusSidebar } = useChatStore();
   const { send } = useMessage();
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <button className={styles.btn}>
+        <button
+          className={soc(styles.btn, styles.btn__active, statusSidebar === "emoji")}
+          onClick={() => {
+            if (statusSidebar !== "emoji") {
+              setStatusSidebar("emoji");
+            } else {
+              setStatusSidebar(null);
+            }
+          }}
+        >
           <Smile size={20} />
         </button>
         <button className={styles.btn}>

@@ -23,7 +23,7 @@
   background-color: var(--travis);
   margin: 0 auto;
 
-  &:hover {
+  @include hover {
     background-color: var(--dark-travis);
   }
 }

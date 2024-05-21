@@ -55,17 +55,6 @@
     right: 0;
   }
 }
-.top {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid var(--gray);
-  span {
-    flex: 1;
-    text-align: center;
-  }
-}
 
 .list {
   flex: 1;
@@ -109,7 +98,7 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
+  @include hover {
     background-color: var(--hover);
   }
 }

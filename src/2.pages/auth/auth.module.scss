@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
 
-  &:hover {
+  @include hover {
     background-color: var(--hover);
   }
 }

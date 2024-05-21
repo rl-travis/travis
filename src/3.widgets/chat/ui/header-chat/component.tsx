@@ -8,13 +8,13 @@ import { ChatType } from "@/5.entities";
 import { useChatStore, useShortStackStore } from "@/6.shared";
 
 export function HeaderChat({ chat }: { chat: ChatType }) {
-  const { openChatInfo, setOpenChatInfo } = useChatStore();
+  const { setStatusSidebar } = useChatStore();
   const { add } = useShortStackStore();
   return (
     <div
       className={styles.wrapper}
       onClick={() => {
-        setOpenChatInfo(!openChatInfo);
+        setStatusSidebar("info");
         add("chat_info");
       }}
     >
