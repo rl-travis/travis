@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./profile-info.module.scss";
 
 import { AtSign, Info } from "lucide-react";
 

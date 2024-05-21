@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./rules.module.scss";
 
 import { i18nType } from "@/6.shared";
 

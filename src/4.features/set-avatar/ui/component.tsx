@@ -1,11 +1,10 @@
 import { useRef, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 
-import styles from "./component.module.scss";
-
 import { CropperType } from "../lib";
 
 import { Crop } from "./crop";
+import styles from "./set-avatar.module.scss";
 import Image from "next/image";
 
 import { Check, ImagePlus } from "lucide-react";

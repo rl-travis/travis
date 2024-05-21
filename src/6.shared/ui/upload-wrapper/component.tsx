@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import styles from "./component.module.scss";
-
 import { PropsType } from "./types";
+import styles from "./upload-wrapper.module.scss";
 
 import { MiniLoading } from "@/6.shared";
 

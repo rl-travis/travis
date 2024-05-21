@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./icon.module.scss";
 
 export function IconGithub() {
   return (

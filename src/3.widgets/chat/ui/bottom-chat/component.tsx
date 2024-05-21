@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./bottom-chat.module.scss";
 
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 

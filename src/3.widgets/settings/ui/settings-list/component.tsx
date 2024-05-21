@@ -1,7 +1,6 @@
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
+import styles from "./settings-list.module.scss";
 import { useTheme } from "next-themes";
 
 import { ChevronRight, Languages, SunMoon, UserRound } from "lucide-react";

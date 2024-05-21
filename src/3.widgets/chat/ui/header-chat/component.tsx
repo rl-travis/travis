@@ -1,5 +1,4 @@
-import styles from "./component.module.scss";
-
+import styles from "./header-chat.module.scss";
 import Image from "next/image";
 
 import { Search } from "lucide-react";

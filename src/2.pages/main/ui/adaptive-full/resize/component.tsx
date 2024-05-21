@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-import styles from "./component.module.scss";
+import styles from "./resize.module.scss";
 
 import { useResize } from "@/2.pages";
 

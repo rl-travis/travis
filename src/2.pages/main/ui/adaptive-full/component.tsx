@@ -2,10 +2,9 @@ import { useCallback, useEffect, useRef } from "react";
 
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
+import styles from "./adaptive-full.module.scss";
 import { Header } from "./header";
 import { Resize } from "./resize";
 

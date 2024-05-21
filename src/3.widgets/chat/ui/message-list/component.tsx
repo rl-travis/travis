@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./component.module.scss";
-
 import { Doc } from "../../../../../convex/_generated/dataModel";
+
+import styles from "./message-list.module.scss";
 
 import { MessageItem } from "@/5.entities";
 

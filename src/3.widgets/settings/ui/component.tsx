@@ -1,6 +1,5 @@
-import styles from "./component.module.scss";
-
 import { SettingsList } from "./settings-list";
+import styles from "./settings.module.scss";
 
 import { ProfileInfo } from "@/4.features";
 

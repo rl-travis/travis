@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import styles from "./component.module.scss";
+import styles from "./new-user.module.scss";
 
 import { EditProfile, EditProfileType } from "@/4.features";
 

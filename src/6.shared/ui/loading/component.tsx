@@ -1,6 +1,6 @@
 import cx from "classnames";
 
-import styles from "./component.module.scss";
+import styles from "./loading.module.scss";
 
 import { Loader2 } from "lucide-react";
 

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
+import styles from "./slider-avatar.module.scss";
 import Image from "next/image";
 import { v4 as hash } from "uuid";
 

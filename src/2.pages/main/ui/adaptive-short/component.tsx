@@ -1,9 +1,8 @@
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
+import styles from "./adaptive-short.module.scss";
 import { Footer } from "./footer";
 
 import { Chat, ChatInfo, ChatList, Settings } from "@/3.widgets";

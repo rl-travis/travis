@@ -3,7 +3,7 @@ import cx from "classnames";
 import { Doc } from "../../../../convex/_generated/dataModel";
 import { reformatDateChats } from "../lib";
 
-import styles from "./index.module.scss";
+import styles from "./user-chat.module.scss";
 import Image from "next/image";
 
 import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";

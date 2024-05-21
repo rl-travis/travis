@@ -1,6 +1,6 @@
 import cx from "classnames";
 
-import styles from "./component.module.scss";
+import styles from "./switch.module.scss";
 
 import { i18nList, useInter } from "@/6.shared";
 

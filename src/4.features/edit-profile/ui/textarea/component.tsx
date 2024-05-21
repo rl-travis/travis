@@ -3,9 +3,9 @@ import { Path, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook
 
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
 import { FormInterface } from "../../lib";
+
+import styles from "./textarea.module.scss";
 
 export function Textarea({
   label,
