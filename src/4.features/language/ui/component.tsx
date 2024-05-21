@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./language.module.scss";
 
 import { useUser } from "@/5.entities";
 

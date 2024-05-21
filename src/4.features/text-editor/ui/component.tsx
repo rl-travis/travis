@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./text-editor.module.scss";
 
 import { useChatStore, useInter } from "@/6.shared";
 

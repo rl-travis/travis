@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./chat-info.module.scss";
 
 import { ProfileInfo } from "@/4.features";
 

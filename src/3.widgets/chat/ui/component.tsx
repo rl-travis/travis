@@ -1,8 +1,7 @@
 import React from "react";
 
-import styles from "./component.module.scss";
-
 import { BottomChat } from "./bottom-chat";
+import styles from "./chat.module.scss";
 import { HeaderChat } from "./header-chat";
 
 import { useChatStore } from "@/6.shared";

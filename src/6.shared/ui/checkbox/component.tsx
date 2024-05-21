@@ -1,4 +1,4 @@
-import styles from "./component.module.scss";
+import styles from "./checkbox.module.scss";
 
 import { Check } from "lucide-react";
 

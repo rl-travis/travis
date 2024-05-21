@@ -1,6 +1,6 @@
-import styles from "./component.module.scss";
-
 import { Doc } from "../../../convex/_generated/dataModel";
+
+import styles from "./chat-list.module.scss";
 
 import { ChatListItem, ChatType } from "@/5.entities";
 

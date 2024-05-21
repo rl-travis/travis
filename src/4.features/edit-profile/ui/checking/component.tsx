@@ -3,9 +3,9 @@ import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 import cx from "classnames";
 
-import styles from "./component.module.scss";
-
 import { FormInterface } from "../../lib";
+
+import styles from "./checking.module.scss";
 
 import { Check, X } from "lucide-react";
 

@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-import styles from "./page.module.scss";
-
+import styles from "./auth.module.scss";
 import { signIn } from "next-auth/react";
 
 import { IconGithub, IconGoogle, IconLogo } from "@/6.shared";

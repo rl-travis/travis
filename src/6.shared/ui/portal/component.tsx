@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
-import styles from "./component.module.scss";
+import styles from "./portal.module.scss";
 
 export function Portal({
   close,

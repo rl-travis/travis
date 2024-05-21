@@ -1,6 +1,6 @@
 import cx from "classnames";
 
-import styles from "./component.module.scss";
+import styles from "./header.module.scss";
 
 import { ArrowLeft, Bolt } from "lucide-react";
 

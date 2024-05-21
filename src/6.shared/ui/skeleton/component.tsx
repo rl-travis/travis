@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import styles from "./component.module.scss";
+import styles from "./skeleton.module.scss";
 
 /*
   В него нужно передавать только div-элементы, другие не пойдут

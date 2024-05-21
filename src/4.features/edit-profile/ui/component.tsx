@@ -1,10 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import styles from "./component.module.scss";
-
 import { FormInterface } from "../lib";
 
 import { Checking } from "./checking";
+import styles from "./edit-profile.module.scss";
 import { Rules } from "./rules";
 import { Switch } from "./switch";
 import { Textarea } from "./textarea";
