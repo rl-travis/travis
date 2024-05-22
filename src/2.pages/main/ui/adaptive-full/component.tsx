@@ -2,8 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
-// просто s, чтобы читалось максимально просто
-import s from "./adaptive-full.module.scss";
+import styles from "./adaptive-full.module.scss";
 import { Header } from "./header";
 import { Resize } from "./resize";
 import { SidebarTop } from "./sidebar-top";
@@ -74,34 +73,50 @@ export function AdaptiveFull({
     };
   }, []);
   return (
-    <div className={s.wrapper}>
-      <div className={s.left} ref={leftRef}>
+    <div className={styles.wrapper}>
+      <div className={styles.left} ref={leftRef}>
         <Header />
-        <div className={s.left__content}>
-          <div className={soc(s.settings, s.settings__active, openSettings)}>
+        <div className={styles.left__content}>
+          <div className={soc(styles.settings, styles.settings__active, openSettings)}>
             <Settings />
           </div>
-          <div className={s.list}>
+          <div className={styles.list}>
             <ChatList chats={chats} user={user} />
           </div>
         </div>
       </div>
       {leftRef.current !== null && <Resize leftRef={leftRef} />}
-      <div className={s.right}>
-        <div className={soc(s.block, s.block__active, menuSettings === "profile")}>
+      <div className={styles.right}>
+        <div
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "profile",
+          )}
+        >
           <EditProfile done={onDone} title={i18n.changeProfile.change} />
         </div>
-        <div className={soc(s.block, s.block__active, menuSettings === "language")}>
+        <div
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "language",
+          )}
+        >
           <LanguageInfo />
         </div>
-        <div className={soc(s.block, s.block__active, !!chat)}>
+        <div className={soc(styles.block, styles.block__active, !!chat)}>
           {chat ? <Chat /> : <Loading />}
-          <div className={soc(s.stub, s.stub__active, !!statusSidebar)} />
-          <div className={soc(s.mini, s.mini__active, statusSidebar === "info")}>
+          <div className={soc(styles.stub, styles.stub__active, !!statusSidebar)} />
+          <div
+            className={soc(styles.mini, styles.mini__active, statusSidebar === "info")}
+          >
             <SidebarTop />
             <ChatInfo />
           </div>
-          <div className={soc(s.mini, s.mini__active, statusSidebar === "emoji")}>
+          <div
+            className={soc(styles.mini, styles.mini__active, statusSidebar === "emoji")}
+          >
             <SidebarTop emoji />
             <EmojiList />
           </div>

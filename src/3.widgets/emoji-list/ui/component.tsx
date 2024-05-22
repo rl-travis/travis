@@ -11,7 +11,9 @@ import { Loading, useChatStore, useLocalStorage } from "@/6.shared";
 
 function RenderEmoji({ nativeEmoji, emoji }: { nativeEmoji: boolean; emoji: string }) {
   if (nativeEmoji) return <div className={styles.native}>{native(emoji)}</div>;
-  return <img src={internal(emoji)} alt={emoji} className={styles.internal} />;
+  return (
+    <img src={internal(emoji)} alt={emoji} className={styles.internal} loading="lazy" />
+  );
 }
 
 function VariantEmoji({

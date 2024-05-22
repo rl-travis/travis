@@ -1,6 +1,6 @@
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
-import s from "./adaptive-short.module.scss";
+import styles from "./adaptive-short.module.scss";
 import { Footer } from "./footer";
 
 import { Chat, ChatInfo, ChatList, Settings } from "@/3.widgets";
@@ -57,26 +57,40 @@ export function AdaptiveShort({
   };
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.content}>
-        <div className={s.list}>
+    <div className={styles.wrapper}>
+      <div className={styles.content}>
+        <div className={styles.list}>
           <ChatList chats={chats} user={user} />
         </div>
-        <div className={soc(s.block, s.block__active, openSettings)}>
+        <div className={soc(styles.block, styles.block__active, openSettings)}>
           <Settings />
         </div>
-        <div className={soc(s.block, s.block__active, menuSettings === "profile")}>
-          <div className={s.edit}>
+        <div
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "profile",
+          )}
+        >
+          <div className={styles.edit}>
             <EditProfile done={onDone} title={i18n.changeProfile.change} />
           </div>
         </div>
-        <div className={soc(s.block, s.block__active, menuSettings === "language")}>
+        <div
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "language",
+          )}
+        >
           <LanguageInfo />
         </div>
-        <div className={soc(s.block, s.block__active, !!chat)}>
+        <div className={soc(styles.block, styles.block__active, !!chat)}>
           {chat ? <Chat /> : <Loading />}
         </div>
-        <div className={soc(s.block, s.block__active, statusSidebar === "info")}>
+        <div
+          className={soc(styles.block, styles.block__active, statusSidebar === "info")}
+        >
           <ChatInfo />
         </div>
       </div>
