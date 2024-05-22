@@ -3,3 +3,4 @@ export type { i18nType } from "./i18n";
 
 export * from "./debounce";
 export * from "./store";
+export * from "./style";

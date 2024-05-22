@@ -4,7 +4,7 @@
   background-color: var(--gray);
   cursor: ew-resize;
   box-sizing: content-box;
-  &:hover {
+  @include hover {
     background-color: var(--color);
   }
 }

@@ -14,7 +14,7 @@
   gap: 10px;
   padding: 5px;
   color: var(--color);
-  &:hover {
+  @include hover {
     background-color: var(--hover);
   }
 }

@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  sassOptions: {
+    includePaths: ["./src"],
+    prependData: `@import "src/app/_styles/mixins";`,
+  },
   reactStrictMode: false,
   images: {
     remotePatterns: [

@@ -14,7 +14,7 @@ import {
 export function Footer() {
   const { openSettings, setOpenSettings, setMenuSettings } = useSettingsStore();
   const { stack, add, pop } = useShortStackStore();
-  const { setChat, setOpenChatInfo } = useChatStore();
+  const { setChat, setStatusSidebar } = useChatStore();
   const close = () => {
     const p = pop();
     if (p === "settings") {
@@ -24,7 +24,7 @@ export function Footer() {
     } else if (p === "chat") {
       setChat(null);
     } else if (p === "chat_info") {
-      setOpenChatInfo(false);
+      setStatusSidebar("info");
     } else {
       throw new Error("Критическая ошибка в логике");
     }

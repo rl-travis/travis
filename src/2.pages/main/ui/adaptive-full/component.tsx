@@ -1,16 +1,13 @@
 import { useCallback, useEffect, useRef } from "react";
 
-import cx from "classnames";
-
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import styles from "./adaptive-full.module.scss";
 import { Header } from "./header";
 import { Resize } from "./resize";
+import { SidebarTop } from "./sidebar-top";
 
-import { X } from "lucide-react";
-
-import { Chat, ChatInfo, ChatList, Settings } from "@/3.widgets";
+import { Chat, ChatInfo, ChatList, EmojiList, Settings } from "@/3.widgets";
 
 import { EditProfile, EditProfileType, LanguageInfo } from "@/4.features";
 
@@ -18,6 +15,7 @@ import { ChatType, useUser, useUserAvatar } from "@/5.entities";
 
 import {
   Loading,
+  soc,
   useChatStore,
   useInter,
   useSettingsStore,
@@ -34,7 +32,7 @@ export function AdaptiveFull({
   const leftRef = useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
-  const { chat, setChat, openChatInfo, setOpenChatInfo } = useChatStore();
+  const { chat, setChat, statusSidebar } = useChatStore();
   const { i18n } = useInter();
   const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
@@ -79,11 +77,7 @@ export function AdaptiveFull({
       <div className={styles.left} ref={leftRef}>
         <Header />
         <div className={styles.left__content}>
-          <div
-            className={cx(styles.settings, {
-              [styles.settings__active]: openSettings,
-            })}
-          >
+          <div className={soc(styles.settings, styles.settings__active, openSettings)}>
             <Settings />
           </div>
           <div className={styles.list}>
@@ -94,41 +88,37 @@ export function AdaptiveFull({
       {leftRef.current !== null && <Resize leftRef={leftRef} />}
       <div className={styles.right}>
         <div
-          className={cx(styles.block, {
-            [styles.block__active]: menuSettings === "profile",
-          })}
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "profile",
+          )}
         >
           <EditProfile done={onDone} title={i18n.changeProfile.change} />
         </div>
         <div
-          className={cx(styles.block, {
-            [styles.block__active]: menuSettings === "language",
-          })}
+          className={soc(
+            styles.block,
+            styles.block__active,
+            menuSettings === "language",
+          )}
         >
           <LanguageInfo />
         </div>
-        <div
-          className={cx(styles.block, {
-            [styles.block__active]: !!chat,
-          })}
-        >
+        <div className={soc(styles.block, styles.block__active, !!chat)}>
           {chat ? <Chat /> : <Loading />}
+          <div className={soc(styles.stub, styles.stub__active, !!statusSidebar)} />
           <div
-            className={cx(styles.stub, {
-              [styles.stub__active]: openChatInfo,
-            })}
-          />
-          <div
-            className={cx(styles.mini, {
-              [styles.mini__active]: openChatInfo,
-            })}
+            className={soc(styles.mini, styles.mini__active, statusSidebar === "info")}
           >
-            <div className={styles.top}>
-              <button className={styles.btn} onClick={() => setOpenChatInfo(false)}>
-                <X size={20} />
-              </button>
-            </div>
+            <SidebarTop />
             <ChatInfo />
+          </div>
+          <div
+            className={soc(styles.mini, styles.mini__active, statusSidebar === "emoji")}
+          >
+            <SidebarTop emoji />
+            <EmojiList />
           </div>
         </div>
       </div>

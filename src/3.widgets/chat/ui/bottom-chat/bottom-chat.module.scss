@@ -18,8 +18,16 @@
   justify-content: center;
   align-items: center;
 
-  &:hover {
+  @include hover {
     background-color: var(--hover);
+  }
+}
+
+.btn__active {
+  background-color: var(--travis);
+  color: white;
+  @include hover {
+    background-color: var(--travis);
   }
 }
 
@@ -32,7 +40,7 @@
   align-items: center;
   background-color: var(--travis);
 
-  &:hover {
+  @include hover {
     background-color: var(--dark-travis);
   }
 }

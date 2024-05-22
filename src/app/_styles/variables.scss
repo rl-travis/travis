@@ -18,6 +18,7 @@
   --border-skeleton: 1px solid rgb(0, 0, 0, 0.08);
   --message: #ebebeb;
   --switch-background: #e4e4e4;
+  --switch-circle: #fff;
 }
 
 [data-theme="dark"] {
@@ -40,4 +41,5 @@
   --border-skeleton: 1px solid rgba(255, 255, 255, 0.08);
   --message: #000;
   --switch-background: #000000;
+  --switch-circle: #2f2f32;
 }

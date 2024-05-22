@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
+  @include hover {
     background-color: var(--hover);
   }
 }
@@ -36,7 +36,7 @@
 .active {
   background: var(--dark-travis);
   color: #ffffff;
-  &:hover {
+  @include hover {
     background: var(--dark-travis);
   }
 }
