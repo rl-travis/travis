@@ -8,10 +8,66 @@ import {
   convertToRaw,
   ContentState,
   Modifier,
+  CompositeDecorator,
+  ContentBlock,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 
 import { useChatStore, useInter } from "@/6.shared";
+
+// Стратегия поиска ссылок в содержимом
+const findLinkEntities = (
+  contentBlock: ContentBlock,
+  callback: (start: number, end: number) => void,
+  contentState: ContentState,
+) => {
+  contentBlock.findEntityRanges((character) => {
+    const entityKey = character.getEntity();
+    return entityKey !== null && contentState.getEntity(entityKey).getType() === "LINK";
+  }, callback);
+};
+
+// Компонент для отображения ссылок
+const Link = (props: any) => {
+  const { url } = props.contentState.getEntity(props.entityKey).getData();
+  return (
+    <a href={url} style={{ textDecoration: "underline", color: "blue" }}>
+      {props.children}
+    </a>
+  );
+};
+
+// Декоратор для обработки ссылок
+const decorator = new CompositeDecorator([
+  {
+    strategy: findLinkEntities,
+    component: Link,
+  },
+]);
+
+// Функция для добавления ссылки
+const addLink = (editorState: EditorState, url: string): EditorState => {
+  const contentState = editorState.getCurrentContent();
+  const selectionState = editorState.getSelection();
+
+  const contentStateWithEntity = contentState.createEntity("LINK", "MUTABLE", { url });
+
+  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+  const contentStateWithLink = Modifier.applyEntity(
+    contentStateWithEntity,
+    selectionState,
+    entityKey,
+  );
+
+  const newEditorState = EditorState.push(
+    editorState,
+    contentStateWithLink,
+    "apply-entity",
+  );
+
+  return EditorState.forceSelection(newEditorState, selectionState);
+};
 
 export function TextEditor() {
   const { i18n } = useInter();
@@ -19,7 +75,7 @@ export function TextEditor() {
 
   const [editorState, setEditorState] = useState(() => {
     const contentState = ContentState.createFromText(message || "");
-    return EditorState.createWithContent(contentState);
+    return EditorState.createWithContent(contentState, decorator);
   });
 
   useEffect(() => {
@@ -60,8 +116,15 @@ export function TextEditor() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
   };
 
-  const onUnderlineClick = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
+  const onStrikeThroughClick = () => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, "STRIKETHROUGH"));
+  };
+
+  const onAddLinkClick = () => {
+    const url = prompt("Enter a URL:");
+    if (url) {
+      setEditorState(addLink(editorState, url));
+    }
   };
 
   const logContent = () => {
@@ -74,8 +137,9 @@ export function TextEditor() {
     <div className={styles.wrapper}>
       <button onClick={onBoldClick}>Bold</button>
       <button onClick={onItalicClick}>Italic</button>
-      <button onClick={onUnderlineClick}>Underline</button>
+      <button onClick={onStrikeThroughClick}>Зачеркнуть</button>
       <button onClick={logContent}>Content</button>
+      <button onClick={onAddLinkClick}>Add link</button>
 
       <Editor
         editorState={editorState}
