@@ -3,7 +3,7 @@
   display: flex;
   gap: 10px;
   padding-bottom: 10px;
-  align-items: center;
+  align-items: flex-end;
 }
 .left {
   display: flex;
@@ -32,6 +32,7 @@
 }
 
 .send {
+  margin: 0 0 10px 0;
   display: flex;
   width: 40px;
   height: 40px;

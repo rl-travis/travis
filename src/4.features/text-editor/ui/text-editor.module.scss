@@ -1,12 +1,54 @@
 .wrapper {
   flex: 1;
   width: 100%;
+  position: relative;
 }
-.textarea {
-  resize: none;
-  border-radius: 20px;
-  background-color: var(--message);
-  padding: 10px 40px;
+
+.buttons {
+  position: absolute;
+  top: -40px;
+  border-radius: 5px;
+  background: var(--message);
+  color: var(--background);
+
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.editor {
+  padding: 10px 0;
   width: 100%;
   font-size: 20px;
+  max-height: 300px;
+  overflow: auto;
+  word-break: break-word;
+}
+
+.editorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--message);
+  color: var(--color);
+  padding: 10px 40px;
+  font-size: 20px;
+}
+
+.lucide {
+  color: var(--color);
+}
+
+.button {
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: var(--background);
+  }
 }

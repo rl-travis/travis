@@ -1,8 +1,9 @@
 import styles from "./bottom-chat.module.scss";
+import { convertToRaw, EditorState } from "draft-js";
 
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
-import { TextEditor } from "@/4.features";
+import { decorator, TextEditor } from "@/4.features";
 
 import { useMessage } from "@/5.entities";
 
@@ -10,8 +11,19 @@ import { soc, useChatStore, useUserStore } from "@/6.shared";
 
 export function BottomChat() {
   const { user } = useUserStore();
-  const { chat, message, setMessage, statusSidebar, setStatusSidebar } = useChatStore();
+  const { chat, statusSidebar, setStatusSidebar, editorState, setEditorState } =
+    useChatStore();
   const { send } = useMessage();
+
+  function getMessageText(): string {
+    return editorState.getCurrentContent().getPlainText();
+  }
+
+  function getMessageContent(): string {
+    const contentState = editorState.getCurrentContent();
+    const rawContent = convertToRaw(contentState);
+    return JSON.stringify(rawContent);
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -35,14 +47,14 @@ export function BottomChat() {
       <TextEditor />
       <button
         className={styles.send}
-        onClick={() => {
-          if (message.length > 0) {
-            send({
+        onClick={async () => {
+          if (getMessageText().length > 0) {
+            await send({
               user_id: user!._id,
               chat_id: chat!.chat._id,
-              value: message,
+              value: getMessageContent(),
             });
-            setMessage("");
+            setEditorState(EditorState.createEmpty(decorator));
           }
         }}
       >
