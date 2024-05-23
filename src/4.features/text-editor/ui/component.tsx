@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { AddLink } from "./add-link";
 import styles from "./text-editor.module.scss";
-import { LinkPortal } from "@/4.features/text-editor/ui/link-portal";
 import { Editor, EditorState, Modifier, RichUtils } from "draft-js";
 import "draft-js/dist/Draft.css";
 
@@ -77,7 +77,7 @@ export function TextEditor() {
 
   return (
     <div className={styles.wrapper}>
-      {hasSelection && (
+      {hasSelection && !isOpen && (
         <div className={styles.buttons}>
           <button onClick={onBoldClick} className={styles.button}>
             <Bold strokeWidth={2} size={16} className={styles.lucide} />
@@ -94,6 +94,7 @@ export function TextEditor() {
           </button>
         </div>
       )}
+      {isOpen && <AddLink setIsOpen={setIsOpen} setHasSelection={setHasSelection} />}
       <div className={styles.editorWrapper}>
         <div className={styles.editor}>
           <Editor
@@ -105,7 +106,6 @@ export function TextEditor() {
           />
         </div>
       </div>
-      {isOpen && <LinkPortal setIsOpen={setIsOpen} />}
     </div>
   );
 }
