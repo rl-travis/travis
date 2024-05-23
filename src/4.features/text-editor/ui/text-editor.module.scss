@@ -1,12 +1,50 @@
 .wrapper {
   flex: 1;
   width: 100%;
+  position: relative;
 }
-.textarea {
-  resize: none;
+
+.buttons {
+  position: absolute;
+  top: -25px;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editor {
+  padding: 10px 0;
+  width: 100%;
+  font-size: 20px;
+  max-height: 100px;
+  overflow: auto;
+  word-break: break-word;
+}
+
+.editorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   border-radius: 20px;
   background-color: var(--message);
   padding: 10px 40px;
-  width: 100%;
   font-size: 20px;
+}
+
+.lucide {
+  color: #ffffff;
+}
+
+.button {
+  background: var(--overlay);
+  padding: 2px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: var(--dark-travis);
+  }
 }
