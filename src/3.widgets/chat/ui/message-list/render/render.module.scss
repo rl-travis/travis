@@ -1,0 +1,30 @@
+.list {
+  overflow-y: auto;
+  // FIXME нихуя не понял, почему 100% не едет
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+}
+.date {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: var(--hover);
+  font-size: 12px;
+}
+
+.empty {
+  // FIXME: какая-то хуета с этим растягиванием происходит
+  // этот блок нужен для того, чтобы если мало сообщений, то они прижимались ниже с помощью этого блока
+  // но он нихуя не работает, я ебал
+  //flex: 0 1 70%;
+}

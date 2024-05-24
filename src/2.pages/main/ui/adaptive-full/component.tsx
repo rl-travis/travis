@@ -32,7 +32,7 @@ export function AdaptiveFull({
   const leftRef = useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
-  const { chat, setChat, statusSidebar } = useChatStore();
+  const { chat, setChat, statusSidebar, clearNewMessages } = useChatStore();
   const { i18n } = useInter();
   const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
   const { edit, store: getUser } = useUser();
@@ -42,6 +42,7 @@ export function AdaptiveFull({
     if (event.key === "Escape") {
       setChat(null);
       setOpenSettings(false);
+      clearNewMessages();
     }
   }, []);
 

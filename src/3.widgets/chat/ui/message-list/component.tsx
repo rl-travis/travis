@@ -1,28 +1,31 @@
-import React from "react";
+"use client";
 
-import { Doc } from "../../../../../convex/_generated/dataModel";
+import { api } from "../../../../../convex/_generated/api";
 
 import styles from "./message-list.module.scss";
+import { Render } from "@/3.widgets/chat/ui/message-list/render";
+import { usePaginatedQuery } from "convex/react";
 
-import { MessageItem } from "@/5.entities";
+import { ChatType } from "@/5.entities";
 
-import { SkeletonMessage } from "@/6.shared";
+import { useChatStore } from "@/6.shared";
 
-export function MessageList({ messages }: { messages: Doc<"message">[] | undefined }) {
-  if (messages === undefined) {
-    return (
-      <div className={styles.wrapper}>
-        <SkeletonMessage width={200} isGroup={false} isReply={false} />
-        <SkeletonMessage width={200} isGroup={false} isReply={false} />
-        <SkeletonMessage width={200} isGroup={false} isReply={true} />
-      </div>
-    );
-  }
-  return (
-    <div className={styles.wrapper}>
-      {messages.map((message) => {
-        return <MessageItem message={message} key={message._id} />;
-      })}
-    </div>
+export function MessageList({ chat }: { chat: ChatType }) {
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.message.getAll,
+    {
+      chat_id: chat!.chat_id,
+    },
+    {
+      initialNumItems: 52,
+    },
   );
+  const { newMessages } = useChatStore();
+
+  // TODO неприятно скачет
+  if (status === "LoadingFirstPage") {
+    return <div className={styles.empty} />;
+  }
+
+  return <Render messages={results} newMessages={newMessages} />;
 }

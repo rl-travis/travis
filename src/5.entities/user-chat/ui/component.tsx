@@ -21,7 +21,7 @@ export function ChatListItem({
 }) {
   const { i18n } = useInter();
   const { add } = useShortStackStore();
-  const { setChat, chat } = useChatStore();
+  const { setChat, chat, clearNewMessages } = useChatStore();
 
   return (
     <div
@@ -29,6 +29,7 @@ export function ChatListItem({
       onClick={() => {
         add("chat");
         setChat(current);
+        clearNewMessages();
       }}
     >
       <Image

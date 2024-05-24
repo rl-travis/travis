@@ -49,6 +49,7 @@ export default defineSchema({
     reply_id: v.optional(v.id("message")),
     forward: v.boolean(),
     value: v.string(),
+    hash: v.string(),
   }),
   pinned_message: defineTable({
     chat_id: v.id("dialog"),
