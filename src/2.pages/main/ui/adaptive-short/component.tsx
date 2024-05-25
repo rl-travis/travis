@@ -16,7 +16,6 @@ import {
   soc,
   useChatStore,
   useInter,
-  useFullStore,
   useShortStore,
   useUserStore,
 } from "@/6.shared";
