@@ -3,25 +3,49 @@ import { create } from "zustand";
 
 interface StoreType {
   stack: ShortStackType[];
+  last: ShortStackType;
   add: (b: ShortStackType) => void;
-  pop: () => ShortStackType | null;
+  pop: () => void;
+  mobile: boolean;
+  isMobile: () => void;
 }
-export const useShortStore = create<StoreType>()((setState, getState) => ({
-  stack: [],
+export const useShortStore = create<StoreType>()((set, get) => ({
+  stack: [null],
+  last: null,
   add: (b) => {
-    const s = getState();
-    setState({
-      stack: [...s.stack, b],
+    const buffer = [...get().stack];
+    const l = get().last;
+    if (l === "chat" && b !== "chat_info") {
+      buffer.pop();
+    }
+    if (l === "chat_info" && b !== "chat_info") {
+      buffer.pop();
+      buffer.pop();
+    }
+    if (l === "settings" && b === "search") {
+      buffer.pop();
+    }
+    if (l === "search" && b === "settings") {
+      buffer.pop();
+    }
+    if (l === "search" && b === "chat") {
+      buffer.pop();
+    }
+    set({
+      stack: [...buffer, b],
+      last: b,
     });
   },
   pop: () => {
-    const s = getState();
-    const p = s.stack.pop();
-    if (p) {
-      setState({ stack: s.stack });
-      return p;
-    } else {
-      return null;
+    if (get().last === null) return;
+    const buffer = [...get().stack];
+    buffer.pop();
+    if (buffer.length === 0) {
+      set({ stack: [null], last: null });
+      return;
     }
+    set({ stack: buffer, last: buffer[buffer.length - 1] || null });
   },
+  mobile: false,
+  isMobile: () => set({ mobile: true }),
 }));

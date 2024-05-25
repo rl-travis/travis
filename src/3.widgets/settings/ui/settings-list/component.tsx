@@ -11,7 +11,7 @@ export function SettingsList() {
   const { setChat } = useChatStore();
 
   const { right, setRight } = useFullStore();
-  const { add } = useShortStore();
+  const { add, mobile, stack } = useShortStore();
   const { i18n } = useInter();
   const { resolvedTheme, setTheme } = useTheme();
 
@@ -19,7 +19,8 @@ export function SettingsList() {
     <div className={styles.wrapper}>
       <button
         className={cx(styles.item, {
-          [styles.active]: right === "profile",
+          [styles.active]: !mobile && right === "profile",
+          [styles.active]: mobile && stack.includes("settings_profile"),
         })}
         onClick={() => {
           setChat(null);
@@ -33,7 +34,8 @@ export function SettingsList() {
       </button>
       <button
         className={cx(styles.item, {
-          [styles.active]: right === "language",
+          [styles.active]: !mobile && right === "language",
+          [styles.active]: mobile && stack.includes("settings_language"),
         })}
         onClick={() => {
           setChat(null);

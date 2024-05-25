@@ -11,12 +11,14 @@ import {
   useChatStore,
   useFullStore,
   useInter,
+  useShortStore,
   useUserStore,
 } from "@/6.shared";
 
 export function Search({ chats }: { chats: ChatType[] }) {
   const { user } = useUserStore();
   const { setChat } = useChatStore();
+  const { add } = useShortStore();
   const { create } = useDialog();
   const [answer, setAnswer] = useState<Doc<"user">[]>([]);
   const { setLeft } = useFullStore();
@@ -44,6 +46,7 @@ export function Search({ chats }: { chats: ChatType[] }) {
           setLoading(false);
           setAnswer([]);
           setValue("");
+          add("chat");
           return;
         }
       }
@@ -56,6 +59,7 @@ export function Search({ chats }: { chats: ChatType[] }) {
     setLoading(false);
     setAnswer([]);
     setValue("");
+    add("chat");
   }
 
   return (

@@ -2,8 +2,10 @@ export type ShortStackType =
   | "settings"
   | "settings_profile"
   | "settings_language"
+  | "search"
   | "chat"
-  | "chat_info";
+  | "chat_info"
+  | null;
 
 export type FullLeftType = "settings" | "search" | null;
 

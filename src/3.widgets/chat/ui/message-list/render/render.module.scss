@@ -6,6 +6,13 @@
   gap: 5px;
   scrollbar-width: none;
 }
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
 .down {
   position: absolute;
   bottom: 90px;

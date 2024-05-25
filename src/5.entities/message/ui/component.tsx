@@ -37,7 +37,7 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
             <ArrowUpFromLine size={10} />
           </div>
         )}
-        <div className={styles.date}>{reformatDateMessage(message.date.getTime())}</div>
+        <div className={styles.date}>{reformatDateMessage(message.date)}</div>
       </div>
     </div>
   );

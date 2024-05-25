@@ -13,6 +13,8 @@ import {
   NewMessageType,
 } from "@/5.entities";
 
+import { MiniLoading } from "@/6.shared";
+
 const MAX_HEIGHT = 10 ** 10;
 
 /**
@@ -39,6 +41,7 @@ function generateBlocks(m: MessageType[]): BlockType[] {
     type: "date",
     d: date,
     h: hash(),
+    date: m[0]._creationTime,
   });
   for (const mes of m) {
     const d = generateDate(mes._creationTime);
@@ -48,12 +51,14 @@ function generateBlocks(m: MessageType[]): BlockType[] {
         type: "date",
         d: date,
         h: hash(),
+        date: mes._creationTime,
       });
     }
     res.push({
       type: "initial",
       m: mes,
       h: hash(),
+      date: mes._creationTime,
     });
   }
   return res;
@@ -84,17 +89,12 @@ function getRange(m: BlockType[]): { older: number; newer: number } {
     newer: new Date().getTime(),
   };
   if (m.length === 0) return ans;
-  ans.older =
-    m[0].type === "initial"
-      ? m[0].m._creationTime
-      : m[0].type === "sending"
-        ? m[0].date.getTime()
-        : new Date().getTime();
+  ans.older = m[0].date;
   for (const block of m) {
     if (block.type === "initial") {
       ans.newer = block.m._creationTime;
     } else if (block.type === "sending") {
-      ans.newer = block.date.getTime();
+      ans.newer = block.date;
     }
   }
   return ans;
@@ -106,34 +106,23 @@ function getRange(m: BlockType[]): { older: number; newer: number } {
 function Dates(m: BlockType[]): BlockType[] {
   m = m.filter((e) => e.type !== "date");
   if (m.length === 0) return [];
-  let cur = generateDate(
-    m[0].type === "initial"
-      ? m[0].m._creationTime
-      : m[0].type === "sending"
-        ? m[0].date.getTime()
-        : new Date().getTime(),
-  );
+  let cur = generateDate(m[0].date);
   const ans: BlockType[] = [];
   ans.push({
     type: "date",
     d: cur,
     h: hash(),
+    date: m[0].date,
   });
   for (const b of m) {
-    let d;
-    if (b.type === "sending") {
-      d = generateDate(b.date.getTime());
-    } else if (b.type === "initial") {
-      d = generateDate(b.m._creationTime);
-    } else {
-      d = generateDate(new Date().getTime());
-    }
+    let d = generateDate(b.date);
     if (d !== cur) {
       cur = d;
       ans.push({
         type: "date",
         d: cur,
         h: hash(),
+        date: b.date,
       });
     }
     ans.push(b);
@@ -181,7 +170,7 @@ export function Render({
             type: "sending",
             hash: m.hash,
             value: m.value,
-            date: m.date,
+            date: m.date.getTime(),
             chat: m.chat_id,
             user: m.user_id,
           },
@@ -234,6 +223,9 @@ export function Render({
   return (
     <>
       <div className={styles.list} ref={containerRef} onScroll={() => onScroll()}>
+        <div className={styles.loading}>
+          <MiniLoading />
+        </div>
         {blocks.map((b) => {
           if (b.type === "date") {
             return (

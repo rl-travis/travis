@@ -40,6 +40,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--travis);
+  color: white;
 
   @include hover {
     background-color: var(--dark-travis);

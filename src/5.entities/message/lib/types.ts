@@ -36,6 +36,7 @@ export type NewMessageType = {
 
 export interface BlockInterface {
   type: "date" | "sending" | "initial";
+  date: number;
 }
 export interface BlockInitialInterface extends BlockInterface {
   type: "initial";
@@ -53,7 +54,6 @@ export interface BlockSendingInterface extends BlockInterface {
   type: "sending";
   value: string;
   hash: string;
-  date: Date;
   user: Id<"user">;
   chat: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
 }
