@@ -7,11 +7,11 @@ import { ChevronRight, Languages, SunMoon, UserRound } from "lucide-react";
 
 import { useChatStore, useInter, useFullStore, useShortStore } from "@/6.shared";
 
-export function SettingsList() {
+export function SettingsList({ mobile }: { mobile: boolean }) {
   const { setChat } = useChatStore();
 
   const { right, setRight } = useFullStore();
-  const { add, mobile, stack } = useShortStore();
+  const { add, stack } = useShortStore();
   const { i18n } = useInter();
   const { resolvedTheme, setTheme } = useTheme();
 

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { Doc } from "../../../../../convex/_generated/dataModel";
 
 import styles from "./adaptive-short.module.scss";
@@ -30,12 +28,9 @@ export function AdaptiveShort({
   const { chat } = useChatStore();
   const { i18n } = useInter();
   const { setUser } = useUserStore();
-  const { pop, stack, isMobile } = useShortStore();
+  const { pop, stack } = useShortStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
-  useEffect(() => {
-    isMobile(true);
-  }, []);
   const onDone = async (p: EditProfileType) => {
     pop();
     pop();
@@ -70,7 +65,7 @@ export function AdaptiveShort({
             stack.includes("settings"),
           )}
         >
-          <Settings />
+          <Settings mobile={true} />
         </div>
         <div
           className={soc(

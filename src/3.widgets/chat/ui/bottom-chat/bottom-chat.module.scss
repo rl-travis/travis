@@ -31,6 +31,29 @@
   }
 }
 
+.emoji {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
+  @include hover {
+    background-color: var(--hover);
+  }
+}
+
+.emoji__active {
+  background-color: var(--travis);
+  color: white;
+  @include hover {
+    background-color: var(--travis);
+  }
+}
+
 .send {
   margin: 0 0 10px 0;
   display: flex;

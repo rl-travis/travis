@@ -5,11 +5,10 @@ import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
 import { TextEditor } from "@/4.features";
 
-import { soc, useChatStore, useShortStore, useUserStore } from "@/6.shared";
+import { soc, useChatStore, useUserStore } from "@/6.shared";
 
 export function BottomChat() {
   const { user } = useUserStore();
-  const { mobile } = useShortStore();
   const { chat, statusSidebar, setStatusSidebar, message, setMessage, addNewMessages } =
     useChatStore();
 
@@ -38,20 +37,18 @@ export function BottomChat() {
       }}
     >
       <div className={styles.left}>
-        {mobile && (
-          <button
-            className={soc(styles.btn, styles.btn__active, statusSidebar === "emoji")}
-            onClick={() => {
-              if (statusSidebar !== "emoji") {
-                setStatusSidebar("emoji");
-              } else {
-                setStatusSidebar(null);
-              }
-            }}
-          >
-            <Smile size={20} />
-          </button>
-        )}
+        <button
+          className={soc(styles.emoji, styles.emoji__active, statusSidebar === "emoji")}
+          onClick={() => {
+            if (statusSidebar !== "emoji") {
+              setStatusSidebar("emoji");
+            } else {
+              setStatusSidebar(null);
+            }
+          }}
+        >
+          <Smile size={20} />
+        </button>
 
         <button className={styles.btn}>
           <LayoutGrid size={20} />
