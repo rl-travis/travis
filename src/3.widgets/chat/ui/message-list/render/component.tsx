@@ -8,7 +8,6 @@ import { ArrowBigDown } from "lucide-react";
 import {
   BlockType,
   MessageItem,
-  MessageItemSending,
   MessageItemSendingMemo,
   MessageType,
   NewMessageType,
