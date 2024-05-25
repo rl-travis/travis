@@ -1,7 +1,6 @@
 import { Doc } from "../../../../convex/_generated/dataModel";
 
 import { AdaptiveFull } from "./adaptive-full";
-import { AdaptiveShort } from "./adaptive-short";
 
 import { useUserChat } from "@/5.entities";
 

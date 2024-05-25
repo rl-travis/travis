@@ -6,8 +6,6 @@ import { v4 as hash } from "uuid";
 import { ArrowBigDown } from "lucide-react";
 
 import {
-  BlockInitialInterface,
-  BlockSendingInterface,
   BlockType,
   MessageItem,
   MessageItemSending,

@@ -1,7 +1,5 @@
 import { Id } from "../../../../convex/_generated/dataModel";
 
-import { v } from "convex/values";
-
 export type MessageType = {
   user:
     | {
