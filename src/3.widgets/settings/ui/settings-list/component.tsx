@@ -5,18 +5,13 @@ import { useTheme } from "next-themes";
 
 import { ChevronRight, Languages, SunMoon, UserRound } from "lucide-react";
 
-import {
-  useChatStore,
-  useInter,
-  useSettingsStore,
-  useShortStackStore,
-} from "@/6.shared";
+import { useChatStore, useInter, useFullStore, useShortStore } from "@/6.shared";
 
 export function SettingsList() {
   const { setChat } = useChatStore();
 
-  const { menuSettings, setMenuSettings } = useSettingsStore();
-  const { add } = useShortStackStore();
+  const { right, setRight } = useFullStore();
+  const { add } = useShortStore();
   const { i18n } = useInter();
   const { resolvedTheme, setTheme } = useTheme();
 
@@ -24,12 +19,12 @@ export function SettingsList() {
     <div className={styles.wrapper}>
       <button
         className={cx(styles.item, {
-          [styles.active]: menuSettings === "profile",
+          [styles.active]: right === "profile",
         })}
         onClick={() => {
           setChat(null);
           add("settings_profile");
-          setMenuSettings("profile");
+          setRight("profile");
         }}
       >
         <UserRound size={20} className={cx(styles.lucide, styles.profile)} />
@@ -38,12 +33,12 @@ export function SettingsList() {
       </button>
       <button
         className={cx(styles.item, {
-          [styles.active]: menuSettings === "language",
+          [styles.active]: right === "language",
         })}
         onClick={() => {
           setChat(null);
           add("settings_language");
-          setMenuSettings("language");
+          setRight("language");
         }}
       >
         <Languages size={20} className={cx(styles.lucide, styles.language)} />

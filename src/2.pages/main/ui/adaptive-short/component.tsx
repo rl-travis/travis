@@ -14,8 +14,8 @@ import {
   soc,
   useChatStore,
   useInter,
-  useSettingsStore,
-  useShortStackStore,
+  useFullStore,
+  useShortStore,
   useUserStore,
 } from "@/6.shared";
 
@@ -29,15 +29,14 @@ export function AdaptiveShort({
   const { chat, statusSidebar } = useChatStore();
   const { i18n } = useInter();
   const { setUser } = useUserStore();
-  const { pop } = useShortStackStore();
-  const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
+  const { pop } = useShortStore();
+  const { status, menuSettings, setStatus } = useFullStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
   const onDone = async (p: EditProfileType) => {
-    // нахуя это здесь написано
     pop();
     pop();
-    setOpenSettings(false);
+    setStatus(null);
     await edit({
       user_id: user._id,
       username: p.username,
@@ -62,7 +61,7 @@ export function AdaptiveShort({
         <div className={styles.list}>
           <ChatList chats={chats} user={user} />
         </div>
-        <div className={soc(styles.block, styles.block__active, openSettings)}>
+        <div className={soc(styles.block, styles.block__active, status === "settings")}>
           <Settings />
         </div>
         <div

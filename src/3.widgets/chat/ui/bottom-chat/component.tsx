@@ -1,9 +1,9 @@
 import styles from "./bottom-chat.module.scss";
-import { convertToRaw, EditorState } from "draft-js";
+import { v4 as hash } from "uuid";
 
 import { LayoutGrid, SendHorizontal, Smile } from "lucide-react";
 
-import { decorator, TextEditor } from "@/4.features";
+import { TextEditor } from "@/4.features";
 
 import { useMessage } from "@/5.entities";
 
@@ -11,22 +11,34 @@ import { soc, useChatStore, useUserStore } from "@/6.shared";
 
 export function BottomChat() {
   const { user } = useUserStore();
-  const { chat, statusSidebar, setStatusSidebar, editorState, setEditorState } =
+  const { chat, statusSidebar, setStatusSidebar, message, setMessage, addNewMessages } =
     useChatStore();
   const { send } = useMessage();
 
-  function getMessageText(): string {
-    return editorState.getCurrentContent().getPlainText();
-  }
-
-  function getMessageContent(): string {
-    const contentState = editorState.getCurrentContent();
-    const rawContent = convertToRaw(contentState);
-    return JSON.stringify(rawContent);
-  }
+  const sendMessage = async () => {
+    if (message.length > 0) {
+      addNewMessages({
+        chat: chat!._id,
+        value: message,
+        hash: hash(),
+        date: new Date(),
+        user_id: user!._id,
+        chat_id: chat!.chat_id,
+      });
+      setMessage("");
+    }
+  };
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          sendMessage();
+        }
+      }}
+    >
       <div className={styles.left}>
         <button
           className={soc(styles.btn, styles.btn__active, statusSidebar === "emoji")}
@@ -45,19 +57,7 @@ export function BottomChat() {
         </button>
       </div>
       <TextEditor />
-      <button
-        className={styles.send}
-        onClick={async () => {
-          if (getMessageText().length > 0) {
-            await send({
-              user_id: user!._id,
-              chat_id: chat!.chat._id,
-              value: getMessageContent(),
-            });
-            setEditorState(EditorState.createEmpty(decorator));
-          }
-        }}
-      >
+      <button className={styles.send} onClick={sendMessage}>
         <SendHorizontal />
       </button>
     </div>

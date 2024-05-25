@@ -18,7 +18,10 @@ export default defineSchema({
     avatar_url: v.string(),
   })
     .index("email", ["email"])
-    .index("username", ["username"]),
+    .index("username", ["username"])
+    .searchIndex("search", {
+      searchField: "username",
+    }),
   user_avatar: defineTable({
     url: v.string(),
     user_id: v.id("user"),
@@ -49,6 +52,7 @@ export default defineSchema({
     reply_id: v.optional(v.id("message")),
     forward: v.boolean(),
     value: v.string(),
+    hash: v.string(),
   }),
   pinned_message: defineTable({
     chat_id: v.id("dialog"),

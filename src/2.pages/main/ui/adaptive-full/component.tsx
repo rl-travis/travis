@@ -7,7 +7,7 @@ import { Header } from "./header";
 import { Resize } from "./resize";
 import { SidebarTop } from "./sidebar-top";
 
-import { Chat, ChatInfo, ChatList, EmojiList, Settings } from "@/3.widgets";
+import { Chat, ChatInfo, ChatList, EmojiList, Search, Settings } from "@/3.widgets";
 
 import { EditProfile, EditProfileType, LanguageInfo } from "@/4.features";
 
@@ -18,7 +18,7 @@ import {
   soc,
   useChatStore,
   useInter,
-  useSettingsStore,
+  useFullStore,
   useUserStore,
 } from "@/6.shared";
 
@@ -32,22 +32,26 @@ export function AdaptiveFull({
   const leftRef = useRef<HTMLDivElement>(null);
 
   const { setUser } = useUserStore();
-  const { chat, setChat, statusSidebar } = useChatStore();
+  const { chat, setChat, statusSidebar, setStatusSidebar, clearNewMessages } =
+    useChatStore();
   const { i18n } = useInter();
-  const { openSettings, menuSettings, setOpenSettings } = useSettingsStore();
+  const { left, right, setRight, setLeft } = useFullStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {
+      setStatusSidebar(null);
       setChat(null);
-      setOpenSettings(false);
+      clearNewMessages();
+      setRight(null);
+      setLeft(null);
     }
   }, []);
 
   const onDone = async (p: EditProfileType) => {
-    setOpenSettings(false);
-
+    setLeft(null);
+    setRight(null);
     await edit({
       user_id: user._id,
       username: p.username,
@@ -77,8 +81,19 @@ export function AdaptiveFull({
       <div className={styles.left} ref={leftRef}>
         <Header />
         <div className={styles.left__content}>
-          <div className={soc(styles.settings, styles.settings__active, openSettings)}>
+          <div
+            className={soc(
+              styles.settings,
+              styles.settings__active,
+              left === "settings",
+            )}
+          >
             <Settings />
+          </div>
+          <div
+            className={soc(styles.settings, styles.settings__active, left === "search")}
+          >
+            <Search chats={chats || []} />
           </div>
           <div className={styles.list}>
             <ChatList chats={chats} user={user} />
@@ -87,22 +102,10 @@ export function AdaptiveFull({
       </div>
       {leftRef.current !== null && <Resize leftRef={leftRef} />}
       <div className={styles.right}>
-        <div
-          className={soc(
-            styles.block,
-            styles.block__active,
-            menuSettings === "profile",
-          )}
-        >
+        <div className={soc(styles.block, styles.block__active, right === "profile")}>
           <EditProfile done={onDone} title={i18n.changeProfile.change} />
         </div>
-        <div
-          className={soc(
-            styles.block,
-            styles.block__active,
-            menuSettings === "language",
-          )}
-        >
+        <div className={soc(styles.block, styles.block__active, right === "language")}>
           <LanguageInfo />
         </div>
         <div className={soc(styles.block, styles.block__active, !!chat)}>

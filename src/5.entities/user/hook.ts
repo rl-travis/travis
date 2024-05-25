@@ -9,6 +9,7 @@ export function useUser() {
   const devGetAll = useQuery(api.user.devGetAll);
   const edit = useMutation(api.user.edit);
   const switchLang = useMutation(api.user.switchLang);
+  const find = useMutation(api.user.find);
 
-  return { store, create, checkUsername, devGetAll, edit, switchLang };
+  return { store, create, checkUsername, devGetAll, edit, switchLang, find };
 }

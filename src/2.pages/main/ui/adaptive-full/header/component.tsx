@@ -2,30 +2,30 @@ import cx from "classnames";
 
 import styles from "./header.module.scss";
 
-import { ArrowLeft, Bolt } from "lucide-react";
+import { ArrowLeft, Bolt, Search } from "lucide-react";
 
-import { IconLogo, useSettingsStore } from "@/6.shared";
+import { IconLogo, soc, useFullStore } from "@/6.shared";
 
 export function Header() {
-  const { openSettings, setOpenSettings } = useSettingsStore();
+  const { left, setLeft } = useFullStore();
   return (
     <header className={styles.header}>
-      <div
-        className={cx(styles.overlay, {
-          [styles.transform]: openSettings,
-        })}
-      >
+      <div className={soc(styles.overlay, styles.transform, left !== null)}>
         <IconLogo />
         <button
-          className={cx(styles.btn, {
-            [styles.active]: openSettings,
-          })}
-          onClick={() => setOpenSettings(!openSettings)}
+          className={soc(styles.btn, styles.active, left === "settings")}
+          onClick={() => setLeft("settings")}
         >
           <Bolt size={20} />
         </button>
+        <button
+          className={soc(styles.btn, styles.active, left === "search")}
+          onClick={() => setLeft("search")}
+        >
+          <Search size={20} />
+        </button>
       </div>
-      <button className={styles.btn} onClick={() => setOpenSettings(false)}>
+      <button className={styles.btn} onClick={() => setLeft(null)}>
         <ArrowLeft size={20} />
       </button>
     </header>

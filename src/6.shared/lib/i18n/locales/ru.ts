@@ -43,6 +43,7 @@ export const ru: i18nType = {
     createButton: "Далее",
     changeButton: "Сохранить",
   },
+  search: "Поиск по никнейму",
   settings: {
     profile: "Мой профиль",
     language: "Язык",

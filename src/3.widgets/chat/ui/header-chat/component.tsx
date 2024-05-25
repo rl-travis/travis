@@ -5,11 +5,11 @@ import { Search } from "lucide-react";
 
 import { ChatType } from "@/5.entities";
 
-import { useChatStore, useShortStackStore } from "@/6.shared";
+import { useChatStore, useShortStore } from "@/6.shared";
 
 export function HeaderChat({ chat }: { chat: ChatType }) {
   const { setStatusSidebar } = useChatStore();
-  const { add } = useShortStackStore();
+  const { add } = useShortStore();
   return (
     <div
       className={styles.wrapper}

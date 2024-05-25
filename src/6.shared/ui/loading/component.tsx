@@ -16,7 +16,5 @@ export function Loading() {
 }
 
 export function MiniLoading({ className }: { className?: string }) {
-  return (
-    <Loader2 size={20} color={"#ffffff"} className={cx(styles.loader, className)} />
-  );
+  return <Loader2 size={20} className={cx(styles.loader, className)} />;
 }

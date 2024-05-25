@@ -101,3 +101,13 @@ export const switchLang = mutation({
     });
   },
 });
+
+export const find = mutation({
+  args: { value: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("user")
+      .withSearchIndex("search", (q) => q.search("username", args.value))
+      .collect();
+  },
+});

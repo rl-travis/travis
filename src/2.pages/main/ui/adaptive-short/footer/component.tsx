@@ -4,21 +4,16 @@ import styles from "./footer.module.scss";
 
 import { ArrowLeft, Bolt } from "lucide-react";
 
-import {
-  IconLogo,
-  useChatStore,
-  useSettingsStore,
-  useShortStackStore,
-} from "@/6.shared";
+import { IconLogo, useChatStore, useFullStore, useShortStore } from "@/6.shared";
 
 export function Footer() {
-  const { openSettings, setOpenSettings, setMenuSettings } = useSettingsStore();
-  const { stack, add, pop } = useShortStackStore();
+  const { status, setStatus, setMenuSettings } = useFullStore();
+  const { stack, add, pop } = useShortStore();
   const { setChat, setStatusSidebar } = useChatStore();
   const close = () => {
     const p = pop();
     if (p === "settings") {
-      setOpenSettings(false);
+      setStatus(null);
     } else if (p === "settings_language" || p === "settings_profile") {
       setMenuSettings(null);
     } else if (p === "chat") {
@@ -38,9 +33,9 @@ export function Footer() {
       >
         <IconLogo />
         <button
-          className={cx(styles.btn, { [styles.active]: openSettings })}
+          className={cx(styles.btn, { [styles.active]: status === "settings" })}
           onClick={() => {
-            setOpenSettings(!openSettings);
+            setStatus(null);
             add("settings");
           }}
         >

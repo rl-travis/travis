@@ -43,6 +43,7 @@ export const en: i18nType = {
     createButton: "Next",
     changeButton: "Save",
   },
+  search: "Search of username",
   settings: {
     profile: "My profile",
     language: "Language",
