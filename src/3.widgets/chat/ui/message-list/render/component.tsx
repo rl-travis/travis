@@ -15,6 +15,9 @@ import {
 
 const MAX_HEIGHT = 10 ** 10;
 
+/**
+ * Генерация даты
+ */
 function generateDate(v: number): string {
   return new Date(v).toLocaleDateString("RU", {
     day: "numeric",
@@ -23,7 +26,11 @@ function generateDate(v: number): string {
   });
 }
 
-function generateMessages(m: MessageType[]): BlockType[] {
+/**
+ * Генерация блоков, блоки - это то, что рендерится
+ * Туда входит и дата, и сообщения, и неотправленное сообщение
+ */
+function generateBlocks(m: MessageType[]): BlockType[] {
   if (m.length === 0) return [];
   const res: BlockType[] = [];
   m = m.sort((a, b) => a._creationTime - b._creationTime);
@@ -52,6 +59,9 @@ function generateMessages(m: MessageType[]): BlockType[] {
   return res;
 }
 
+/**
+ * Генерирует хэш всех сообщений на основе отрисованных сейчас блоков
+ */
 function getHashSet(m: BlockType[]): Set<string> {
   const set: Set<string> = new Set();
   for (const block of m) {
@@ -64,6 +74,9 @@ function getHashSet(m: BlockType[]): Set<string> {
   return set;
 }
 
+/**
+ * Определяет временные границы сообщений
+ */
 function getRange(m: BlockType[]): { older: number; newer: number } {
   m = m.filter((e) => e.type !== "date");
   const ans = {
@@ -87,6 +100,9 @@ function getRange(m: BlockType[]): { older: number; newer: number } {
   return ans;
 }
 
+/**
+ * Добавляет даты в блоки. Вначале их удаляет, потом пересчитывает
+ */
 function Dates(m: BlockType[]): BlockType[] {
   m = m.filter((e) => e.type !== "date");
   if (m.length === 0) return [];
@@ -125,9 +141,6 @@ function Dates(m: BlockType[]): BlockType[] {
   return ans;
 }
 
-/**
- * Компонент требует рендериться заново, если изменился чат
- */
 export function Render({
   messages,
   newMessages,
@@ -151,7 +164,7 @@ export function Render({
   useEffect(() => {
     console.log("%c Первый рендер сообщений", "color: orange");
     if (blocks.length === 0) {
-      setBlocks(Dates(generateMessages(messages)));
+      setBlocks(Dates(generateBlocks(messages)));
       setFirstRender(true);
       setTimeout(() => scroll(MAX_HEIGHT), 20);
     }
@@ -190,10 +203,10 @@ export function Render({
       const older = m.filter((e) => e._creationTime < range.older);
       const newer = m.filter((e) => e._creationTime > range.newer);
       if (older.length > 0) {
-        setBlocks((prev) => Dates([...generateMessages(older), ...prev]));
+        setBlocks((prev) => Dates([...generateBlocks(older), ...prev]));
       }
       if (newer.length > 0) {
-        setBlocks((prev) => Dates([...prev, ...generateMessages(newer)]));
+        setBlocks((prev) => Dates([...prev, ...generateBlocks(newer)]));
         setTimeout(() => scroll(MAX_HEIGHT), 200);
       }
     }
