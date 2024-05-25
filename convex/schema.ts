@@ -18,7 +18,10 @@ export default defineSchema({
     avatar_url: v.string(),
   })
     .index("email", ["email"])
-    .index("username", ["username"]),
+    .index("username", ["username"])
+    .searchIndex("search", {
+      searchField: "username",
+    }),
   user_avatar: defineTable({
     url: v.string(),
     user_id: v.id("user"),

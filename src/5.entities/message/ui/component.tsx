@@ -19,7 +19,6 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (!user) return;
-    // TODO вырезать hash
     send({
       user_id: message.user,
       chat_id: message.chat,
@@ -48,7 +47,6 @@ export function MessageItem({ message }: { message: MessageType }) {
   const { user } = useUserStore();
   if (!user) return "";
 
-  // TODO потестить чужие сообщения
   return (
     <div
       className={cx(styles.wrapper, {

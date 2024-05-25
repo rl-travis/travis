@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./render.module.scss";
 import { v4 as hash } from "uuid";
 
+import { ArrowBigDown } from "lucide-react";
+
 import {
   BlockInitialInterface,
   BlockSendingInterface,
@@ -89,6 +91,7 @@ function getRange(m: BlockType[]): { older: number; newer: number } {
 
 function Dates(m: BlockType[]): BlockType[] {
   m = m.filter((e) => e.type !== "date");
+  if (m.length === 0) return [];
   let cur = generateDate(
     m[0].type === "initial"
       ? m[0].m._creationTime
@@ -130,13 +133,16 @@ function Dates(m: BlockType[]): BlockType[] {
 export function Render({
   messages,
   newMessages,
+  loadMore,
 }: {
   messages: MessageType[];
   newMessages: NewMessageType[];
+  loadMore: (numItems: number) => void;
 }) {
-  // TODO подгрузку новых сообщений
   const [blocks, setBlocks] = useState<BlockType[]>([]);
   const [firstRender, setFirstRender] = useState(false);
+  const [lastHeight, setLastHeight] = useState(0);
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   function scroll(value: number) {
@@ -149,7 +155,7 @@ export function Render({
     if (blocks.length === 0) {
       setBlocks(Dates(generateMessages(messages)));
       setFirstRender(true);
-      setTimeout(() => scroll(MAX_HEIGHT), 100);
+      setTimeout(() => scroll(MAX_HEIGHT), 20);
     }
   }, []);
 
@@ -190,14 +196,33 @@ export function Render({
       }
       if (newer.length > 0) {
         setBlocks((prev) => Dates([...prev, ...generateMessages(newer)]));
+        setTimeout(() => scroll(MAX_HEIGHT), 200);
       }
+    }
+    console.log("%c Скролл, когда пришли сверху новые сообщения", "color: orange");
+    if (lastHeight && container && container.scrollTop === 0) {
+      setTimeout(() => {
+        scroll(container.scrollHeight - lastHeight);
+      }, 100);
     }
   }, [messages]);
 
+  function onScroll() {
+    const container = containerRef.current;
+    if (container && container.scrollTop === 0) {
+      const { scrollHeight } = container;
+      setLastHeight(scrollHeight);
+      loadMore(52);
+    }
+    if (container && container.scrollHeight - container.scrollTop > 1000) {
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  }
   return (
     <>
-      <div className={styles.empty} />
-      <div className={styles.list} ref={containerRef}>
+      <div className={styles.list} ref={containerRef} onScroll={() => onScroll()}>
         {blocks.map((b) => {
           if (b.type === "date") {
             return (
@@ -214,6 +239,11 @@ export function Render({
           return <MessageItem key={b.h} message={b.m} />;
         })}
       </div>
+      {showScrollButton && (
+        <button className={styles.down} onClick={() => scroll(MAX_HEIGHT)}>
+          <ArrowBigDown size={20} />
+        </button>
+      )}
     </>
   );
 }

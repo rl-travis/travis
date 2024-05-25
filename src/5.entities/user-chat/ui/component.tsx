@@ -10,7 +10,7 @@ import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
 
 import { ChatType } from "@/5.entities";
 
-import { useInter, useShortStackStore, useChatStore } from "@/6.shared";
+import { useInter, useShortStore, useChatStore } from "@/6.shared";
 
 export function ChatListItem({
   current,
@@ -20,7 +20,7 @@ export function ChatListItem({
   user: Doc<"user">;
 }) {
   const { i18n } = useInter();
-  const { add } = useShortStackStore();
+  const { add } = useShortStore();
   const { setChat, chat, clearNewMessages } = useChatStore();
 
   return (

@@ -1,11 +1,27 @@
 .list {
   overflow-y: auto;
-  // FIXME нихуя не понял, почему 100% не едет
-  height: 86%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  scrollbar-width: none;
 }
+.down {
+  position: absolute;
+  bottom: 90px;
+  right: -50px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color);
+  @include hover {
+    background-color: var(--hover);
+  }
+}
+
 .block {
   width: 100%;
   display: flex;
@@ -20,11 +36,5 @@
   border-radius: 20px;
   background-color: var(--hover);
   font-size: 12px;
-}
-
-.empty {
-  // FIXME: какая-то хуета с этим растягиванием происходит
-  // этот блок нужен для того, чтобы если мало сообщений, то они прижимались ниже с помощью этого блока
-  // но он нихуя не работает, я ебал
-  //flex: 0 1 70%;
+  opacity: 0.8;
 }

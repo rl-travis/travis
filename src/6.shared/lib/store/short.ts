@@ -6,7 +6,7 @@ interface StoreType {
   add: (b: ShortStackType) => void;
   pop: () => ShortStackType | null;
 }
-export const useShortStackStore = create<StoreType>()((setState, getState) => ({
+export const useShortStore = create<StoreType>()((setState, getState) => ({
   stack: [],
   add: (b) => {
     const s = getState();

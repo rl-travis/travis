@@ -22,10 +22,9 @@ export function MessageList({ chat }: { chat: ChatType }) {
   );
   const { newMessages } = useChatStore();
 
-  // TODO неприятно скачет
   if (status === "LoadingFirstPage") {
     return <div className={styles.empty} />;
   }
 
-  return <Render messages={results} newMessages={newMessages} />;
+  return <Render messages={results} newMessages={newMessages} loadMore={loadMore} />;
 }

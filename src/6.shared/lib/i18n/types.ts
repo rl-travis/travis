@@ -33,6 +33,7 @@ export type i18nType = {
     changeButton: string;
     and: string;
   };
+  search: string;
   settings: {
     profile: string;
     language: string;
