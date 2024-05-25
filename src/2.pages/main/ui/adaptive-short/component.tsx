@@ -30,11 +30,11 @@ export function AdaptiveShort({
   const { chat } = useChatStore();
   const { i18n } = useInter();
   const { setUser } = useUserStore();
-  const { pop, last, stack, isMobile } = useShortStore();
+  const { pop, stack, isMobile } = useShortStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
   useEffect(() => {
-    isMobile();
+    isMobile(true);
   }, []);
   const onDone = async (p: EditProfileType) => {
     pop();

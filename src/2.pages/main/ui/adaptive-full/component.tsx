@@ -20,6 +20,7 @@ import {
   useInter,
   useFullStore,
   useUserStore,
+  useShortStore,
 } from "@/6.shared";
 
 export function AdaptiveFull({
@@ -34,10 +35,15 @@ export function AdaptiveFull({
   const { setUser } = useUserStore();
   const { chat, setChat, statusSidebar, setStatusSidebar, clearNewMessages } =
     useChatStore();
+  const { isMobile } = useShortStore();
   const { i18n } = useInter();
   const { left, right, setRight, setLeft } = useFullStore();
   const { edit, store: getUser } = useUser();
   const { add: addAvatar } = useUserAvatar();
+
+  useEffect(() => {
+    isMobile(false);
+  }, []);
 
   const keydownCallback = useCallback((event: KeyboardEvent) => {
     if (event.key === "Escape") {

@@ -7,7 +7,7 @@ interface StoreType {
   add: (b: ShortStackType) => void;
   pop: () => void;
   mobile: boolean;
-  isMobile: () => void;
+  isMobile: (b: boolean) => void;
 }
 export const useShortStore = create<StoreType>()((set, get) => ({
   stack: [null],
@@ -47,5 +47,5 @@ export const useShortStore = create<StoreType>()((set, get) => ({
     set({ stack: buffer, last: buffer[buffer.length - 1] || null });
   },
   mobile: false,
-  isMobile: () => set({ mobile: true }),
+  isMobile: (b) => set({ mobile: b }),
 }));
