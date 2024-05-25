@@ -9,6 +9,7 @@ import {
   BlockType,
   MessageItem,
   MessageItemSending,
+  MessageItemSendingMemo,
   MessageType,
   NewMessageType,
 } from "@/5.entities";
@@ -173,6 +174,7 @@ export function Render({
             date: m.date.getTime(),
             chat: m.chat_id,
             user: m.user_id,
+            files: m.files,
           },
         ]);
       });
@@ -236,7 +238,7 @@ export function Render({
           }
 
           if (b.type === "sending") {
-            return <MessageItemSending key={b.hash} message={b} />;
+            return <MessageItemSendingMemo key={b.hash} message={b} />;
           }
 
           return <MessageItem key={b.h} message={b.m} />;

@@ -5,3 +5,4 @@ export * from "./portal";
 export * from "./skeleton";
 export * from "./upload-wrapper";
 export * from "./slider-avatar";
+export * from "./file-icon";

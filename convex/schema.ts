@@ -53,6 +53,7 @@ export default defineSchema({
     forward: v.boolean(),
     value: v.string(),
     hash: v.string(),
+    files: v.array(v.id("file")),
   }),
   pinned_message: defineTable({
     chat_id: v.id("dialog"),

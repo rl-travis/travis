@@ -1,4 +1,4 @@
-export default function reformatDateMessage(time: number) {
+export function reformatDateMessage(time: number) {
   const targetDate = new Date(time);
   return targetDate.toLocaleTimeString("ru-RU", {
     hour: "2-digit",

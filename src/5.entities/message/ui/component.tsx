@@ -1,36 +1,74 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import cx from "classnames";
 
 import styles from "./message.module.scss";
-import reformatDateMessage from "@/5.entities/message/lib/reformat-date-message";
+import Link from "next/link";
+import { v4 as hash } from "uuid";
 
 import { ArrowUpFromLine } from "lucide-react";
 
-import { BlockSendingInterface, MessageType, useMessage } from "@/5.entities";
+import {
+  BlockSendingInterface,
+  MessageType,
+  useMessage,
+  reformatDateMessage,
+  useFiles,
+} from "@/5.entities";
 
-import { useUserStore } from "@/6.shared";
+import { calculateSizeFile, FileIcon, useUserStore } from "@/6.shared";
 
+export const MessageItemSendingMemo = memo(MessageItemSending);
 export function MessageItemSending({ message }: { message: BlockSendingInterface }) {
   const { send } = useMessage();
   const { user } = useUserStore();
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    if (!user) return;
+  const { uploadFile } = useFiles();
+  const upload = async () => {
+    const filesIds = await uploadFile(message.files);
     send({
       user_id: message.user,
       chat_id: message.chat,
       value: message.value,
       hash: message.hash,
+      files: filesIds.map((e) => e._id),
     }).then(() => {
       setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    if (!user) return;
+    upload();
   }, []);
   return (
     <div className={cx(styles.wrapper, styles.sender)} data-sending={true}>
-      <div className={styles.message}>{message.value}</div>
+      <div className={styles.message}>
+        {message.files.length > 0 && (
+          <div className={styles.files}>
+            {message.files.map((f) => {
+              return (
+                <Link
+                  key={hash()}
+                  href={URL.createObjectURL(f)}
+                  download={f.name}
+                  className={styles.file}
+                >
+                  <FileIcon file={f} gray />
+                  <div className={styles.content}>
+                    <div className={styles.name}>{f.name}</div>
+                    <div className={styles.size}>{calculateSizeFile(f.size)}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
+        <div className={styles.value}>{message.value}</div>
+      </div>
       <div className={styles.info}>
         {loading && (
           <div className={styles.sending}>
@@ -54,7 +92,30 @@ export function MessageItem({ message }: { message: MessageType }) {
         [styles.sender]: user._id === message.user_id,
       })}
     >
-      <div className={styles.message}>{message.value}</div>
+      <div className={styles.message}>
+        {message.objects.length > 0 && (
+          <div className={styles.files}>
+            {message.objects.map((f) => {
+              return (
+                <Link
+                  key={f._id}
+                  href={f.url}
+                  download={f.name}
+                  className={styles.file}
+                  target="_blank"
+                >
+                  <FileIcon object={f} gray={true} />
+                  <div className={styles.content}>
+                    <div className={styles.name}>{f.name}</div>
+                    <div className={styles.size}>{calculateSizeFile(f.size)}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+        <div className={styles.value}>{message.value}</div>
+      </div>
       <div className={styles.info}>
         <div className={styles.date}>{reformatDateMessage(message._creationTime)}</div>
       </div>

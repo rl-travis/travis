@@ -73,7 +73,9 @@ export function ChatListItem({
           <div className={styles.message}>
             {current.chat.last_message === null
               ? "История очищена"
-              : current.chat.last_message.value}
+              : current.chat.last_message.value === ""
+                ? "Файлы"
+                : current.chat.last_message.value}
           </div>
           {current.unread > 0 && <div className={styles.unread}>{current.unread}</div>}
         </div>

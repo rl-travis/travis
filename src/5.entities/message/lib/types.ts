@@ -1,4 +1,4 @@
-import { Id } from "../../../../convex/_generated/dataModel";
+import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
 export type MessageType = {
   user:
@@ -21,6 +21,8 @@ export type MessageType = {
   edited: boolean;
   reply_id?: Id<"message">;
   forward: boolean;
+  objects: Doc<"file">[];
+  files: Id<"file">[];
   hash: string;
   _creationTime: number;
 };
@@ -32,6 +34,7 @@ export type NewMessageType = {
   chat_id: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
   user_id: Id<"user">;
   date: Date;
+  files: File[];
 };
 
 export interface BlockInterface {
@@ -56,6 +59,7 @@ export interface BlockSendingInterface extends BlockInterface {
   hash: string;
   user: Id<"user">;
   chat: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
+  files: File[];
 }
 
 export type BlockType =

@@ -9,6 +9,7 @@ export const send = mutation({
     chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
     value: v.string(),
     hash: v.string(),
+    files: v.array(v.id("file")),
   },
   handler: async (ctx, args) => {
     const message_id = await ctx.db.insert("message", {
@@ -18,6 +19,7 @@ export const send = mutation({
       user_id: args.user_id,
       forward: false,
       hash: args.hash,
+      files: args.files,
     });
     await ctx.db.patch(args.chat_id, {
       last_message_id: message_id,
@@ -41,6 +43,13 @@ export const getAll = query({
 
     const newPages = [];
     for (const message of messages.page) {
+      const objects: Doc<"file">[] = [];
+      if (message.files.length > 0) {
+        for (const f of message.files) {
+          const file = await ctx.db.get(f);
+          if (file) objects.push(file);
+        }
+      }
       let user;
       if (users.has(message.user_id)) {
         user = users.get(message.user_id);
@@ -53,6 +62,7 @@ export const getAll = query({
         if (!repliedMessage) {
           newPages.push({
             ...message,
+            objects,
             user,
           });
         } else {
@@ -60,6 +70,7 @@ export const getAll = query({
           newPages.push({
             ...message,
             user,
+            objects,
             reply: {
               message: repliedMessage,
               user: repliedUser,
@@ -67,7 +78,7 @@ export const getAll = query({
           });
         }
       } else {
-        newPages.push({ ...message, user });
+        newPages.push({ ...message, user, objects });
       }
     }
 
