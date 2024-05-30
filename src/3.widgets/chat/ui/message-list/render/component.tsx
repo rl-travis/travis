@@ -32,77 +32,44 @@ function generateDate(v: number): string {
  * Генерация блоков, блоки - это то, что рендерится
  * Туда входит и дата, и сообщения, и неотправленное сообщение
  */
-function generateBlocks(m: MessageType[]): BlockType[] {
-  if (m.length === 0) return [];
+function generateBlocks(messages: MessageType[], blocks: BlockType[]): BlockType[] {
+  if (messages.length === 0) return [];
+  blocks = blocks.filter((i) => i.type === "sending").sort((a, b) => a.date - b.date);
+  messages = messages.sort((a, b) => a._creationTime - b._creationTime);
+  let union: string[] = [];
+  const uniqueHash: Set<string> = new Set();
+  for (const b of blocks) {
+    if (!uniqueHash.has(b.hash)) {
+      union.push(b.hash);
+      uniqueHash.add(b.hash);
+    }
+  }
+  for (const b of messages) {
+    if (!uniqueHash.has(b.hash)) {
+      union.push(b.hash);
+      uniqueHash.add(b.hash);
+    }
+  }
   const res: BlockType[] = [];
-  m = m.sort((a, b) => a._creationTime - b._creationTime);
-  let date = generateDate(m[0]._creationTime);
-  res.push({
-    type: "date",
-    d: date,
-    h: hash(),
-    date: m[0]._creationTime,
-  });
-  for (const mes of m) {
-    const d = generateDate(mes._creationTime);
-    if (d !== date) {
-      date = d;
+  for (const hash of union) {
+    const message = messages.find((e) => e.hash === hash);
+    const sending = blocks.find((e) => e.hash === hash);
+    if (message) {
       res.push({
-        type: "date",
-        d: date,
-        h: hash(),
-        date: mes._creationTime,
+        type: "initial",
+        date: message._creationTime,
+        hash: message.hash,
+        m: message,
       });
-    }
-    res.push({
-      type: "initial",
-      m: mes,
-      h: hash(),
-      date: mes._creationTime,
-    });
-  }
-  return res;
-}
-
-/**
- * Генерирует хэш всех сообщений на основе отрисованных сейчас блоков
- */
-function getHashSet(m: BlockType[]): Set<string> {
-  const set: Set<string> = new Set();
-  for (const block of m) {
-    if (block.type === "initial") {
-      set.add(block.m.hash);
-    } else if (block.type === "sending") {
-      set.add(block.hash);
+    } else if (sending) {
+      res.push(sending);
+    } else {
+      throw new Error("52");
     }
   }
-  return set;
+  return res.sort((a, b) => a.date - b.date);
 }
 
-/**
- * Определяет временные границы сообщений
- */
-function getRange(m: BlockType[]): { older: number; newer: number } {
-  m = m.filter((e) => e.type !== "date");
-  const ans = {
-    older: new Date().getTime(),
-    newer: new Date().getTime(),
-  };
-  if (m.length === 0) return ans;
-  ans.older = m[0].date;
-  for (const block of m) {
-    if (block.type === "initial") {
-      ans.newer = block.m._creationTime;
-    } else if (block.type === "sending") {
-      ans.newer = block.date;
-    }
-  }
-  return ans;
-}
-
-/**
- * Добавляет даты в блоки. Вначале их удаляет, потом пересчитывает
- */
 function Dates(m: BlockType[]): BlockType[] {
   m = m.filter((e) => e.type !== "date");
   if (m.length === 0) return [];
@@ -111,7 +78,7 @@ function Dates(m: BlockType[]): BlockType[] {
   ans.push({
     type: "date",
     d: cur,
-    h: hash(),
+    hash: hash(),
     date: m[0].date,
   });
   for (const b of m) {
@@ -121,7 +88,7 @@ function Dates(m: BlockType[]): BlockType[] {
       ans.push({
         type: "date",
         d: cur,
-        h: hash(),
+        hash: hash(),
         date: b.date,
       });
     }
@@ -134,10 +101,12 @@ export function Render({
   messages,
   newMessages,
   loadMore,
+  status,
 }: {
   messages: MessageType[];
   newMessages: NewMessageType[];
   loadMore: (numItems: number) => void;
+  status: "LoadingFirstPage" | "CanLoadMore" | "LoadingMore" | "Exhausted";
 }) {
   const [blocks, setBlocks] = useState<BlockType[]>([]);
   const [firstRender, setFirstRender] = useState(false);
@@ -153,7 +122,7 @@ export function Render({
   useEffect(() => {
     console.log("%c Первый рендер сообщений", "color: orange");
     if (blocks.length === 0) {
-      setBlocks(Dates(generateBlocks(messages)));
+      setBlocks(Dates(generateBlocks(messages, blocks)));
       setFirstRender(true);
       setTimeout(() => scroll(MAX_HEIGHT), 20);
     }
@@ -174,6 +143,7 @@ export function Render({
             chat: m.chat_id,
             user: m.user_id,
             files: m.files,
+            reply: m.reply,
           },
         ]);
       });
@@ -185,20 +155,7 @@ export function Render({
     console.log("%c Рендер пришедших сообщений", "color: orange");
     const container = containerRef.current;
     if (firstRender && container) {
-      const set = getHashSet(blocks);
-      const m = messages
-        .sort((a, b) => a._creationTime - b._creationTime)
-        .filter((e) => !set.has(e.hash));
-      const range = getRange(blocks);
-      const older = m.filter((e) => e._creationTime < range.older);
-      const newer = m.filter((e) => e._creationTime > range.newer);
-      if (older.length > 0) {
-        setBlocks((prev) => Dates([...generateBlocks(older), ...prev]));
-      }
-      if (newer.length > 0) {
-        setBlocks((prev) => Dates([...prev, ...generateBlocks(newer)]));
-        setTimeout(() => scroll(MAX_HEIGHT), 200);
-      }
+      setBlocks(Dates(generateBlocks(messages, blocks)));
     }
     console.log("%c Скролл, когда пришли сверху новые сообщения", "color: orange");
     if (lastHeight && container && container.scrollTop === 0) {
@@ -224,13 +181,16 @@ export function Render({
   return (
     <>
       <div className={styles.list} ref={containerRef} onScroll={() => onScroll()}>
-        <div className={styles.loading}>
-          <MiniLoading />
-        </div>
+        {status !== "Exhausted" && (
+          <div className={styles.loading}>
+            <MiniLoading />
+          </div>
+        )}
+
         {blocks.map((b) => {
           if (b.type === "date") {
             return (
-              <div key={b.h} className={styles.block}>
+              <div key={b.hash} className={styles.block}>
                 <div className={styles.date}>{b.d}</div>
               </div>
             );
@@ -240,7 +200,7 @@ export function Render({
             return <MessageItemSendingMemo key={b.hash} message={b} />;
           }
 
-          return <MessageItem key={b.h} message={b.m} />;
+          return <MessageItem key={b.hash} message={b.m} />;
         })}
       </div>
       {showScrollButton && (

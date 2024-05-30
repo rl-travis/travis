@@ -14,6 +14,16 @@ export type MessageType = {
       }
     | null
     | undefined;
+  reply?: {
+    message: {
+      _id: Id<"message">;
+      _creationTime: number;
+      value: string;
+    };
+    user: {
+      name: string;
+    } | null;
+  };
   _id: Id<"message">;
   value: string;
   user_id: Id<"user">;
@@ -24,6 +34,8 @@ export type MessageType = {
   objects: Doc<"file">[];
   files: Id<"file">[];
   hash: string;
+  read: boolean;
+  pinned: boolean;
   _creationTime: number;
 };
 
@@ -35,31 +47,31 @@ export type NewMessageType = {
   user_id: Id<"user">;
   date: Date;
   files: File[];
+  reply: MessageType | null;
 };
 
 export interface BlockInterface {
   type: "date" | "sending" | "initial";
   date: number;
+  hash: string;
 }
 export interface BlockInitialInterface extends BlockInterface {
   type: "initial";
   m: MessageType;
-  h: string;
 }
 
 export interface BlockDateInterface extends BlockInterface {
   type: "date";
   d: string;
-  h: string;
 }
 
 export interface BlockSendingInterface extends BlockInterface {
   type: "sending";
   value: string;
-  hash: string;
   user: Id<"user">;
   chat: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
   files: File[];
+  reply: MessageType | null;
 }
 
 export type BlockType =

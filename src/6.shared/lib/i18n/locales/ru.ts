@@ -6,6 +6,9 @@ export const ru: i18nType = {
   name: "Русский",
   chat: {
     placeholder: "Сообщение...",
+    pinned: "Закрепленные сообщения",
+    edit: "Редактирование",
+    reply: "Ответ",
   },
   changeProfile: {
     crop: "Кадрировать Аватарку",
@@ -52,5 +55,12 @@ export const ru: i18nType = {
   language: {
     ru: "Русский",
     en: "Английский",
+  },
+  popup: {
+    pinned: "Открепить",
+    unpinned: "Закрепить",
+    delete: "Удалить",
+    edit: "Редактировать",
+    reply: "Ответить",
   },
 };

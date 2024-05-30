@@ -4,6 +4,9 @@ export type i18nType = {
   name: string;
   chat: {
     placeholder: string;
+    pinned: string;
+    edit: string;
+    reply: string;
   };
   changeProfile: {
     create: string;
@@ -42,6 +45,13 @@ export type i18nType = {
   language: {
     ru: string;
     en: string;
+  };
+  popup: {
+    pinned: string;
+    unpinned: string;
+    delete: string;
+    edit: string;
+    reply: string;
   };
 };
 

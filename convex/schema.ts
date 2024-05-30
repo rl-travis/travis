@@ -54,11 +54,9 @@ export default defineSchema({
     value: v.string(),
     hash: v.string(),
     files: v.array(v.id("file")),
+    read: v.boolean(),
+    pinned: v.boolean(),
   }),
-  pinned_message: defineTable({
-    chat_id: v.id("dialog"),
-    message_id: v.id("message"),
-  }).index("chat_id", ["chat_id"]),
 
   group: defineTable({
     avatar_url: v.string(),

@@ -3,6 +3,39 @@ import { mutation, query } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
 import { v } from "convex/values";
 
+export const pin = mutation({
+  args: {
+    pinned: v.boolean(),
+    message_id: v.id("message"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.message_id, {
+      pinned: args.pinned,
+    });
+  },
+});
+
+export const patch = mutation({
+  args: {
+    value: v.string(),
+    message_id: v.id("message"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.message_id, {
+      value: args.value,
+    });
+  },
+});
+
+export const deleteMessage = mutation({
+  args: {
+    message_id: v.id("message"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.message_id);
+  },
+});
+
 export const send = mutation({
   args: {
     user_id: v.id("user"),
@@ -10,6 +43,7 @@ export const send = mutation({
     value: v.string(),
     hash: v.string(),
     files: v.array(v.id("file")),
+    reply: v.optional(v.id("message")),
   },
   handler: async (ctx, args) => {
     const message_id = await ctx.db.insert("message", {
@@ -20,11 +54,37 @@ export const send = mutation({
       forward: false,
       hash: args.hash,
       files: args.files,
+      read: false,
+      pinned: false,
+      reply_id: args.reply,
     });
     await ctx.db.patch(args.chat_id, {
       last_message_id: message_id,
     });
     return message_id;
+  },
+});
+
+export const readMessage = mutation({
+  args: { message_id: v.id("message") },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.message_id, {
+      read: true,
+    });
+  },
+});
+
+export const getAllPinned = query({
+  args: {
+    chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("message")
+      .filter((q) => q.eq(q.field("chat_id"), args.chat_id))
+      .filter((q) => q.eq(q.field("pinned"), true))
+      .order("desc")
+      .collect();
   },
 });
 

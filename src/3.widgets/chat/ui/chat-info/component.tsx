@@ -1,4 +1,5 @@
 import styles from "./chat-info.module.scss";
+import { PinnedMessages } from "@/4.features/PinnedMessages";
 
 import { ProfileInfo } from "@/4.features";
 
@@ -6,6 +7,7 @@ import { useChatStore } from "@/6.shared";
 
 export function ChatInfo() {
   const { chat } = useChatStore();
+
   if (!chat) {
     return "";
   }
@@ -15,6 +17,7 @@ export function ChatInfo() {
         doc={chat.type === "dialog" ? chat.chat.user._id : chat.chat._id}
         type={chat.type === "dialog" ? "user" : chat.type}
       />
+      <PinnedMessages chat_id={chat.chat_id} />
     </div>
   );
 }

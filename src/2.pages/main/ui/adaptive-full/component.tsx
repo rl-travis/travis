@@ -7,7 +7,15 @@ import { Header } from "./header";
 import { Resize } from "./resize";
 import { SidebarTop } from "./sidebar-top";
 
-import { Chat, ChatInfo, ChatList, EmojiList, Search, Settings } from "@/3.widgets";
+import {
+  Chat,
+  ChatInfo,
+  ChatList,
+  EmojiList,
+  Popup,
+  Search,
+  Settings,
+} from "@/3.widgets";
 
 import { EditProfile, EditProfileType, LanguageInfo } from "@/4.features";
 
@@ -125,6 +133,7 @@ export function AdaptiveFull({
           </div>
         </div>
       </div>
+      <Popup />
     </div>
   );
 }

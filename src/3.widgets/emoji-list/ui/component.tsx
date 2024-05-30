@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 import cx from "classnames";
 
@@ -52,9 +53,58 @@ function VariantEmoji({
   );
 }
 
+type EmojiRender = {
+  emoji: {
+    u: string;
+    v?: string[];
+  } | null;
+  name: string | null;
+  hash: string;
+  index: number;
+};
+
+function generate(): EmojiRender[] {
+  const list: EmojiRender[] = [];
+  let i = 0;
+  for (const key in emojis) {
+    list.push({
+      name: key,
+      emoji: null,
+      hash: hash(),
+      index: 0,
+    });
+    for (const e of emojis[key]) {
+      i++;
+      list.push({
+        name: null,
+        emoji: e,
+        hash: hash(),
+        index: i,
+      });
+    }
+    i = 0;
+  }
+  return list;
+}
 export function EmojiList({ mobile }: { mobile?: boolean }) {
   const { statusSidebar, addEmoji } = useChatStore();
+  const { ref, inView } = useInView({
+    threshold: 1,
+  });
+  const containerRef = useRef<HTMLDivElement>(null);
   const { nativeEmoji } = useLocalStorage();
+  const listed = generate();
+  const [renderIndex, setRenderIndex] = useState(200);
+  useEffect(() => {
+    if (inView) {
+      setRenderIndex((prev) => prev + 200);
+    }
+  }, [inView]);
+  useEffect(() => {
+    if (statusSidebar !== "emoji") {
+      setRenderIndex(200);
+    }
+  }, [statusSidebar]);
 
   const handleEmoji = (emoji: string) => addEmoji(emoji);
 
@@ -63,37 +113,39 @@ export function EmojiList({ mobile }: { mobile?: boolean }) {
   }
 
   return (
-    <div className={styles.wrapper}>
-      {Object.keys(emojis).map((group) => {
-        return (
-          <Fragment key={group}>
-            <div className={styles.top}>{group}</div>
-            <div className={styles.group}>
-              {emojis[group].map((emoji, index) => {
-                return (
-                  <button
-                    key={hash()}
-                    className={cx(styles.btn, {
-                      [styles.has]: !!emoji.v && !mobile,
-                    })}
-                    onClick={() => {
-                      handleEmoji(native(emoji.u));
-                    }}
-                  >
-                    <VariantEmoji
-                      handleEmoji={handleEmoji}
-                      nativeEmoji={nativeEmoji}
-                      variants={emoji.v}
-                      left={index % 8 >= 4}
-                    />
-                    <RenderEmoji nativeEmoji={nativeEmoji} emoji={emoji.u} />
-                  </button>
-                );
+    <div className={styles.wrapper} ref={containerRef}>
+      {listed.map((element, index) => {
+        if (index > renderIndex) return "";
+        if (element.emoji) {
+          return (
+            <button
+              key={hash()}
+              className={cx(styles.btn, {
+                [styles.has]: !!element.emoji.v && !mobile,
               })}
+              onClick={() => {
+                if (element.emoji) handleEmoji(native(element.emoji.u));
+              }}
+            >
+              <VariantEmoji
+                handleEmoji={handleEmoji}
+                nativeEmoji={nativeEmoji}
+                variants={element.emoji.v}
+                left={element.index % 8 >= 4}
+              />
+              <RenderEmoji nativeEmoji={nativeEmoji} emoji={element.emoji.u} />
+            </button>
+          );
+        } else {
+          return (
+            <div key={element.hash} className={styles.top}>
+              {element.name}
             </div>
-          </Fragment>
-        );
+          );
+        }
       })}
+
+      <div style={{ height: 20 }} ref={ref} />
     </div>
   );
 }

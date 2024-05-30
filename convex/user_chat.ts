@@ -7,8 +7,20 @@ import {
 } from "../src/5.entities";
 
 import { Doc } from "./_generated/dataModel";
-import { query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
+
+export const pin = mutation({
+  args: {
+    pinned: v.boolean(),
+    chat_id: v.id("user_chat"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.chat_id, {
+      pinned: args.pinned,
+    });
+  },
+});
 
 export const getChats = query({
   args: { user_id: v.id("user") },

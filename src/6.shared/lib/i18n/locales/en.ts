@@ -6,6 +6,9 @@ export const en: i18nType = {
   name: "English",
   chat: {
     placeholder: "Message...",
+    pinned: "Pinned Messages",
+    edit: "Edit",
+    reply: "Reply",
   },
   changeProfile: {
     crop: "Crop Avatar",
@@ -52,5 +55,12 @@ export const en: i18nType = {
   language: {
     ru: "Russian",
     en: "English",
+  },
+  popup: {
+    pinned: "Unpin",
+    unpinned: "Pin",
+    delete: "Delete",
+    edit: "Edit",
+    reply: "Reply",
   },
 };

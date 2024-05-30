@@ -4,9 +4,10 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 import { reformatDateChats } from "../lib";
 
 import styles from "./user-chat.module.scss";
+import { usePopupStore } from "@/6.shared/lib/store/popup";
 import Image from "next/image";
 
-import { Bookmark, Disc2, Pin, Rss, UsersRound } from "lucide-react";
+import { Bookmark, Check, CheckCheck, Pin, Rss, UsersRound } from "lucide-react";
 
 import { ChatType } from "@/5.entities";
 
@@ -21,15 +22,30 @@ export function ChatListItem({
 }) {
   const { i18n } = useInter();
   const { add } = useShortStore();
-  const { setChat, chat, clearNewMessages } = useChatStore();
-
+  const { setChat, chat, clearNewMessages, setEdit } = useChatStore();
+  const { setDeed } = usePopupStore();
   return (
     <div
       className={cx(styles.item, { [styles.active]: chat?._id === current._id })}
-      onClick={() => {
+      onClick={(e) => {
         add("chat");
         setChat(current);
         clearNewMessages();
+        setEdit(null);
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setDeed({
+          type: "chat",
+          x: e.pageX,
+          y: e.pageY,
+          chat_id: current._id,
+          pinned: current.pinned,
+          // @ts-ignore
+          width: e.view.innerWidth,
+          // @ts-ignore
+          height: e.view.innerHeight,
+        });
       }}
     >
       <Image
@@ -61,7 +77,12 @@ export function ChatListItem({
           <div className={styles.info}>
             {current.pinned && <Pin size={12} />}
             {current.chat.last_message &&
-              current.chat.last_message.user_id === user._id && <Disc2 size={12} />}
+              current.chat.last_message.user_id === user._id &&
+              (current.chat.last_message.read ? (
+                <CheckCheck size={12} />
+              ) : (
+                <Check size={12} />
+              ))}
             {current.chat.last_message && (
               <div className={styles.date}>
                 {reformatDateChats(current.chat.last_message._creationTime, i18n.slug)}

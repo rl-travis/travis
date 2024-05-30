@@ -26,5 +26,12 @@ export function MessageList({ chat }: { chat: ChatType }) {
     return <div className={styles.empty} />;
   }
 
-  return <Render messages={results} newMessages={newMessages} loadMore={loadMore} />;
+  return (
+    <Render
+      messages={results}
+      newMessages={newMessages}
+      loadMore={loadMore}
+      status={status}
+    />
+  );
 }

@@ -8,6 +8,10 @@
     background-color: var(--hover);
   }
 }
+.info {
+  display: flex;
+  align-items: center;
+}
 .sender {
   justify-content: flex-end;
   .message {
@@ -17,6 +21,7 @@
   }
   .info {
     order: 1;
+    flex-direction: row-reverse;
   }
 }
 .message {
@@ -61,4 +66,34 @@
 }
 .size {
   font-size: 12px;
+}
+.reply {
+  max-width: 380px;
+  padding: 5px 5px 5px 10px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--hover-alpha);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.elem {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title {
+  font-weight: 700;
+}
+.tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 5px;
+  background-color: white;
 }

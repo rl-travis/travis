@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 
+import { api } from "../../../../../convex/_generated/api";
+
 import styles from "./bottom-chat.module.scss";
+import { useMutation } from "convex/react";
 import { v4 as hash } from "uuid";
 
-import { Paperclip, SendHorizontal, Smile, Trash } from "lucide-react";
+import { Paperclip, SendHorizontal, Smile, Trash, X } from "lucide-react";
 
 import { TextEditor } from "@/4.features";
 
@@ -14,31 +17,55 @@ import {
   FileIcon,
   soc,
   useChatStore,
+  useInter,
   useUserStore,
 } from "@/6.shared";
 
 export function BottomChat() {
   const [files, setFiles] = useState<{ file: File; h: string }[]>([]);
   const { user } = useUserStore();
-  const { chat, statusSidebar, setStatusSidebar, message, setMessage, addNewMessages } =
-    useChatStore();
+  const { i18n } = useInter();
+  const {
+    chat,
+    statusSidebar,
+    setStatusSidebar,
+    message,
+    setMessage,
+    addNewMessages,
+    edit,
+    setEdit,
+    answer,
+    setAnswer,
+  } = useChatStore();
+  const patch = useMutation(api.message.patch);
 
   const sendMessage = async () => {
-    if (message.length > 0 || files.length > 0) {
-      addNewMessages({
-        chat: chat!._id,
-        value: message,
-        hash: hash(),
-        date: new Date(),
-        user_id: user!._id,
-        chat_id: chat!.chat_id,
-        files: files.map((e) => e.file),
-      });
-      setFiles([]);
-      setMessage("");
+    if (edit) {
+      if (message.length > 0) {
+        patch({
+          message_id: edit,
+          value: message,
+        });
+      }
+      setEdit(null);
+    } else {
+      if (message.length > 0 || files.length > 0) {
+        addNewMessages({
+          chat: chat!._id,
+          value: message,
+          hash: hash(),
+          date: new Date(),
+          user_id: user!._id,
+          chat_id: chat!.chat_id,
+          files: files.map((e) => e.file),
+          reply: answer,
+        });
+        setAnswer(null);
+        setFiles([]);
+        setMessage("");
+      }
     }
   };
-
   return (
     <div
       className={styles.wrapper}
@@ -49,6 +76,19 @@ export function BottomChat() {
         }
       }}
     >
+      <div className={soc(styles.edit, styles.edit__active, !!edit)}>
+        <button className={styles.edit__btn} onClick={() => setEdit(null)}>
+          <X size={16} />
+        </button>
+        <div className={styles.edit__title}>{i18n.chat.edit}</div>
+      </div>
+      <div className={soc(styles.edit, styles.edit__active, !!answer)}>
+        <button className={styles.edit__btn} onClick={() => setAnswer(null)}>
+          <X size={16} />
+        </button>
+        <div className={styles.edit__name}>{answer?.user?.name}</div>
+        <div className={styles.edit__value}>{answer?.value}</div>
+      </div>
       <div className={soc(styles.files, styles.files__active, files.length > 0)}>
         {files.map((f, i) => {
           return (
@@ -87,11 +127,15 @@ export function BottomChat() {
         >
           <Smile size={20} />
         </button>
-
-        <label htmlFor="files" className={styles.btn}>
+        <label
+          htmlFor="files"
+          className={soc(styles.btn, styles.btn__disable, edit !== null)}
+        >
           <Paperclip size={20} />
         </label>
+
         <input
+          disabled={edit !== null}
           type="file"
           multiple
           id="files"

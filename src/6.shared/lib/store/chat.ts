@@ -1,6 +1,8 @@
+import { Id } from "../../../../convex/_generated/dataModel";
+
 import { create } from "zustand";
 
-import { ChatType, NewMessageType } from "@/5.entities";
+import { ChatType, MessageType, NewMessageType } from "@/5.entities";
 
 type statusSidebarType = "info" | "emoji" | null;
 
@@ -15,11 +17,15 @@ interface StoreType {
   newMessages: NewMessageType[];
   addNewMessages: (m: NewMessageType) => void;
   clearNewMessages: () => void;
+  edit: Id<"message"> | null;
+  setEdit: (o: { id: Id<"message">; message: string } | null) => void;
+  answer: MessageType | null;
+  setAnswer: (m: MessageType | null) => void;
 }
 
 export const useChatStore = create<StoreType>()((setState, get) => ({
   chat: null,
-  setChat: (b) => setState({ chat: b }),
+  setChat: (b) => setState({ chat: b, edit: null, message: "" }),
   message: "",
   setMessage: (value) => setState(() => ({ message: value })),
   statusSidebar: null,
@@ -28,4 +34,27 @@ export const useChatStore = create<StoreType>()((setState, get) => ({
   newMessages: [],
   addNewMessages: (m) => setState({ newMessages: [...get().newMessages, m] }),
   clearNewMessages: () => setState({ newMessages: [] }),
+  edit: null,
+  setEdit: (o) => {
+    if (o === null) {
+      setState({
+        edit: null,
+        message: "",
+        answer: null,
+      });
+    } else {
+      setState({
+        edit: o.id,
+        message: o.message,
+        answer: null,
+      });
+    }
+  },
+  answer: null,
+  setAnswer: (m) => {
+    setState({
+      edit: null,
+      answer: m,
+    });
+  },
 }));
