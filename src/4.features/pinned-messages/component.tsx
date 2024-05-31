@@ -1,7 +1,7 @@
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 
-import styles from "./PinnedMessages.module.scss";
+import styles from "./pinned-messages.module.scss";
 import { useQuery } from "convex/react";
 
 import { reformatDateMessage } from "@/5.entities";

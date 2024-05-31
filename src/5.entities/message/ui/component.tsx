@@ -23,12 +23,13 @@ import {
   useFiles,
 } from "@/5.entities";
 
-import { calculateSizeFile, FileIcon, useUserStore } from "@/6.shared";
+import { calculateSizeFile, FileIcon, useInter, useUserStore } from "@/6.shared";
 
 export const MessageItemSendingMemo = memo(MessageItemSending);
 export function MessageItemSending({ message }: { message: BlockSendingInterface }) {
   const { send } = useMessage();
   const { user } = useUserStore();
+  const { i18n } = useInter();
   const [loading, setLoading] = useState(true);
   const { uploadFile } = useFiles();
   const upload = async () => {
@@ -63,6 +64,7 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
         {message.files.length > 0 && (
           <div className={styles.files}>
             {message.files.map((f) => {
+              const size = calculateSizeFile(f.size);
               return (
                 <Link
                   key={hash()}
@@ -73,7 +75,9 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
                   <FileIcon file={f} gray />
                   <div className={styles.content}>
                     <div className={styles.name}>{f.name}</div>
-                    <div className={styles.size}>{calculateSizeFile(f.size)}</div>
+                    <div className={styles.size}>
+                      {size.value + " " + i18n.sizes[size.type]}
+                    </div>
                   </div>
                 </Link>
               );
@@ -98,6 +102,7 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
 export function MessageItem({ message }: { message: MessageType }) {
   const { user } = useUserStore();
   const readMessage = useMutation(api.message.readMessage);
+  const { i18n } = useInter();
   const { ref, inView } = useInView({
     threshold: 0.7,
   });
@@ -150,6 +155,7 @@ export function MessageItem({ message }: { message: MessageType }) {
         {message.objects.length > 0 && (
           <div className={styles.files}>
             {message.objects.map((f) => {
+              const size = calculateSizeFile(f.size);
               return (
                 <Link
                   key={f._id}
@@ -161,7 +167,9 @@ export function MessageItem({ message }: { message: MessageType }) {
                   <FileIcon object={f} gray={true} />
                   <div className={styles.content}>
                     <div className={styles.name}>{f.name}</div>
-                    <div className={styles.size}>{calculateSizeFile(f.size)}</div>
+                    <div className={styles.size}>
+                      {size.value + " " + i18n.sizes[size.type]}
+                    </div>
                   </div>
                 </Link>
               );

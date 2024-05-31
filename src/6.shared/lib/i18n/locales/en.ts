@@ -63,4 +63,19 @@ export const en: i18nType = {
     edit: "Edit",
     reply: "Reply",
   },
+  sizes: {
+    b: "B",
+    kb: "KB",
+    mb: "MB",
+  },
+  emojis: [
+    "Emojis and People",
+    "Animals and Nature",
+    "Food and drink",
+    "Travel and Places",
+    "Actions",
+    "Objects",
+    "Symbols",
+    "Flags",
+  ],
 };

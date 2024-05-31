@@ -53,6 +53,12 @@ export type i18nType = {
     edit: string;
     reply: string;
   };
+  sizes: {
+    b: string;
+    kb: string;
+    mb: string;
+  };
+  emojis: string[];
 };
 
 export type InternationalizationContextType = {

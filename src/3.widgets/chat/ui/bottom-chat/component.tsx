@@ -91,12 +91,15 @@ export function BottomChat() {
       </div>
       <div className={soc(styles.files, styles.files__active, files.length > 0)}>
         {files.map((f, i) => {
+          const size = calculateSizeFile(f.file.size);
           return (
             <div key={f.h} className={styles.file}>
               <FileIcon file={f.file} gray={false} />
               <div className={styles.info}>
                 <div className={styles.name}>{f.file.name}</div>
-                <div className={styles.size}>{calculateSizeFile(f.file.size)}</div>
+                <div className={styles.size}>
+                  {size.value + " " + i18n.sizes[size.type]}
+                </div>
               </div>
               <button
                 className={styles.delete}

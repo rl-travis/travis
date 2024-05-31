@@ -8,7 +8,7 @@ import { emojis, internal, native } from "../lib";
 import styles from "./emoji-list.module.scss";
 import { v4 as hash } from "uuid";
 
-import { Loading, useChatStore, useLocalStorage } from "@/6.shared";
+import { Loading, useChatStore, useInter, useLocalStorage } from "@/6.shared";
 
 function RenderEmoji({ nativeEmoji, emoji }: { nativeEmoji: boolean; emoji: string }) {
   if (nativeEmoji) return <div className={styles.native}>{native(emoji)}</div>;
@@ -58,7 +58,7 @@ type EmojiRender = {
     u: string;
     v?: string[];
   } | null;
-  name: string | null;
+  name: number | null;
   hash: string;
   index: number;
 };
@@ -66,14 +66,14 @@ type EmojiRender = {
 function generate(): EmojiRender[] {
   const list: EmojiRender[] = [];
   let i = 0;
-  for (const key in emojis) {
+  for (let j = 0; j < emojis.length; j++) {
     list.push({
-      name: key,
+      name: j,
       emoji: null,
       hash: hash(),
       index: 0,
     });
-    for (const e of emojis[key]) {
+    for (const e of emojis[j]) {
       i++;
       list.push({
         name: null,
@@ -94,6 +94,7 @@ export function EmojiList({ mobile }: { mobile?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { nativeEmoji } = useLocalStorage();
   const listed = generate();
+  const { i18n } = useInter();
   const [renderIndex, setRenderIndex] = useState(200);
   useEffect(() => {
     if (inView) {
@@ -139,7 +140,7 @@ export function EmojiList({ mobile }: { mobile?: boolean }) {
         } else {
           return (
             <div key={element.hash} className={styles.top}>
-              {element.name}
+              {i18n.emojis[element.name!]}
             </div>
           );
         }
