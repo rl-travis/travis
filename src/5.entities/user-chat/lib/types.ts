@@ -1,32 +1,14 @@
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 
-export type ChatType =
-  | GroupInterface
-  | ChannelInterface
-  | DialogInterface
-  | SavedInterface;
+export type ChatType = DialogInterface | SavedInterface;
 export interface ChatBase {
   _id: Id<"user_chat">;
   user_id: Id<"user">;
-  chat_id: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
+  chat_id: Id<"dialog"> | Id<"saved">;
   unread: number;
   type: "dialog" | "group" | "channel" | "saved";
   pinned: boolean;
   _creationTime: number;
-}
-
-export interface GroupInterface extends ChatBase {
-  chat_id: Id<"group">;
-  type: "group";
-  chat: {
-    _id: Id<"group">;
-    _creationTime: number;
-    avatar_url: string;
-    about: string;
-    name: string;
-    last_message_id?: Id<"message">;
-    last_message: Doc<"message"> | null;
-  };
 }
 
 export interface SavedInterface extends ChatBase {
@@ -42,19 +24,6 @@ export interface SavedInterface extends ChatBase {
   };
 }
 
-export interface ChannelInterface extends ChatBase {
-  chat_id: Id<"channel">;
-  type: "channel";
-  chat: {
-    _id: Id<"channel">;
-    _creationTime: number;
-    avatar_url: string;
-    about: string;
-    name: string;
-    last_message_id?: Id<"message">;
-    last_message: Doc<"message"> | null;
-  };
-}
 export interface DialogInterface extends ChatBase {
   chat_id: Id<"dialog">;
   type: "dialog";

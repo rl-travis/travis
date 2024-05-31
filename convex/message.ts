@@ -23,6 +23,7 @@ export const patch = mutation({
   handler: async (ctx, args) => {
     await ctx.db.patch(args.message_id, {
       value: args.value,
+      edited: true,
     });
   },
 });
@@ -39,7 +40,7 @@ export const deleteMessage = mutation({
 export const send = mutation({
   args: {
     user_id: v.id("user"),
-    chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
+    chat_id: v.union(v.id("dialog"), v.id("saved")),
     value: v.string(),
     hash: v.string(),
     files: v.array(v.id("file")),
@@ -51,7 +52,6 @@ export const send = mutation({
       value: args.value,
       edited: false,
       user_id: args.user_id,
-      forward: false,
       hash: args.hash,
       files: args.files,
       read: false,

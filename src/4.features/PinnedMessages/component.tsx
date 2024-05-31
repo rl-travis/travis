@@ -8,11 +8,7 @@ import { reformatDateMessage } from "@/5.entities";
 
 import { useInter } from "@/6.shared";
 
-export function PinnedMessages({
-  chat_id,
-}: {
-  chat_id: Id<"dialog"> | Id<"saved"> | Id<"group"> | Id<"channel">;
-}) {
+export function PinnedMessages({ chat_id }: { chat_id: Id<"dialog"> | Id<"saved"> }) {
   const pinned = useQuery(api.message.getAllPinned, {
     chat_id,
   });

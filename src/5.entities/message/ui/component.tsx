@@ -13,7 +13,7 @@ import { useMutation } from "convex/react";
 import Link from "next/link";
 import { v4 as hash } from "uuid";
 
-import { ArrowUpFromLine, Check, CheckCheck, Pin } from "lucide-react";
+import { ArrowUpFromLine, Check, CheckCheck, Pencil, Pin } from "lucide-react";
 
 import {
   BlockSendingInterface,
@@ -84,12 +84,12 @@ export function MessageItemSending({ message }: { message: BlockSendingInterface
         <div className={styles.value}>{message.value}</div>
       </div>
       <div className={styles.info}>
+        <div className={styles.date}>{reformatDateMessage(message.date)}</div>
         {loading && (
           <div className={styles.sending}>
             <ArrowUpFromLine size={10} />
           </div>
         )}
-        <div className={styles.date}>{reformatDateMessage(message.date)}</div>
       </div>
     </div>
   );
@@ -173,6 +173,7 @@ export function MessageItem({ message }: { message: MessageType }) {
       <div className={styles.info}>
         <div className={styles.date}>{reformatDateMessage(message._creationTime)}</div>
         {message.pinned && <Pin size={10} />}
+        {message.edited && <Pencil size={10} />}
         {message.read ? <CheckCheck size={10} /> : <Check size={10} />}
       </div>
     </div>

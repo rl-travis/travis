@@ -15,7 +15,6 @@ export const create = mutation({
     await ctx.db.insert("user_chat", {
       user_id: args.first_user_id,
       chat_id: dialog_id,
-      unread: 0,
       pinned: false,
       type: "dialog",
     });
@@ -23,7 +22,6 @@ export const create = mutation({
     await ctx.db.insert("user_chat", {
       user_id: args.second_user_id,
       chat_id: dialog_id,
-      unread: 0,
       pinned: false,
       type: "dialog",
     });

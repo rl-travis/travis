@@ -7,7 +7,7 @@ import styles from "./user-chat.module.scss";
 import { usePopupStore } from "@/6.shared/lib/store/popup";
 import Image from "next/image";
 
-import { Bookmark, Check, CheckCheck, Pin, Rss, UsersRound } from "lucide-react";
+import { Bookmark, Check, CheckCheck, Pin } from "lucide-react";
 
 import { ChatType } from "@/5.entities";
 
@@ -62,15 +62,7 @@ export function ChatListItem({
 
       <div className={styles.right}>
         <div className={styles.top}>
-          {current.type === "saved" ? (
-            <Bookmark size={12} />
-          ) : current.type === "group" ? (
-            <UsersRound size={12} />
-          ) : current.type === "channel" ? (
-            <Rss size={12} />
-          ) : (
-            ""
-          )}
+          {current.type === "saved" && <Bookmark size={12} />}
           <h3 className={styles.title}>
             {current.type === "dialog" ? current.chat.user.name : current.chat.name}
           </h3>

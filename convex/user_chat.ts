@@ -1,10 +1,4 @@
-import {
-  ChannelInterface,
-  ChatType,
-  DialogInterface,
-  GroupInterface,
-  SavedInterface,
-} from "../src/5.entities";
+import { ChatType, DialogInterface, SavedInterface } from "../src/5.entities";
 
 import { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
@@ -71,38 +65,6 @@ export const getChats = query({
         }
         // @ts-ignore
         const chatObject: SavedInterface = {
-          ...chat,
-          chat: {
-            ...chatItem,
-            last_message,
-          },
-        };
-        result.push(chatObject);
-      } else if (chat.type === "channel") {
-        const chatItem = (await ctx.db.get(chat.chat_id)) as Doc<"channel">;
-        if (!chatItem) throw new ConvexError("Диалог не найден");
-        let last_message = null;
-        if (chatItem.last_message_id) {
-          last_message = await ctx.db.get(chatItem.last_message_id);
-        }
-        // @ts-ignore
-        const chatObject: ChannelInterface = {
-          ...chat,
-          chat: {
-            ...chatItem,
-            last_message,
-          },
-        };
-        result.push(chatObject);
-      } else if (chat.type === "group") {
-        const chatItem = (await ctx.db.get(chat.chat_id)) as Doc<"group">;
-        if (!chatItem) throw new ConvexError("Диалог не найден");
-        let last_message = null;
-        if (chatItem.last_message_id) {
-          last_message = await ctx.db.get(chatItem.last_message_id);
-        }
-        // @ts-ignore
-        const chatObject: GroupInterface = {
           ...chat,
           chat: {
             ...chatItem,

@@ -28,14 +28,8 @@ export default defineSchema({
   }).index("user_id", ["user_id"]),
   user_chat: defineTable({
     user_id: v.id("user"),
-    chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
-    unread: v.number(),
-    type: v.union(
-      v.literal("dialog"),
-      v.literal("channel"),
-      v.literal("group"),
-      v.literal("saved"),
-    ),
+    chat_id: v.union(v.id("dialog"), v.id("saved")),
+    type: v.union(v.literal("dialog"), v.literal("saved")),
     pinned: v.boolean(),
   })
     .index("user_id", ["user_id"])
@@ -47,35 +41,15 @@ export default defineSchema({
   }),
   message: defineTable({
     user_id: v.id("user"),
-    chat_id: v.union(v.id("dialog"), v.id("group"), v.id("channel"), v.id("saved")),
+    chat_id: v.union(v.id("dialog"), v.id("saved")),
     edited: v.boolean(),
     reply_id: v.optional(v.id("message")),
-    forward: v.boolean(),
     value: v.string(),
     hash: v.string(),
     files: v.array(v.id("file")),
     read: v.boolean(),
     pinned: v.boolean(),
   }),
-
-  group: defineTable({
-    avatar_url: v.string(),
-    about: v.string(),
-    name: v.string(),
-    last_message_id: v.optional(v.id("message")),
-  }),
-  channel: defineTable({
-    avatar_url: v.string(),
-    about: v.string(),
-    name: v.string(),
-    last_message_id: v.optional(v.id("message")),
-  }),
-  admin: defineTable({
-    owner: v.boolean(),
-    user_id: v.id("user"),
-    chat_id: v.union(v.id("group"), v.id("channel")),
-  }).index("chat_id", ["chat_id"]),
-
   saved: defineTable({
     avatar_url: v.string(),
     name: v.string(),

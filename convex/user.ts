@@ -43,7 +43,6 @@ export const create = mutation({
     });
 
     await ctx.db.insert("user_chat", {
-      unread: 0,
       pinned: false,
       user_id: created_user,
       chat_id: saved,

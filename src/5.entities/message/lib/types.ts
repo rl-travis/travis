@@ -27,10 +27,9 @@ export type MessageType = {
   _id: Id<"message">;
   value: string;
   user_id: Id<"user">;
-  chat_id: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
+  chat_id: Id<"dialog"> | Id<"saved">;
   edited: boolean;
   reply_id?: Id<"message">;
-  forward: boolean;
   objects: Doc<"file">[];
   files: Id<"file">[];
   hash: string;
@@ -43,7 +42,7 @@ export type NewMessageType = {
   value: string;
   hash: string;
   chat: Id<"user_chat">;
-  chat_id: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
+  chat_id: Id<"dialog"> | Id<"saved">;
   user_id: Id<"user">;
   date: Date;
   files: File[];
@@ -69,7 +68,7 @@ export interface BlockSendingInterface extends BlockInterface {
   type: "sending";
   value: string;
   user: Id<"user">;
-  chat: Id<"dialog"> | Id<"group"> | Id<"channel"> | Id<"saved">;
+  chat: Id<"dialog"> | Id<"saved">;
   files: File[];
   reply: MessageType | null;
 }

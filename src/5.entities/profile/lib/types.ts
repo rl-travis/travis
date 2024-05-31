@@ -8,6 +8,6 @@ export type ProfileInfoReturnType = {
 };
 
 export type ProfileInfoParamsType = {
-  doc: Id<"user"> | Id<"saved"> | Id<"group"> | Id<"channel">;
-  type: "user" | "saved" | "group" | "channel";
+  doc: Id<"user"> | Id<"saved">;
+  type: "user" | "saved";
 };
