@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { AuthPage, MainPage, NewUserPage } from "../_pages";
 import { useUser } from "../entities";
-import { AuthPage, MainPage, NewUserPage } from "../pages";
 import { Loading, useInter, useUserStore } from "../shared";
 
 import { useSession } from "next-auth/react";
