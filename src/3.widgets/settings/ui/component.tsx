@@ -1,7 +1,7 @@
 import { SettingsList } from "./settings-list";
 import styles from "./settings.module.scss";
 
-import { ProfileInfo } from "@/4.features";
+import { Exit, ProfileInfo } from "@/4.features";
 
 import { useUserStore } from "@/6.shared";
 
@@ -11,7 +11,14 @@ export function Settings({ mobile }: { mobile: boolean }) {
   return (
     <div className={styles.wrapper}>
       <ProfileInfo doc={user!._id} type={"user"} />
-      <SettingsList mobile={mobile} />
+      <div
+        style={{
+          flex: 1,
+        }}
+      >
+        <SettingsList mobile={mobile} />
+      </div>
+      <Exit />
     </div>
   );
 }

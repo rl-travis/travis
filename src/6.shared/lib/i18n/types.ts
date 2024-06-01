@@ -59,6 +59,7 @@ export type i18nType = {
     mb: string;
   };
   emojis: string[];
+  exit: string;
 };
 
 export type InternationalizationContextType = {

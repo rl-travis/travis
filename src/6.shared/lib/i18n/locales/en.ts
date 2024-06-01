@@ -78,4 +78,5 @@ export const en: i18nType = {
     "Symbols",
     "Flags",
   ],
+  exit: "Log out",
 };

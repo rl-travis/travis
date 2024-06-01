@@ -78,4 +78,5 @@ export const ru: i18nType = {
     "Символы",
     "Флаги",
   ],
+  exit: "Выйти",
 };
