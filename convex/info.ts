@@ -1,4 +1,4 @@
-import { ProfileInfoReturnType } from "../src/5.entities";
+import { ProfileInfoReturnType } from "../src/entities";
 
 import { Doc, Id } from "./_generated/dataModel";
 import { query } from "./_generated/server";

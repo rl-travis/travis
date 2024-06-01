@@ -1,4 +1,4 @@
-import { ChatType, DialogInterface, SavedInterface } from "../src/5.entities";
+import { ChatType, DialogInterface, SavedInterface } from "../src/entities";
 
 import { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";

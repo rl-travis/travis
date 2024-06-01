@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from "react";
 
-import { InternationalizationContext } from "@/6.shared";
+import { InternationalizationContext } from "../../shared";
 
 export function InternationalizationProvider({ children }: { children: ReactNode }) {
   const [id, setId] = useState(0);
