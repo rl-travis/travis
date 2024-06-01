@@ -1,8 +1,6 @@
 import styles from "./header-chat.module.scss";
 import Image from "next/image";
 
-import { Search } from "lucide-react";
-
 import { ChatType } from "@/5.entities";
 
 import { useChatStore, useShortStore } from "@/6.shared";
@@ -32,7 +30,6 @@ export function HeaderChat({ chat }: { chat: ChatType }) {
           {chat.type !== "dialog" ? chat.chat.name : chat.chat.user.name}
         </span>
       </div>
-      <Search size={20} />
     </div>
   );
 }
