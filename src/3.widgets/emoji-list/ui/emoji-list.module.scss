@@ -61,7 +61,8 @@
   border-radius: 3px;
   padding: 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  background-color: var(--background);
+  background-color: var(--hover-alpha);
+  backdrop-filter: blur(10px);
 }
 .left {
   left: initial;
@@ -72,7 +73,7 @@
   width: 41px;
   height: 41px;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
   justify-content: center;

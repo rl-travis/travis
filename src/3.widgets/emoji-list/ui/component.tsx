@@ -74,16 +74,17 @@ function generate(): EmojiRender[] {
       index: 0,
     });
     for (const e of emojis[j]) {
-      i++;
       list.push({
         name: null,
         emoji: e,
         hash: hash(),
         index: i,
       });
+      i++;
     }
     i = 0;
   }
+  console.log(list);
   return list;
 }
 export function EmojiList({ mobile }: { mobile?: boolean }) {
@@ -132,7 +133,7 @@ export function EmojiList({ mobile }: { mobile?: boolean }) {
                 handleEmoji={handleEmoji}
                 nativeEmoji={nativeEmoji}
                 variants={element.emoji.v}
-                left={element.index % 8 >= 4}
+                left={element.index % 9 >= 5}
               />
               <RenderEmoji nativeEmoji={nativeEmoji} emoji={element.emoji.u} />
             </button>
